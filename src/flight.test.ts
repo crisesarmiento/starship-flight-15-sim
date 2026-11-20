@@ -12,7 +12,9 @@ function metadataAt(node: unknown, path: string): void {
         expect(fields.source, path).toBe('no publicado')
       } else {
         expect(['official', 'reported', 'estimate'], path).toContain(fields.confidence)
-        expect(fields.source, path).toMatch(/^https?:\/\//)
+        expect(fields.source, path).toMatch(fields.confidence === 'estimate'
+          ? /^(https?:\/\/|docs\/[A-Za-z0-9_-]+\.md(?:#|$))/
+          : /^https?:\/\//)
         expect(fields.value, path).not.toBeNull()
       }
       if (typeof fields.value === 'number' || Array.isArray(fields.value)) {

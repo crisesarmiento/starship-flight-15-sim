@@ -4,7 +4,7 @@
     "researched_at": "2026-11-19",
     "timezone_note": "t_sec es tiempo de misión desde el liftoff. El despegue local fue en America/Chicago (CST, UTC-6) el 13 de noviembre de 2026.",
     "notes_file": "docs/research.md",
-    "timeline_note": "Los tiempos T+ publicados son aproximados. La marca del FTS se alinea con el corte de la quema, no es un segundo publicado por separado."
+    "timeline_note": "Los tiempos T+ publicados son aproximados. El FTS ocurrió al corte; T+395 s es una alineación impuesta por la sim, no un segundo publicado por separado."
   },
   "mission": {
     "name": {
@@ -420,6 +420,20 @@
       "value": "U.S. Standard Atmosphere 1976",
       "confidence": "official",
       "source": "https://ntrs.nasa.gov/citations/19770009539"
+    },
+    "earth_radius_m": {
+      "value": 6378137,
+      "unit": "m",
+      "confidence": "official",
+      "source": "https://earth-info.nga.mil/index.php?dir=wgs84&action=wgs84",
+      "note": "Semieje mayor WGS 84, radio de la esfera simplificada de la sim."
+    },
+    "earth_rotation_rad_s": {
+      "value": 7.292115e-05,
+      "unit": "rad/s",
+      "confidence": "official",
+      "source": "https://earth-info.nga.mil/index.php?dir=wgs84&action=wgs84",
+      "note": "Velocidad angular nominal WGS 84, sin calcular la época astronómica del lanzamiento."
     }
   },
   "timeline": [
@@ -522,9 +536,9 @@
       "t_unit": "s",
       "label": "Super Heavy FTS",
       "vehicle": "booster",
-      "confidence": "official",
+      "confidence": "estimate",
       "source": "https://www.spacex.com/launches/starship-flight-15/",
-      "as_flown_note": "FTS al cortar la quema de aterrizaje, sobre el Golfo. El segundo exacto no está separado del corte en la tabla oficial; se alinea con T+00:06:35."
+      "as_flown_note": "El relato oficial confirma FTS al apagar sobre el Golfo. El T+ del FTS se impone al T+ aproximado de corte; no es un segundo oficial independiente."
     },
     {
       "id": "ship_ascent_cutoff",
@@ -749,6 +763,403 @@
       "confidence": "unknown",
       "source": "no publicado",
       "note": "Un punto de partida geométrico sería pi*(4.5^2) para un cilindro de 9 m, pero es una simplificación, no un dato oficial."
+    }
+  },
+  "model": {
+    "comment": "Reconstrucción didáctica: parámetros propios de la sim, no telemetría ni sistema de guía. No validado para operación.",
+    "atmosphere": {
+      "geometric_altitude_m": {
+        "value": [0, 2000, 4000, 6000, 8000, 10000, 11000, 12000, 14000, 16000, 18000, 20000, 24000, 28000, 32000, 36000, 40000, 44000, 48000, 52000, 56000, 60000, 64000, 68000, 70000, 72000, 76000, 80000, 84000, 86000],
+        "unit": "m",
+        "confidence": "official",
+        "source": "https://ntrs.nasa.gov/citations/19770009539",
+        "note": "U.S. Standard Atmosphere, 1976, Tabla II, Geometric Altitude, Metric Units, págs. impresas 53–68. Nudos seleccionados de altitud geométrica Z."
+      },
+      "density_kg_m3": {
+        "value": [1.2250, 1.0066, 0.81935, 0.66011, 0.52579, 0.41351, 0.36480, 0.31194, 0.22786, 0.16647, 0.12165, 0.088910, 0.046938, 0.025076, 0.013555, 0.0072579, 0.0039957, 0.0022589, 0.0013167, 0.00080562, 0.00050445, 0.00030968, 0.00018605, 0.00010917, 0.000082829, 0.000062374, 0.000034311, 0.000018458, 0.0000096940, 0.000006958],
+        "unit": "kg/m³",
+        "confidence": "official",
+        "source": "https://ntrs.nasa.gov/citations/19770009539",
+        "note": "Columna de densidad ρ de los mismos nudos de Tabla II; atmósfera estándar, no medición de Flight 15."
+      },
+      "interpolation_note": "Interpolación lineal en ln(ρ) de 0 a 86 km geométricos. Bajo 0 m se usa el valor a nivel del mar. Sobre 86 km se prolonga la pendiente logarítmica del último par hacia el vacío: es una extensión de la sim, no la alta atmósfera USSA76."
+    },
+    "ascent": {
+      "step_s": {
+        "value": 0.1,
+        "unit": "s",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Paso fijo RK4 recomendado por el spec."
+      },
+      "booster_dry_mass_kg": {
+        "value": 250000,
+        "unit": "kg",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Orden de magnitud de trabajo para la masa; no sustituye la masa seca unknown de B22."
+      },
+      "ship_dry_mass_kg": {
+        "value": 170000,
+        "unit": "kg",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Orden de magnitud de trabajo para la masa; no sustituye la masa seca unknown de S42."
+      },
+      "booster_propellant_kg": {
+        "value": 3600000,
+        "unit": "kg",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Carga inicial didáctica inferior a capacidad de diseño y suficiente para el consumo del tramo integrado; carga real no publicada."
+      },
+      "ship_propellant_kg": {
+        "value": 1550000,
+        "unit": "kg",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Carga inicial didáctica inferior a capacidad de diseño; carga real no publicada."
+      },
+      "isp_s": {
+        "value": 330,
+        "unit": "s",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Isp efectivo provisional de la integración, no cifra confirmada de Raptor 3."
+      },
+      "drag_cd": {
+        "value": 0.4,
+        "unit": "1",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Coeficiente de arrastre constante ilustrativo, sin ajuste aerodinámico."
+      },
+      "pitch_start_s": {
+        "value": 12,
+        "unit": "s",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Inicio de inclinación ilustrativa; no reconstruye el programa de vuelo."
+      },
+      "staging_tilt_deg": {
+        "value": 66,
+        "unit": "deg",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Inclinación máxima de la receta abierta desde la vertical; proyección local al este sin afirmar azimut real."
+      },
+      "post_meco_engines": {
+        "value": 3,
+        "unit": "engines",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Número de trabajo visual entre MECO y boostback; la tabla pública sólo indica corte de la mayoría."
+      },
+      "radial_correction_note": "Corrección suave de posición/velocidad hasta el ancla reportada al separar; no modifica la integración bruta ni recupera telemetría."
+    },
+    "booster": {
+      "coast_apex_altitude_m": {
+        "value": 82000,
+        "unit": "m",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Nudo cinematográfico al corte del boostback, no apogeo medido."
+      },
+      "coast_east_m": {
+        "value": 20000,
+        "unit": "m",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Desplazamiento dibujado al corte para mostrar desvío, no downrange reportado."
+      },
+      "coast_north_m": {
+        "value": -5000,
+        "unit": "m",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Componente visual hacia el Golfo al corte, no coordenada reconstruida."
+      },
+      "offshore_east_m": {
+        "value": 42000,
+        "unit": "m",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Distancia visual que separa el FTS del pad; no distancia real."
+      },
+      "offshore_north_m": {
+        "value": -12000,
+        "unit": "m",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Componente sur visual para el cierre offshore; no punto de FTS real."
+      },
+      "burn_start_altitude_m": {
+        "value": 900,
+        "unit": "m",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Nudo visual al encender; sin medición pública."
+      },
+      "hover_altitude_m": {
+        "value": 20,
+        "unit": "m",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Separación visual entre vehículo y agua; no altura real."
+      },
+      "burn_start_vertical_speed_ms": {
+        "value": -65,
+        "unit": "m/s",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Tangente descendente visual antes del hover, no velocidad real."
+      }
+    },
+    "ship": {
+      "orbital_anchor_note": "El ancla circular elige una fase hacia el este para que el puente visual de ascenso no retroceda. No se deriva un azimut, inclinación o corredor reales.",
+      "kepler_join_s": {
+        "value": 1180,
+        "unit": "s",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Fin ilustrativo del puente entre ascenso y preinserción kepleriana; no evento de vuelo."
+      },
+      "seco_altitude_m": {
+        "value": 180000,
+        "unit": "m",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Nudo de altura visual al cutoff; sin medición pública."
+      },
+      "seco_east_m": {
+        "value": 1450000,
+        "unit": "m",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Nudo de avance ilustrativo para puente de ascenso, no downrange reportado."
+      },
+      "seco_east_speed_ms": {
+        "value": 5600,
+        "unit": "m/s",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Tangente ilustrativa en SECO, no telemetría."
+      },
+      "deorbit_delta_v_ms": {
+        "value": 58,
+        "unit": "m/s",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Pulso fijo retrógrado de la sim para bajar el perigeo; no Δv publicado ni solución de apuntado."
+      },
+      "return_east_m": {
+        "value": 23000,
+        "unit": "m",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Desplazamiento cinematográfico al subsónico sobre el Golfo; no ruta publicada."
+      },
+      "return_north_m": {
+        "value": -7000,
+        "unit": "m",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Componente visual al subsónico; no corredor de vuelo."
+      },
+      "transonic_altitude_m": {
+        "value": 11000,
+        "unit": "m",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Nudo de altura visual al transónico; sin medición pública."
+      },
+      "transonic_east_m": {
+        "value": 34000,
+        "unit": "m",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Nudo cinematográfico previo al swoosh, no posición reportada."
+      },
+      "transonic_north_m": {
+        "value": -7000,
+        "unit": "m",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Componente sur visual al transónico; no recorrido de vuelo."
+      },
+      "subsonic_altitude_m": {
+        "value": 7200,
+        "unit": "m",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Nudo de altura visual al subsónico; sin medición pública."
+      },
+      "landing_start_east_m": {
+        "value": 850,
+        "unit": "m",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Nudo ilustrativo al iniciar quema; no posición real."
+      },
+      "landing_start_altitude_m": {
+        "value": 320,
+        "unit": "m",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Nudo ilustrativo al iniciar quema; no medición pública."
+      },
+      "flip_east_m": {
+        "value": 720,
+        "unit": "m",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Nudo ilustrativo de desplazamiento en el flip; no posición real."
+      },
+      "flip_altitude_m": {
+        "value": 280,
+        "unit": "m",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Nudo ilustrativo de altura en el flip; no medición pública."
+      },
+      "catch_altitude_m": {
+        "value": 90,
+        "unit": "m",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Altura visual del encuentro con torre; altura real de captura desconocida."
+      },
+      "insertion_anchor_east_m": {
+        "value": 8500000,
+        "unit": "m",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Avance de arco desde Pad 2 para la fase ilustrativa al terminar inserción; no longitud de vuelo medida."
+      },
+      "entry_cut_note": "En T+ de entrada se salta del estado orbital propagado a un tramo local sobre el Golfo. La altura conserva el ancla orbital; la posición horizontal y la velocidad se reemplazan por valores cinematográficos. No es una conexión física ni un corredor calculado.",
+      "entry_east_m": {
+        "value": 1150000,
+        "unit": "m",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Inicio del tramo local visual sobre el Golfo después del corte, no punto real de entrada."
+      },
+      "entry_east_speed_ms": {
+        "value": -2400,
+        "unit": "m/s",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Tangente ilustrativa hacia el oeste al inicio del tramo local; no velocidad de entrada real."
+      },
+      "entry_vertical_speed_ms": {
+        "value": -95,
+        "unit": "m/s",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Tangente radial descendente del tramo local después del corte, no velocidad medida."
+      },
+      "transonic_east_speed_ms": {
+        "value": -330,
+        "unit": "m/s",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Tangente visual del orden de la velocidad del sonido en este tramo; no Mach calculado."
+      },
+      "transonic_vertical_speed_ms": {
+        "value": -100,
+        "unit": "m/s",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Tangente radial descendente para unir los nudos sin detener la nave."
+      },
+      "subsonic_east_speed_ms": {
+        "value": -240,
+        "unit": "m/s",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Tangente horizontal subsonica ilustrativa, no telemetría."
+      },
+      "subsonic_vertical_speed_ms": {
+        "value": -85,
+        "unit": "m/s",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Tangente radial descendente subsonica ilustrativa, no telemetría."
+      },
+      "landing_start_east_speed_ms": {
+        "value": -70,
+        "unit": "m/s",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Tangente horizontal visual al activar la quema; no telemetría."
+      },
+      "landing_start_vertical_speed_ms": {
+        "value": -24,
+        "unit": "m/s",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Tangente radial descendente al activar la quema; no telemetría."
+      },
+      "flip_east_speed_ms": {
+        "value": -55,
+        "unit": "m/s",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Tangente horizontal visual al flip, no telemetría."
+      },
+      "flip_vertical_speed_ms": {
+        "value": -17,
+        "unit": "m/s",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Tangente radial visual al flip, no telemetría."
+      }
+    },
+    "satellites": {
+      "delta_v_span_ms": {
+        "value": 1.8,
+        "unit": "m/s",
+        "confidence": "estimate",
+        "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
+        "note": "Dispersión tangencial total visual entre 26 liberaciones uniformes en la ventana pública; no velocidades de expulsión medidas."
+      }
+    },
+    "maneuvers": {
+      "liftoff": {
+        "value": null,
+        "unit": "m/s",
+        "confidence": "unknown",
+        "source": "no publicado",
+        "note": "Sin Δv aislable de despegue: el ascenso expone empuje y consumo, no un impulso instantáneo."
+      },
+      "boostback_start": {
+        "value": null,
+        "unit": "m/s",
+        "confidence": "unknown",
+        "source": "no publicado",
+        "note": "Curva cinematográfica sin empuje integrado; no evaluable."
+      },
+      "booster_landing_burn_start": {
+        "value": null,
+        "unit": "m/s",
+        "confidence": "unknown",
+        "source": "no publicado",
+        "note": "Curva cinematográfica sin empuje integrado; no evaluable."
+      },
+      "hot_staging": {
+        "value": null,
+        "unit": "m/s",
+        "confidence": "unknown",
+        "source": "no publicado",
+        "note": "Encendido y separación publicados, ascenso de Ship posterior cinematográfico; no evaluable."
+      },
+      "ship_landing_burn_start": {
+        "value": null,
+        "unit": "m/s",
+        "confidence": "unknown",
+        "source": "no publicado",
+        "note": "Curva cinematográfica sin empuje integrado; no evaluable."
+      }
     }
   }
 }

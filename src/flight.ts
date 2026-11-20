@@ -41,6 +41,11 @@ function isSourceUrl(value: unknown): boolean {
   return typeof value === 'string' && /^https?:\/\/\S+$/.test(value)
 }
 
+function isSource(value: unknown, confidence: unknown, note: unknown): boolean {
+  return isSourceUrl(value) || (confidence === 'estimate' && hasText(note)
+    && typeof value === 'string' && /^docs\/SPEC\.md(?:#\S+)?$/.test(value))
+}
+
 function checkMetadata(node: unknown, path: string): void {
   if (Array.isArray(node)) {
     node.forEach((item, i) => checkMetadata(item, `${path}[${i}]`))
@@ -60,7 +65,7 @@ function checkMetadata(node: unknown, path: string): void {
       if (value !== null || source !== 'no publicado') {
         throw new Error(`${path}: un dato desconocido debe quedar null y sin fuente publicada`)
       }
-    } else if (value === null || !confidence || !isSourceUrl(source)) {
+    } else if (value === null || !confidence || !isSource(source, confidence, fields.note)) {
       throw new Error(`${path}: falta valor, confianza o fuente`)
     }
     const numbers = typeof value === 'number' ? [value] : Array.isArray(value) ? value : undefined

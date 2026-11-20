@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { altitudeNote, duration, eventAt, flight, sample } from './core'
+import { altitudeNote, burnDeltaV, duration, earthRadiusM, eventAt, flight, orbitPath, sample } from './core'
+import { norm, sub } from './physics/frame'
 
 describe('Flight 15: seek de la misión', () => {
   it('resuelve cada hito en el instante exacto; el FTS gana el empate con el corte', () => {
@@ -23,13 +24,12 @@ describe('Flight 15: seek de la misión', () => {
     for (const t of [duration + 1, Infinity]) expect(sample(t)).toEqual(sample(duration))
   })
 
-  it('expone la altitud como esquemática y conserva las referencias reportadas', () => {
-    expect(altitudeNote).toMatch(/esquemática.*no telemetría/i)
-    expect(sample(0).altitudeM).toBe(0)
-    expect(sample(141).altitudeM).toBe(65000)
-    expect(sample(1590).altitudeM).toBe(275000)
-    expect(sample(77767).altitudeM).toBe(275000)
-    expect(sample(duration).altitudeM).toBe(0)
+  it('expone la altitud como reconstruida y conserva las referencias reportadas', () => {
+    expect(altitudeNote).toMatch(/reconstruida.*no telemetría/i)
+    expect(sample(0).altitudeM).toBeCloseTo(0)
+    expect(sample(141).altitudeM).toBeCloseTo(65000)
+    expect(sample(1590).altitudeM).toBeCloseTo(275000)
+    expect(sample(duration).altitudeM).toBeCloseTo(flight.model.ship.catch_altitude_m.value)
     expect(sample(100).altitudeM).toBeGreaterThan(0)
     expect(sample(100).altitudeM).toBeLessThan(65000)
   })
@@ -52,5 +52,60 @@ describe('Flight 15: seek de la misión', () => {
     [81154, 0, 0],
   ])('en T+%is da %i motores del booster y %i de la Ship', (t, boosterEngines, shipEngines) => {
     expect(sample(t)).toMatchObject({ boosterEngines, shipEngines })
+  })
+})
+
+describe('Flight 15: telemetría reconstruida y despliegue', () => {
+  it('respeta marcos ECI/ECEF, masas desconocidas y desenlaces terminales', () => {
+    const launch = sample(0)
+    expect(launch.earthAngleRad).toBe(0)
+    expect(launch.ship.latitudeDeg).toBeCloseTo(flight.site.latitude_deg.value, 10)
+    expect(launch.ship.longitudeDeg).toBeCloseTo(flight.site.longitude_deg.value, 10)
+    expect(launch.ship.surfaceSpeedMs).toBeCloseTo(0)
+    expect(launch.ship.inertialSpeedMs).toBeGreaterThan(0)
+    expect(launch.booster.accelerationG).toBeGreaterThan(1)
+    expect(sample(100).booster.propellantKg!).toBeLessThan(launch.booster.propellantKg!)
+    expect(sample(200).booster.propellantKg).toBeNull()
+    expect(sample(395).booster).toMatchObject({ status: 'fts', surfaceSpeedMs: expect.closeTo(0) })
+    expect(sample(395).booster.downrangeM).toBeGreaterThan(1_000)
+    expect(sample(duration).ship).toMatchObject({ status: 'caught', surfaceSpeedMs: expect.closeTo(0) })
+    expect(sample(duration).ship.downrangeM).toBeLessThan(1e-6)
+  })
+
+  it('dibuja la elipse desde r/v y sólo el arco exterior si el perigeo es subterráneo', () => {
+    const inserted = sample(1590)
+    const aligned = orbitPath(inserted.ship.r, inserted.ship.v)
+    expect(aligned.points.length).toBeGreaterThan(100)
+    expect(norm(sub(aligned.points[0], aligned.points.at(-1)!))).toBeLessThan(1e-6)
+    expect(norm(aligned.perigee!) - earthRadiusM).toBeCloseTo(inserted.orbit.perigeeM!, 5)
+    expect(norm(aligned.apogee!) - earthRadiusM).toBeCloseTo(inserted.orbit.apogeeM!, 5)
+    const pre = sample(1570)
+    const clipped = orbitPath(pre.ship.r, pre.ship.v)
+    expect(norm(clipped.perigee!)).toBeLessThan(earthRadiusM)
+    expect(clipped.points.every(p => norm(p) >= earthRadiusM - 1e-6)).toBe(true)
+    expect(norm(sub(clipped.points[0], clipped.points.at(-1)!))).toBeGreaterThan(1)
+    expect(sample(1580).orbit.perigeeM!).toBeGreaterThan(pre.orbit.perigeeM!)
+    expect(sample(77762).orbit.perigeeM!).toBeLessThan(sample(77757).orbit.perigeeM!)
+    expect(sample(77767).orbit.perigeeM!).toBeLessThan(sample(77762).orbit.perigeeM!)
+    expect(burnDeltaV('insertion_start')).toBe(flight.mission.orbit.insertion_delta_v_m_s.value)
+    expect(burnDeltaV('deorbit_start')).toBe(flight.model.ship.deorbit_delta_v_ms.value)
+    expect(burnDeltaV('boostback_start')).toBeNull()
+    expect(burnDeltaV('unknown')).toBeNull()
+  })
+
+  it('despliega 26 estados independientes en su ventana y no los desorbita con la Ship', () => {
+    expect(sample(2100.999).satellites).toEqual([])
+    const start = sample(2101)
+    expect(start.satellites.map(s => s.id)).toEqual([1])
+    expect(norm(sub(start.satellites[0].r, start.ship.r))).toBeLessThan(1e-6)
+    expect(sample(4660 - 0.001).satellites).toHaveLength(25)
+    const deployed = sample(4660).satellites
+    expect(deployed.map(s => s.id)).toEqual(Array.from({ length: 26 }, (_, i) => i + 1))
+    const final = sample(duration).satellites
+    expect(final).toHaveLength(26)
+    expect(final.every(s => norm(s.r) > earthRadiusM + 260_000)).toBe(true)
+    expect(new Set(final.map(s => s.r.join(','))).size).toBe(26)
+    expect(final[0].r).not.toEqual(deployed[0].r)
+    expect(sample(4660).satellites).toEqual(deployed)
   })
 })
