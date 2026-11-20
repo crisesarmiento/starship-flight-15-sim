@@ -1,0 +1,13 @@
+{
+  "$schema": "https://unpkg.com/oh-my-opencode-slim@latest/oh-my-opencode-slim.schema.json",
+  "preset": "test-astra-sol-2026-11-19",
+  "presets": {
+    "test-astra-sol-2026-11-19": {
+      "orchestrator": { "model": ["openai/gpt-6.2-astra"], "skills": ["*"] },
+      "oracle": { "model": ["openai/gpt-6.2-astra"], "skills": ["simplify"] },
+      "fixer": { "model": ["openai/gpt-6.2-sol"], "skills": [] },
+      "designer": { "model": [{ "id": "claude-code/claude-sonnet-5-5", "variant": "medium" }, { "id": "opencode-go/gemini-4-argon", "variant": "medium" }], "skills": [] },
+      "explorer": { "model": ["opencode-go/glm-5.3-flash", { "id": "opencode-go/gpt-6-luna", "variant": "low" }, { "id": "opencode-go/claude-haiku-5-5", "variant": "low" }], "skills": [] }
+    }
+  }
+}

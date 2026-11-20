@@ -6,7 +6,7 @@ An interactive, physically based 3D simulation of SpaceX Starship Flight 15 (lau
 
 ## Status
 
-🚧 Early stage. The spec is in [`docs/SPEC.md`](docs/SPEC.md) (coming soon).
+🚧 Early stage. The spec (in Spanish) is in [`docs/SPEC.md`](docs/SPEC.md), with sourced data in [`data/flight15.json`](data/flight15.json).
 
 ## Planned features
 
