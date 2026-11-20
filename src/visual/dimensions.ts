@@ -1,4 +1,4 @@
-import type { FlightData, Sourced } from './core'
+import type { flight } from './core'
 
 /** Measured values: always read from data/flight15.json (official ones). */
 export interface Measured {
@@ -16,26 +16,21 @@ export interface Measured {
   padLon: number
 }
 
-function num(label: string, s: Sourced): number {
-  if (s.value === null || typeof s.value !== 'number') throw new Error(`Falta el dato: ${label}`)
-  return s.value
-}
-
-export function measuredFrom(flight: FlightData): Measured {
-  const v = flight.vehicle
+export function measuredFrom(f: typeof flight): Measured {
+  const v = f.vehicle
   return {
-    diameter: num('diámetro del stack', v.stack.diameter_m),
-    boosterHeight: num('altura del booster', v.booster.height_m),
-    shipHeight: num('altura de la Ship', v.ship.height_m),
-    stackHeight: num('altura del stack', v.stack.height_m),
-    boosterEngines: num('motores del booster', v.booster.engine_count),
-    boosterCenter: num('motores centrales', v.booster.center_maneuverable_engines),
-    boosterPerimeter: num('motores perimetrales', v.booster.perimeter_engines),
-    boosterGridFins: num('grid fins', v.booster.grid_fins),
-    shipSeaLevel: num('Raptor de nivel del mar de la Ship', v.ship.sea_level_engines),
-    shipVacuum: num('Raptor de vacío de la Ship', v.ship.vacuum_engines),
-    padLat: num('latitud del pad', flight.site.latitude_deg),
-    padLon: num('longitud del pad', flight.site.longitude_deg),
+    diameter: v.stack.diameter_m.value,
+    boosterHeight: v.booster.height_m.value,
+    shipHeight: v.ship.height_m.value,
+    stackHeight: v.stack.height_m.value,
+    boosterEngines: v.booster.engine_count.value,
+    boosterCenter: v.booster.center_maneuverable_engines.value,
+    boosterPerimeter: v.booster.perimeter_engines.value,
+    boosterGridFins: v.booster.grid_fins.value,
+    shipSeaLevel: v.ship.sea_level_engines.value,
+    shipVacuum: v.ship.vacuum_engines.value,
+    padLat: f.site.latitude_deg.value,
+    padLon: f.site.longitude_deg.value,
   }
 }
 
@@ -56,8 +51,6 @@ export const VISUAL = {
   mountHeight: 20,
   /** Where the Gulf starts east of the pad, schematic. */
   coastEastM: 2600,
-  /** Visual height at which the caught Ship hangs between the arms. */
-  catchHeight: 108,
 } as const
 
 /** Engine rings for the booster: 3 centre + 10 middle (13 maneuverable) + 20 outer. */

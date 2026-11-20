@@ -1,4 +1,5 @@
 import type { Confidence } from './core'
+import type { CameraMode } from './cameraRig'
 
 export const EVENT_LABELS: Record<string, string> = {
   liftoff: 'Despegue',
@@ -40,7 +41,7 @@ export function eventLabel(id: string | undefined, fallback = ''): string {
   return (id && EVENT_LABELS[id]) || fallback
 }
 
-export type BadgeKind = Confidence | 'placeholder' | 'timeline' | 'calculated' | 'nodata'
+export type BadgeKind = Confidence | 'placeholder' | 'timeline' | 'calculated' | 'interpolated' | 'nodata'
 
 export const BADGE_LABELS: Record<BadgeKind, string> = {
   official: 'Oficial',
@@ -50,6 +51,7 @@ export const BADGE_LABELS: Record<BadgeKind, string> = {
   placeholder: 'Placeholder',
   timeline: 'Cronología',
   calculated: 'Calculado',
+  interpolated: 'Interpolado',
   nodata: 'Sin dato',
 }
 
@@ -57,4 +59,13 @@ export const BADGE_LABELS: Record<BadgeKind, string> = {
 export const OUTCOME_KIND: Record<string, 'fts' | 'catch' | undefined> = {
   booster_fts: 'fts',
   ship_catch: 'catch',
+}
+
+export const MODE_LABELS: Record<CameraMode, { name: string; key: string; hint: string }> = {
+  earth: { name: 'Tierra', key: 'T', hint: 'Tierra entera, rotando' },
+  orbit: { name: 'Órbita', key: 'O', hint: 'Mirar la órbita de la Ship desde arriba' },
+  ship: { name: 'Ship', key: 'S', hint: 'Seguir a la Ship' },
+  booster: { name: 'Booster', key: 'B', hint: 'Seguir al booster' },
+  pad: { name: 'Torre', key: 'P', hint: 'Pad 2 y torre de captura' },
+  free: { name: 'Libre', key: 'F', hint: 'Cámara libre: congela el foco actual' },
 }
