@@ -8,3 +8,4 @@ coverage/
 .DS_Store
 *.log
 .slim/deepwork/.runtime/
+.slim/deepwork/

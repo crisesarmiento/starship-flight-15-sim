@@ -3,7 +3,8 @@
     "disclaimer": "Aproximación con datos públicos. No es información oficial de vuelo ni telemetría interna de SpaceX.",
     "researched_at": "2026-11-19",
     "timezone_note": "t_sec es tiempo de misión desde el liftoff. El despegue local fue en America/Chicago (CST, UTC-6) el 13 de noviembre de 2026.",
-    "notes_file": "research.md"
+    "notes_file": "docs/research.md",
+    "timeline_note": "Los tiempos T+ publicados son aproximados. La marca del FTS se alinea con el corte de la quema, no es un segundo publicado por separado."
   },
   "mission": {
     "name": {
@@ -68,8 +69,9 @@
       },
       "unit_mass_kg": {
         "value": null,
+        "unit": "kg",
         "confidence": "unknown",
-        "source": null,
+        "source": "no publicado",
         "note": "No verificado un filing primario que aplique con certeza a estos V3."
       }
     },
@@ -81,36 +83,42 @@
       },
       "altitude_km": {
         "value": 275,
+        "unit": "km",
         "confidence": "reported",
         "source": "https://www.space.com/space-exploration/launches-spacecraft/spacex-starship-flight-15-chopsticks-double-catch-super-heavy-ship",
         "note": "SpaceX/webcast: around 275 km. McDowell: near-circular at 276 km after ~92 m/s insertion."
       },
       "mcdowell_perigee_km": {
         "value": 276,
+        "unit": "km",
         "confidence": "reported",
         "source": "https://en.wikipedia.org/wiki/Starship_flight_test_15",
         "note": "Vía cita de Wikipedia al tuit de Jonathan McDowell, 14 nov 2026."
       },
       "insertion_delta_v_m_s": {
         "value": 92,
+        "unit": "m/s",
         "confidence": "reported",
         "source": "https://en.wikipedia.org/wiki/Starship_flight_test_15",
         "note": "McDowell: about 92 m/s. Cita vía Wikipedia."
       },
       "apogee_km": {
         "value": null,
+        "unit": "km",
         "confidence": "unknown",
-        "source": null,
+        "source": "no publicado",
         "note": "Wikipedia lista 278 km sin cita sólida en ese campo."
       },
       "inclination_deg": {
         "value": null,
+        "unit": "deg",
         "confidence": "unknown",
-        "source": null,
+        "source": "no publicado",
         "note": "Wikipedia lista 30.5° sin cita sólida en ese campo."
       },
       "orbits_approx": {
         "value": 14,
+        "unit": "orbits",
         "confidence": "reported",
         "source": "https://spaceflightnow.com/2026/11/13/live-coverage-starship-flight-15-attempts-to-recover-full-vehicle-in-double-launch-pad-catch/"
       }
@@ -124,7 +132,7 @@
         "splashdown_coordinates": {
           "value": null,
           "confidence": "unknown",
-          "source": null
+          "source": "no publicado"
         }
       },
       "ship": {
@@ -143,19 +151,22 @@
     },
     "latitude_deg": {
       "value": 25.99677,
+      "unit": "deg",
       "confidence": "reported",
       "source": "https://ll.thespacedevs.com/2.2.0/pad/235/",
       "note": "Launch Library 2, terceros."
     },
     "longitude_deg": {
       "value": -97.15799,
+      "unit": "deg",
       "confidence": "reported",
       "source": "https://ll.thespacedevs.com/2.2.0/pad/235/"
     },
     "tower_height_m": {
       "value": null,
+      "unit": "m",
       "confidence": "unknown",
-      "source": null,
+      "source": "no publicado",
       "note": "SpaceX no publica la altura. En v1 usar una torre reconocible sin afirmar el metro."
     }
   },
@@ -163,29 +174,34 @@
     "stack": {
       "height_m": {
         "value": 124,
+        "unit": "m",
         "confidence": "official",
         "source": "https://www.spacex.com/vehicles/starship"
       },
       "diameter_m": {
         "value": 9,
+        "unit": "m",
         "confidence": "official",
         "source": "https://www.spacex.com/vehicles/starship"
       },
       "payload_capacity_t": {
         "value": 100,
+        "unit": "t",
         "confidence": "official",
         "source": "https://www.spacex.com/vehicles/starship",
         "note": "La ficha dice '100+ t'."
       },
       "dry_mass_kg": {
         "value": null,
+        "unit": "kg",
         "confidence": "unknown",
-        "source": null
+        "source": "no publicado"
       },
       "gross_liftoff_mass_kg": {
         "value": null,
+        "unit": "kg",
         "confidence": "unknown",
-        "source": null,
+        "source": "no publicado",
         "note": "No usar la PEA 2022 (~5000 t) como masa del Flight 15 / V3."
       }
     },
@@ -193,64 +209,76 @@
       "name": "Super Heavy V3",
       "height_m": {
         "value": 72,
+        "unit": "m",
         "confidence": "official",
         "source": "https://www.spacex.com/vehicles/starship"
       },
       "diameter_m": {
         "value": 9,
+        "unit": "m",
         "confidence": "official",
         "source": "https://www.spacex.com/vehicles/starship"
       },
       "propellant_capacity_kg": {
         "value": 3650000,
+        "unit": "kg",
         "confidence": "official",
         "source": "https://www.spacex.com/vehicles/starship",
         "note": "Capacidad de diseño, no la carga confirmada del Flight 15."
       },
       "thrust_tf": {
         "value": 8240,
+        "unit": "tf",
         "confidence": "official",
         "source": "https://www.spacex.com/vehicles/starship"
       },
       "engine_count": {
         "value": 33,
+        "unit": "engines",
         "confidence": "official",
         "source": "https://www.spacex.com/vehicles/starship"
       },
       "center_maneuverable_engines": {
         "value": 13,
+        "unit": "engines",
         "confidence": "official",
         "source": "https://www.spacex.com/vehicles/starship"
       },
       "perimeter_engines": {
         "value": 20,
+        "unit": "engines",
         "confidence": "official",
         "source": "https://www.spacex.com/vehicles/starship"
       },
       "grid_fins": {
         "value": 3,
+        "unit": "fins",
         "confidence": "official",
         "source": "https://www.spacex.com/updates",
         "note": "Actualización V3, 12 may 2026: de 4 a 3 grid fins."
       },
       "dry_mass_kg": {
         "value": null,
+        "unit": "kg",
         "confidence": "unknown",
-        "source": null,
+        "source": "no publicado",
         "note": "La cifra de 275 t en Wikipedia corresponde al recuadro de Block 1/2, no se adopta para B22."
       },
       "boostback_engines_planned": {
         "value": 33,
+        "unit": "engines",
         "confidence": "official",
         "source": "https://www.spacex.com/launches/starship-flight-15/"
       },
       "boostback_engines_lit": {
         "value": 32,
+        "unit": "engines",
         "confidence": "official",
         "source": "https://www.spacex.com/launches/starship-flight-15/"
       },
       "landing_burn_engines": {
         "value": 13,
+        "unit": "engines",
         "confidence": "reported",
         "source": "https://www.space.com/space-exploration/launches-spacecraft/spacex-says-starship-flight-15-booster-aborted-chopsticks-landing-catch-after-launch-due-to-guidance-issue-video"
       }
@@ -259,48 +287,57 @@
       "name": "Starship V3",
       "height_m": {
         "value": 52,
+        "unit": "m",
         "confidence": "official",
         "source": "https://www.spacex.com/vehicles/starship"
       },
       "diameter_m": {
         "value": 9,
+        "unit": "m",
         "confidence": "official",
         "source": "https://www.spacex.com/vehicles/starship"
       },
       "propellant_capacity_kg": {
         "value": 1600000,
+        "unit": "kg",
         "confidence": "official",
         "source": "https://www.spacex.com/vehicles/starship",
         "note": "Capacidad de diseño, no la carga confirmada del Flight 15."
       },
       "thrust_tf": {
         "value": 1614,
+        "unit": "tf",
         "confidence": "official",
         "source": "https://www.spacex.com/vehicles/starship",
         "note": "No coincidir en silencio con 3*250 + 3*275 = 1575 tf de la actualización V3."
       },
       "sea_level_engines": {
         "value": 3,
+        "unit": "engines",
         "confidence": "official",
         "source": "https://www.spacex.com/vehicles/starship"
       },
       "vacuum_engines": {
         "value": 3,
+        "unit": "engines",
         "confidence": "official",
         "source": "https://www.spacex.com/vehicles/starship"
       },
       "dry_mass_kg": {
         "value": null,
+        "unit": "kg",
         "confidence": "unknown",
-        "source": null
+        "source": "no publicado"
       },
       "insertion_engines": {
         "value": 1,
+        "unit": "engines",
         "confidence": "official",
         "source": "https://www.spacex.com/launches/starship-flight-15/"
       },
       "deorbit_engines": {
         "value": 1,
+        "unit": "engines",
         "confidence": "official",
         "source": "https://www.spacex.com/launches/starship-flight-15/",
         "note": "Un Raptor de nivel del mar."
@@ -311,6 +348,7 @@
           2,
           1
         ],
+        "unit": "engines",
         "confidence": "official",
         "source": "https://www.spacex.com/launches/starship-flight-15/"
       }
@@ -318,40 +356,47 @@
     "raptor": {
       "sea_level_thrust_tf": {
         "value": 250,
+        "unit": "tf",
         "confidence": "official",
         "source": "https://www.spacex.com/updates",
         "note": "Actualización V3, 12 may 2026. La ficha del vehículo también lista 250 tf / 551 klbf."
       },
       "vacuum_thrust_tf": {
         "value": 275,
+        "unit": "tf",
         "confidence": "official",
         "source": "https://www.spacex.com/updates"
       },
       "sea_level_engine_mass_kg": {
         "value": 1525,
+        "unit": "kg",
         "confidence": "official",
         "source": "https://www.spacex.com/updates"
       },
       "diameter_m": {
         "value": 1.3,
+        "unit": "m",
         "confidence": "official",
         "source": "https://www.spacex.com/vehicles/starship"
       },
       "height_m": {
         "value": 2.9,
+        "unit": "m",
         "confidence": "official",
         "source": "https://www.spacex.com/vehicles/starship"
       },
       "isp_sea_level_s": {
         "value": null,
+        "unit": "s",
         "confidence": "unknown",
-        "source": null,
+        "source": "no publicado",
         "note": "No está en la ficha 2026. Ver physics_estimates."
       },
       "isp_vacuum_s": {
         "value": null,
+        "unit": "s",
         "confidence": "unknown",
-        "source": null,
+        "source": "no publicado",
         "note": "Un tuit de SpaceX del 3 ago 2024 citó 350 s para la variante SL; hay recuentos que lo tratan como Isp de vacío. No se adopta como oficial vigente."
       }
     }
@@ -359,12 +404,14 @@
   "constants": {
     "earth_mu_m3_s2": {
       "value": 398600441800000.0,
+      "unit": "m³/s²",
       "confidence": "official",
       "source": "https://earth-info.nga.mil/index.php?dir=wgs84&action=wgs84",
       "note": "WGS 84."
     },
     "g0_m_s2": {
       "value": 9.80665,
+      "unit": "m/s²",
       "confidence": "official",
       "source": "https://physics.nist.gov/cgi-bin/cuu/Value?gn",
       "note": "Aceleración estándar para Isp, no un dato de SpaceX."
@@ -379,6 +426,7 @@
     {
       "id": "liftoff",
       "t_sec": 0,
+      "t_unit": "s",
       "label": "Liftoff",
       "vehicle": "stack",
       "confidence": "official",
@@ -388,16 +436,23 @@
     {
       "id": "max_q",
       "t_sec": 58,
+      "t_unit": "s",
       "label": "Max Q",
       "vehicle": "stack",
       "confidence": "official",
       "source": "https://www.spacex.com/launches/starship-flight-15/",
       "as_flown_note": "Solo el instante; no hay altitud ni velocidad oficiales.",
-      "altitude_m": null
+      "altitude_m": {
+        "value": null,
+        "unit": "m",
+        "confidence": "unknown",
+        "source": "no publicado"
+      }
     },
     {
       "id": "meco",
       "t_sec": 139,
+      "t_unit": "s",
       "label": "Super Heavy MECO",
       "vehicle": "booster",
       "confidence": "official",
@@ -407,6 +462,7 @@
     {
       "id": "hot_staging",
       "t_sec": 141,
+      "t_unit": "s",
       "label": "Hot-staging",
       "vehicle": "stack",
       "confidence": "official",
@@ -414,6 +470,7 @@
       "as_flown_note": "Space.com estima unos 65 km de altitud en la separación.",
       "altitude_m": {
         "value": 65000,
+        "unit": "m",
         "confidence": "reported",
         "source": "https://www.space.com/space-exploration/launches-spacecraft/relive-starships-historic-flight-15-with-our-best-photos-from-launch-and-mechazilla-tower-catch",
         "note": "Approximately 40 miles (65 km)."
@@ -422,6 +479,7 @@
     {
       "id": "boostback_start",
       "t_sec": 146,
+      "t_unit": "s",
       "label": "Super Heavy boostback burn start",
       "vehicle": "booster",
       "confidence": "official",
@@ -431,6 +489,7 @@
     {
       "id": "boostback_shutdown",
       "t_sec": 182,
+      "t_unit": "s",
       "label": "Super Heavy boostback burn shutdown",
       "vehicle": "booster",
       "confidence": "official",
@@ -440,6 +499,7 @@
     {
       "id": "booster_landing_burn_start",
       "t_sec": 370,
+      "t_unit": "s",
       "label": "Super Heavy landing burn start",
       "vehicle": "booster",
       "confidence": "official",
@@ -449,6 +509,7 @@
     {
       "id": "booster_landing_burn_shutdown",
       "t_sec": 395,
+      "t_unit": "s",
       "label": "Super Heavy landing burn shutdown",
       "vehicle": "booster",
       "confidence": "official",
@@ -458,6 +519,7 @@
     {
       "id": "booster_fts",
       "t_sec": 395,
+      "t_unit": "s",
       "label": "Super Heavy FTS",
       "vehicle": "booster",
       "confidence": "official",
@@ -467,6 +529,7 @@
     {
       "id": "ship_ascent_cutoff",
       "t_sec": 489,
+      "t_unit": "s",
       "label": "Starship engine cutoff",
       "vehicle": "ship",
       "confidence": "official",
@@ -476,6 +539,7 @@
     {
       "id": "insertion_start",
       "t_sec": 1570,
+      "t_unit": "s",
       "label": "Starship orbital insertion burn start",
       "vehicle": "ship",
       "confidence": "official",
@@ -485,6 +549,7 @@
     {
       "id": "insertion_shutdown",
       "t_sec": 1590,
+      "t_unit": "s",
       "label": "Starship orbital insertion burn shutdown",
       "vehicle": "ship",
       "confidence": "official",
@@ -494,6 +559,7 @@
     {
       "id": "payload_deploy_start",
       "t_sec": 2101,
+      "t_unit": "s",
       "label": "Payload deploy start",
       "vehicle": "ship",
       "confidence": "official",
@@ -503,6 +569,7 @@
     {
       "id": "payload_deploy_complete",
       "t_sec": 4660,
+      "t_unit": "s",
       "label": "Payload deploy complete",
       "vehicle": "ship",
       "confidence": "official",
@@ -512,6 +579,7 @@
     {
       "id": "hawaii_check_early",
       "t_sec": 5266,
+      "t_unit": "s",
       "label": "Early Hawaii Return Check",
       "vehicle": "ship",
       "confidence": "official",
@@ -521,6 +589,7 @@
     {
       "id": "chile_check",
       "t_sec": 26135,
+      "t_unit": "s",
       "label": "Mid Chile Return Check",
       "vehicle": "ship",
       "confidence": "official",
@@ -530,6 +599,7 @@
     {
       "id": "hawaii_check_final",
       "t_sec": 74515,
+      "t_unit": "s",
       "label": "Final Hawaii Return Check",
       "vehicle": "ship",
       "confidence": "official",
@@ -539,6 +609,7 @@
     {
       "id": "deorbit_start",
       "t_sec": 77757,
+      "t_unit": "s",
       "label": "Deorbit burn start",
       "vehicle": "ship",
       "confidence": "official",
@@ -548,6 +619,7 @@
     {
       "id": "deorbit_shutdown",
       "t_sec": 77767,
+      "t_unit": "s",
       "label": "Deorbit burn shutdown",
       "vehicle": "ship",
       "confidence": "official",
@@ -557,6 +629,7 @@
     {
       "id": "entry",
       "t_sec": 79846,
+      "t_unit": "s",
       "label": "Starship entry",
       "vehicle": "ship",
       "confidence": "official",
@@ -566,6 +639,7 @@
     {
       "id": "transonic",
       "t_sec": 80974,
+      "t_unit": "s",
       "label": "Starship is transonic",
       "vehicle": "ship",
       "confidence": "official",
@@ -575,6 +649,7 @@
     {
       "id": "subsonic",
       "t_sec": 81013,
+      "t_unit": "s",
       "label": "Starship is subsonic",
       "vehicle": "ship",
       "confidence": "official",
@@ -584,6 +659,7 @@
     {
       "id": "ship_landing_burn_start",
       "t_sec": 81136,
+      "t_unit": "s",
       "label": "Landing burn start",
       "vehicle": "ship",
       "confidence": "official",
@@ -593,6 +669,7 @@
     {
       "id": "landing_flip",
       "t_sec": 81138,
+      "t_unit": "s",
       "label": "Landing flip",
       "vehicle": "ship",
       "confidence": "official",
@@ -602,6 +679,7 @@
     {
       "id": "landing_3_to_2",
       "t_sec": 81146,
+      "t_unit": "s",
       "label": "Landing burn 3 to 2 engines",
       "vehicle": "ship",
       "confidence": "official",
@@ -611,6 +689,7 @@
     {
       "id": "landing_2_to_1",
       "t_sec": 81153,
+      "t_unit": "s",
       "label": "Landing burn 2 to 1 engine",
       "vehicle": "ship",
       "confidence": "official",
@@ -620,6 +699,7 @@
     {
       "id": "ship_catch",
       "t_sec": 81154,
+      "t_unit": "s",
       "label": "Starship landing burn shutdown and catch",
       "vehicle": "ship",
       "confidence": "official",
@@ -631,37 +711,43 @@
     "comment": "Solo parámetros no publicados. Se pueden ajustar para cerrar la timeline. Nunca presentarlo en el HUD como oficial.",
     "booster_dry_mass_kg": {
       "value": null,
+      "unit": "kg",
       "confidence": "unknown",
-      "source": null,
+      "source": "no publicado",
       "note": "Ajustable. No hay cifra oficial para V3."
     },
     "ship_dry_mass_kg": {
       "value": null,
+      "unit": "kg",
       "confidence": "unknown",
-      "source": null,
+      "source": "no publicado",
       "note": "Ajustable. No hay cifra oficial para V3."
     },
     "raptor_sl_isp_s": {
       "value": null,
+      "unit": "s",
       "confidence": "unknown",
-      "source": null,
+      "source": "no publicado",
       "note": "Hueco. Si se pone un valor de partida, etiquetarlo estimate y citar la fuente (p. ej. discusión del tuit 2024 de 350 s)."
     },
     "raptor_vac_isp_s": {
       "value": null,
+      "unit": "s",
       "confidence": "unknown",
-      "source": null
+      "source": "no publicado"
     },
     "drag_cd": {
       "value": null,
+      "unit": "1",
       "confidence": "unknown",
-      "source": null,
+      "source": "no publicado",
       "note": "Cd constante de partida, ajuste contra la timeline."
     },
     "reference_area_m2": {
       "value": null,
+      "unit": "m²",
       "confidence": "unknown",
-      "source": null,
+      "source": "no publicado",
       "note": "Un punto de partida geométrico sería pi*(4.5^2) para un cilindro de 9 m, pero es una simplificación, no un dato oficial."
     }
   }

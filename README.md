@@ -1,25 +1,15 @@
-# Starship Flight 15 Sim
+# Starship Flight 15 · recorrido de la misión
 
-An interactive, physically based 3D simulation of SpaceX Starship Flight 15 (launch, staging, booster return, orbit, deployment, maneuvers, reentry and landing), built with three.js.
+**Aproximación educativa con datos públicos. No es un producto oficial de SpaceX ni muestra telemetría interna.** No sirve para operar vehículos ni para sacar conclusiones forenses sobre el vuelo.
 
-> **Unofficial fan project.** Not affiliated with, endorsed by, or connected to SpaceX. All mission data comes from public sources, which are cited in `data/`. Values that are estimates are labeled as such. This is an approximation, not official telemetry.
+## Cómo correrlo
 
-## Status
+Con Node.js y npm instalados, ejecutá `npm ci` y después `npm run dev`. Abrí la dirección local que imprime Vite. Para correr las pruebas usá `npm test`; para compilar el sitio estático, `npm run build`. La instalación necesita los paquetes de npm; la aplicación no necesita servicios externos, mapas remotos ni claves.
 
-🚧 Early stage. The spec (in Spanish) is in [`docs/SPEC.md`](docs/SPEC.md), with sourced data in [`data/flight15.json`](data/flight15.json).
+## Qué estás viendo
 
-## Planned features
+Usá la barra de tiempo para comparar los dos regresos. En T+00:06:35 el booster queda sobre el Golfo: corta los motores y se activa el sistema de terminación de vuelo (FTS). **No volvió a la torre**. La captura de Pad 2 en T+22:32:34 es la de la Ship, después del despliegue de los 26 Starlink V3.
 
-- Free camera plus modes that follow the booster, the ship, or the whole Earth
-- Time controls: play, pause, speed up, and jump to any mission event
-- A live orbit view, with perigee and apogee that change during burns
-- A telemetry panel showing altitude, velocity, downrange, g-load, inclination, period, and the current phase
-- Trajectory integrated with real physics, Earth rotation, and the real launch site (Starbase, Texas)
+La [línea de tiempo y los parámetros](data/flight15.json) conservan sus fuentes. Un horario oficial es aproximado: no convierte en oficial la posición del vehículo a esa hora. No se publicaron las coordenadas del FTS, la carga real de propelente, las masas secas ni el segundo exacto de despegue. Las capacidades de diseño no son cargas medidas. La ficha da 1.614 tf para la Ship; la suma de las cifras por motor da 1.575 tf. No las promediamos.
 
-## Contributing
-
-Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md). Every new data point needs a public source.
-
-## License
-
-[MIT](LICENSE)
+[Especificación](docs/SPEC.md) · [Investigación y huecos](docs/research.md) · [Licencia MIT](LICENSE)
