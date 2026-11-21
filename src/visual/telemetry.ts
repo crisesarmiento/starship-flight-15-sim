@@ -1,4 +1,4 @@
-import { eventTime, flight, type Sample, type VehicleState } from './core'
+import { eventTime, flight, type Sample } from './core'
 import { measuredFrom } from './dimensions'
 import { fmtAltitude, fmtDistance, fmtDeg, fmtEcc, fmtG, fmtKm, fmtLat, fmtLon, fmtMassT, fmtPeriod, fmtSpeed } from './format'
 import type { BadgeKind } from './labels'
