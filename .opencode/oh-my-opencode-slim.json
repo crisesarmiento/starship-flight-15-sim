@@ -1,7 +1,18 @@
 {
   "$schema": "https://unpkg.com/oh-my-opencode-slim@latest/oh-my-opencode-slim.schema.json",
-  "preset": "test-astra-sol-2026-11-19",
+  "preset": "sim-balanced-2026-11-22",
   "presets": {
+    "sim-balanced-2026-11-22": {
+      "orchestrator": { "model": ["openai/gpt-6.2-astra", { "id": "claude-code/claude-sonnet-5-5", "variant": "medium" }], "skills": ["*"] },
+      "oracle": { "model": [{ "id": "claude-code/claude-opus-5-5", "variant": "high" }, "openai/gpt-6.2-astra"], "skills": ["simplify"] },
+      "fixer": {
+        "model": ["openai/gpt-6.2-sol", { "id": "claude-code/claude-sonnet-5-5", "variant": "medium" }, { "id": "openai/gpt-6.2-astra", "variant": "high" }],
+        "skills": [],
+        "orchestratorPrompt": "@fixer routing for simulation work\n- Default: physics code, tests, docs (SPEC, VALIDACION), constants, CI and build go to @fixer with no `model` or `variant` (gpt-6.2-sol).\n- GLSL/shader math (ShaderMaterial, onBeforeCompile, fresnel, noise, scattering, plume shock diamonds, transparency order with logarithmicDepthBuffer): delegate to @fixer with `model` `openai/gpt-6.2-astra` and `variant` `high`. Then send the diff to @oracle for review before accepting.\n- Escalation after a failed check (tests, `npm run build`, bundle budget): re-delegate @fixer once with `model` `claude-code/claude-sonnet-5-5` `variant` `medium`, briefing the failure evidence. Not for quota or transport errors; the fallback chain handles those.\n- @designer owns scene layout, materials wiring, textures, sprites, instancing, camera and accessibility, but does not author shader math.\n- Keep the 200 kB gzip budget: no new runtime dependencies without asking. Do not add Grok, OpenRouter or NVIDIA routes."
+      },
+      "designer": { "model": [{ "id": "claude-code/claude-sonnet-5-5", "variant": "medium" }, "openai/gpt-6.2-sol"], "skills": [] },
+      "explorer": { "model": ["opencode-go/glm-5.3-flash", { "id": "opencode-go/gpt-6-luna", "variant": "low" }, { "id": "opencode-go/claude-haiku-5-5", "variant": "low" }], "skills": [] }
+    },
     "test-astra-sol-2026-11-19": {
       "orchestrator": { "model": ["openai/gpt-6.2-astra"], "skills": ["*"] },
       "oracle": { "model": ["openai/gpt-6.2-astra"], "skills": ["simplify"] },
