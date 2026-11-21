@@ -6,14 +6,19 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
-    "test": "vitest run"
+    "test": "vitest run",
+    "lint": "eslint .",
+    "size": "node scripts/check-bundle-size.mjs"
   },
   "dependencies": {
     "three": "^0.181.0"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@types/three": "^0.181.0",
+    "eslint": "^10.15.0",
     "typescript": "~5.9.3",
+    "typescript-eslint": "^8.73.0",
     "vite": "^7.2.2",
     "vitest": "^4.1.12"
   }

@@ -195,7 +195,6 @@ export function createScene(host: HTMLElement): SceneApi {
   let overlayAnchors: Anchor[] = []
 
   // scratch
-  const vB = new THREE.Vector3()
   const vS = new THREE.Vector3()
   const rB = new THREE.Vector3()
   const rS = new THREE.Vector3()
