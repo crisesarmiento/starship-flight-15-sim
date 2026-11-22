@@ -1,4 +1,4 @@
-import { eventTime, flight, type Sample } from './core'
+import { eventTime, flight, type Sample, type VehicleState } from './core'
 import { measuredFrom } from './dimensions'
 import { fmtAltitude, fmtDistance, fmtDeg, fmtEcc, fmtG, fmtKm, fmtLat, fmtLon, fmtMassT, fmtPeriod, fmtSpeed } from './format'
 import type { BadgeKind } from './labels'
@@ -48,16 +48,9 @@ export const STATUS_EN: Record<string, string> = {
 }
 export const statusEn = (status: string): string => STATUS_EN[status] ?? status
 
-/**
- * How a state value was made, read from the core's own method text:
- * - "cinematic" / "illustrative": a drawn curve between knots -> Interpolated
- * - "adjust", "anchor", "estimat", "fixed pulse": a physical model pinned to a reference or with a fixed estimate -> Estimated
- * - otherwise integrated or Keplerian from (r, v) -> Calculated
- */
-export function stateBadge(method: string): BadgeKind {
-  if (/cinematic|illustrativ/i.test(method)) return 'interpolated'
-  if (/adjust|anchor|estimat|fixed pulse/i.test(method)) return 'estimate'
-  return 'calculated'
+/** How a state value was made, as classified by the core. */
+export function stateBadge(provenance: VehicleState['provenance']): BadgeKind {
+  return provenance
 }
 
 const BADGE_HINT: Partial<Record<BadgeKind, string>> = {
@@ -89,7 +82,7 @@ const none = (key: string, label: string, hint: string): Row => ({ key, label, v
 /** HUD rows for one vehicle. A value that the core does not have shows "—", never a made-up number. */
 export function telemetryRows(s: Sample, who: HudVehicle): Row[] {
   const st = s[who]
-  const b = stateBadge(st.method)
+  const b = stateBadge(st.provenance)
   const hint = `${BADGE_HINT[b] ?? ''}. Method: ${st.method}`
   const eng = engineBadge(who, s.time)
   const orbit = who === 'ship' ? s.orbit : null

@@ -2,7 +2,13 @@ import { add, cross, dot, earthRadiusM, fromFixed, localPoint, norm, scale, sub,
   unit, type State, type Vec3 } from './frame'
 
 type Knot = { time: number; direction: Vec3; directionRate: Vec3; altitude: number; verticalSpeed: number }
-export type VehicleState = State & { propellantKg: number | null; method: string; status: string }
+export type StateProvenance = 'interpolated' | 'estimate' | 'calculated'
+export type VehicleState = State & {
+  propellantKg: number | null
+  method: string
+  provenance: StateProvenance
+  status: string
+}
 
 function fixedKnot(time: number, { r, v }: State): Knot {
   const radius = norm(r)

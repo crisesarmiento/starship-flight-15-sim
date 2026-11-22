@@ -91,6 +91,7 @@ function rawVehicleAt(time: number, vehicle: 'booster' | 'ship'): VehicleState {
     ...state,
     propellantKg: vehicle === 'booster' ? state.propellantKg : flight.model.ascent.ship_propellant_kg.value,
     method: 'RK4 ascent with radial adjustment toward the reported separation reference; not telemetry',
+    provenance: 'estimate',
     status: 'stack',
   }
 }

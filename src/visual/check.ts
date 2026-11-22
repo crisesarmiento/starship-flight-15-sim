@@ -3,7 +3,7 @@ import { CAMERA_MODES, worldQuaternionFor } from './cameraRig'
 import { calloutsAt } from './callouts'
 import { duration, earthRadiusM, entryHandoff, eventTime, flight, frameAt, orbitPath } from './core'
 import { VISUAL, boosterEngineLayout, measuredFrom, shipEngineLayout } from './dimensions'
-import { EVENT_LABELS, MODE_LABELS } from './labels'
+import { EVENT_LABELS, MODE_LABELS, type BadgeKind } from './labels'
 import { attitudeQuaternion, ecefToEci, eciToEcef, enuAt, geodeticToScene, noseDirection, SUN_DIRECTION, toScene, type AttitudeTimes } from './frames'
 import { buildManeuvers, dvBadge, dvValueText } from './maneuvers'
 import { Overlays } from './overlays'
@@ -238,17 +238,42 @@ export function runVisualChecks(): CheckResult[] {
   add('orbit: only one rebuild while paused', orbitRuns.rebuilds.orbit === 1, `${orbitRuns.rebuilds.orbit}`)
 
   // ---- data provenance badges and status display labels
-  const stateAt = (t: number, who: 'ship' | 'booster') => frameAt(t)[who]
-  add('cinematic curves are labeled interpolated (Ship entry and booster divert)', stateBadge(stateAt(cut + 60, 'ship').method) === 'interpolated' && stateBadge(stateAt(300, 'booster').method) === 'interpolated' && telemetryRows(frameAt(cut + 60), 'ship').find((r) => r.key === 'alt')?.badge === 'interpolated', stateAt(cut + 60, 'ship').method.slice(0, 40))
-  add('adjusted physics or estimated impulses are labeled estimated (ascent, insertion, anchored coast, deorbit)', [30, T.insStart + 5, 20000, eventTime('deorbit_start') + 3].every((t) => stateBadge(stateAt(t, 'ship').method) === 'estimate'), [30, T.insStart + 5, 20000, eventTime('deorbit_start') + 3].map((t) => stateBadge(stateAt(t, 'ship').method)).join(' '))
-  add('unadjusted Keplerian coast is labeled calculated', stateBadge(stateAt(T.insStart - 200, 'ship').method) === 'calculated', stateAt(T.insStart - 200, 'ship').method.slice(0, 40))
+  const join = flight.model.ship.kepler_join_s.value
+  // Baseline from the main branch's method labels and old stateBadge rules.
+  // Inclusive lower bounds, latest first. Same-badge changes (e.g. FTS) are sampled too.
+  const expectedBadges: Record<'ship' | 'booster', readonly [number, BadgeKind][]> = {
+    ship: [[eventTime('entry'), 'interpolated'], [eventTime('deorbit_shutdown'), 'calculated'],
+      [T.insStart, 'estimate'], [join, 'calculated'], [AT.hotStaging, 'interpolated'], [-Infinity, 'estimate']],
+    booster: [[AT.hotStaging, 'interpolated'], [-Infinity, 'estimate']],
+  }
+  const markers = [...new Set([...times, join])].sort((a, b) => a - b)
+  const badgeTimes = new Set(markers.flatMap((t, i) => [
+    t - 0.001, t, t + 0.001, (t + (markers[i + 1] ?? t)) / 2,
+  ]))
+  for (let t = 0; t <= duration; t += 97) badgeTimes.add(t)
+  const stateKeys = ['alt', 'vs', 'vi', 'dr', 'g', 'lat', 'lon']
+  let badgeError: string | undefined, methodError: string | undefined
   add('orbital elements are always labeled calculated, including during entry', ['peri', 'apo', 'inc', 'per', 'ecc'].every((k) => telemetryRows(frameAt(cut + 60), 'ship').find((r) => r.key === k)?.badge === 'calculated'), 'ok')
   const statuses = new Set<string>()
-  for (let t = 0; t <= duration; t += 97) {
+  for (const t of badgeTimes) {
     const f = frameAt(t)
-    statuses.add(f.ship.status)
-    statuses.add(f.booster.status)
+    for (const who of ['ship', 'booster'] as const) {
+      statuses.add(f[who].status)
+      const expected = expectedBadges[who].find(([start]) => t >= start)![1]
+      const actual = stateBadge(f[who].provenance)
+      if (actual !== expected) badgeError ??= `${who} T+${t}: expected ${expected}, got ${actual}`
+      const method = expected === 'interpolated' ? 'estimated fixed pulse' : 'illustrative cinematic'
+      const rows = telemetryRows({ ...f, [who]: { ...f[who], method } }, who)
+      for (const key of stateKeys) {
+        const row = rows.find((r) => r.key === key)
+        if (row?.badge !== expected || !row.hint?.includes(method)) {
+          methodError ??= `${who} T+${t} ${key}: expected ${expected} with method in hint, got ${row?.badge} (${row?.hint})`
+        }
+      }
+    }
   }
+  add('Ship and booster state badges match the baseline throughout the mission', !badgeError, badgeError ?? `${badgeTimes.size} times per vehicle`)
+  add('HUD state badges ignore misleading method text while still displaying it', !methodError, methodError ?? `${badgeTimes.size} times per vehicle`)
   const raw = [...statuses].filter((x) => !(x in STATUS_EN))
   add('all core statuses have display labels', raw.length === 0, `${statuses.size} statuses; missing display labels: ${raw.join(', ') || 'none'}`)
 

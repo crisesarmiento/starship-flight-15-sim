@@ -1,6 +1,6 @@
 import { flight } from '../flight'
 import { ascentAt } from './ascent'
-import { curveAt, inertialKnot, localKnot, type VehicleState } from './cinematic'
+import { curveAt, inertialKnot, localKnot, type StateProvenance, type VehicleState } from './cinematic'
 import { add, earthAngleAt, earthRadiusM, mu, norm, padEast, padUp, rotate, scale, sub,
   timeAt, unit, type State } from './frame'
 import { constantBurn, keplerFrom } from './orbit'
@@ -65,16 +65,16 @@ export const entryHandoff = {
 }
 
 export function shipAt(time: number): VehicleState {
-  function out(state: State, method: string, status: string): VehicleState {
-    return { ...state, method, status, propellantKg: null }
+  function out(state: State, provenance: StateProvenance, method: string, status: string): VehicleState {
+    return { ...state, method, provenance, status, propellantKg: null }
   }
-  if (time < join) return out(curveAt(time, ascentKnots),
+  if (time < join) return out(curveAt(time, ascentKnots), 'interpolated',
     'Cinematic Ship ascent bridge and initial coast; not telemetry', time < seco ? 'ascent' : 'coast')
-  if (time < insertionStart) return out(preInsertion(time), 'Keplerian pre-insertion coast; osculating orbit of the model', 'coast')
-  if (time < insertionEnd) return out(insertion(time), 'Integrated insertion, fixed pulse with reported Δv and orbital anchor', 'insertion')
-  if (time < deorbitStart) return out(orbitalCoast(time), 'Keplerian coast anchored to the reported orbital altitude', 'orbit')
-  if (time < deorbitEnd) return out(deorbit(time), 'Integrated deorbit with an estimated fixed retrograde pulse', 'deorbit')
-  if (time < entry) return out(preEntry(time), 'Keplerian coast toward entry; not a prediction of the real corridor', 'pre-entry')
-  return out(curveAt(time, entryKnots), 'Local cinematic curve over the Gulf after an explicit position and velocity cut; not telemetry',
+  if (time < insertionStart) return out(preInsertion(time), 'calculated', 'Keplerian pre-insertion coast; osculating orbit of the model', 'coast')
+  if (time < insertionEnd) return out(insertion(time), 'estimate', 'Integrated insertion, fixed pulse with reported Δv and orbital anchor', 'insertion')
+  if (time < deorbitStart) return out(orbitalCoast(time), 'estimate', 'Keplerian coast anchored to the reported orbital altitude', 'orbit')
+  if (time < deorbitEnd) return out(deorbit(time), 'estimate', 'Integrated deorbit with an estimated fixed retrograde pulse', 'deorbit')
+  if (time < entry) return out(preEntry(time), 'calculated', 'Keplerian coast toward entry; not a prediction of the real corridor', 'pre-entry')
+  return out(curveAt(time, entryKnots), 'interpolated', 'Local cinematic curve over the Gulf after an explicit position and velocity cut; not telemetry',
     time >= catchTime ? 'caught' : time >= landing ? 'landing-burn' : 'entry')
 }
