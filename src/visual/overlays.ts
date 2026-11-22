@@ -265,7 +265,7 @@ export class Overlays {
       const mark = (id: string, text: string, r: readonly [number, number, number]) =>
         out.push({ id, text, pos: eciToEcef(toScene(r), theta), kind: 'ghost', fixed: true })
       mark('cut-before', 'Entry cut · before', entryHandoff.before.r)
-      mark('cut-after', `Entry cut · after (jump of ${Math.round(entryHandoff.distanceM / 1000).toLocaleString('es-AR')} km)`, entryHandoff.after.r)
+      mark('cut-after', `Entry cut · after (jump of ${Math.round(entryHandoff.distanceM / 1000).toLocaleString('en-US')} km)`, entryHandoff.after.r)
     }
     return out
   }

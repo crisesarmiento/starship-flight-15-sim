@@ -29,8 +29,8 @@ export function cordobaClock(liftoffUtc: string | null, t: number): { date: stri
   return { date: cordobaDate.format(d).replace('.', ''), time: cordobaTime.format(d) }
 }
 
-const nf = new Intl.NumberFormat('es-AR', { maximumFractionDigits: 1 })
-const ni = new Intl.NumberFormat('es-AR', { maximumFractionDigits: 0 })
+const nf = new Intl.NumberFormat('en-US', { maximumFractionDigits: 1 })
+const ni = new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 })
 
 export function fmtAltitude(m: number | null): string {
   if (m === null) return '—'
@@ -48,8 +48,8 @@ export function fmtDistance(m: number | null): string {
   return Math.abs(m) >= 10_000 ? `${nf.format(m / 1000)} km` : `${ni.format(m)} m`
 }
 
-const n2 = new Intl.NumberFormat('es-AR', { maximumFractionDigits: 2 })
-const n3 = new Intl.NumberFormat('es-AR', { minimumFractionDigits: 3, maximumFractionDigits: 3 })
+const n2 = new Intl.NumberFormat('en-US', { maximumFractionDigits: 2 })
+const n3 = new Intl.NumberFormat('en-US', { minimumFractionDigits: 3, maximumFractionDigits: 3 })
 
 /** Altitude above the surface in km, signed (a negative perigee means below the ground). */
 export function fmtKm(m: number | null): string {
@@ -67,15 +67,15 @@ export function fmtMassT(kg: number | null): string {
 
 export function fmtDeg(d: number | null, digits = 2): string {
   if (d === null || !Number.isFinite(d)) return '—'
-  return `${new Intl.NumberFormat('es-AR', { minimumFractionDigits: digits, maximumFractionDigits: digits }).format(d)}°`
+  return `${new Intl.NumberFormat('en-US', { minimumFractionDigits: digits, maximumFractionDigits: digits }).format(d)}°`
 }
 
 /** Latitude/longitude with hemisphere letters (N, S, E, W). */
 export function fmtLat(d: number): string {
-  return `${new Intl.NumberFormat('es-AR', { minimumFractionDigits: 3, maximumFractionDigits: 3 }).format(Math.abs(d))}° ${d >= 0 ? 'N' : 'S'}`
+  return `${new Intl.NumberFormat('en-US', { minimumFractionDigits: 3, maximumFractionDigits: 3 }).format(Math.abs(d))}° ${d >= 0 ? 'N' : 'S'}`
 }
 export function fmtLon(d: number): string {
-  return `${new Intl.NumberFormat('es-AR', { minimumFractionDigits: 3, maximumFractionDigits: 3 }).format(Math.abs(d))}° ${d >= 0 ? 'E' : 'W'}`
+  return `${new Intl.NumberFormat('en-US', { minimumFractionDigits: 3, maximumFractionDigits: 3 }).format(Math.abs(d))}° ${d >= 0 ? 'E' : 'W'}`
 }
 
 export function fmtPeriod(s: number | null): string {

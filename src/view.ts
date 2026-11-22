@@ -497,7 +497,7 @@ export function mount(root: HTMLElement): () => void {
       `<div class="chip"><b>Starlink V3</b><span>${s.satellites.length} of ${payloadCount} in orbit</span></div>`,
       st.scale > 1.05 ? `<div class="chip warn"><b>Visual scale</b><span>vehicles ×${st.scale < 10 ? st.scale.toFixed(1) : Math.round(st.scale)}</span></div>` : '',
       s.time >= entryHandoff.time
-        ? `<div class="chip warn wide"><b>Entry · explicit model cut</b><span>From ${fmtT(entryHandoff.time)} the Ship follows a local cinematic curve: the core cuts position and velocity (jump of ${Math.round(entryHandoff.distanceM / 1000).toLocaleString('es-AR')} km and ${Math.round(entryHandoff.velocityGapMs).toLocaleString('es-AR')} m/s). Values are interpolated, not telemetry, and the trails do not cross the cut.</span></div>`
+        ? `<div class="chip warn wide"><b>Entry · explicit model cut</b><span>From ${fmtT(entryHandoff.time)} the Ship follows a local cinematic curve: the core cuts position and velocity (jump of ${Math.round(entryHandoff.distanceM / 1000).toLocaleString('en-US')} km and ${Math.round(entryHandoff.velocityGapMs).toLocaleString('en-US')} m/s). Values are interpolated, not telemetry, and the trails do not cross the cut.</span></div>`
         : '',
       warn && s.ship.status !== 'caught' ? `<div class="chip warn"><b>Orbit</b><span>${esc(warn)}</span></div>` : '',
     ].join('')
