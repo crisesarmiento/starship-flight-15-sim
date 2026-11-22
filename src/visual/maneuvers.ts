@@ -71,7 +71,7 @@ export function activeManeuver(list: Maneuver[], t: number): Maneuver | null {
   return list.find((m) => t >= m.t0 && t < m.t1) ?? null
 }
 
-/** Badge for a Δv: never "Calculado", because these inputs are reported, estimated or not published. */
+/** Badge for a Δv: never `calculated`, because these inputs are reported, estimated or not published. */
 export function dvBadge(m: Maneuver): BadgeKind {
   return m.dv.kind === 'reported' ? 'reported' : m.dv.kind === 'estimate' ? 'estimate' : 'nodata'
 }

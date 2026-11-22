@@ -1,7 +1,7 @@
 import { expect, it } from 'vitest'
 import { flight } from './flight'
 
-it('da cotas oficiales y las tres aletas del Super Heavy V3', () => {
+it('provides official dimensions and specifies three grid fins for Super Heavy V3', () => {
   const { stack, booster, ship } = flight.vehicle
   for (const [stage, height] of [[stack, 124], [booster, 72], [ship, 52]] as const) {
     expect(stage.height_m).toMatchObject({ value: height, unit: 'm', confidence: 'official' })

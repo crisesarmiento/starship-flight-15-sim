@@ -52,30 +52,30 @@ function checkMetadata(node: unknown, path: string): void {
     return
   }
   if (node === null || typeof node !== 'object') {
-    if (typeof node === 'number') throw new Error(`${path}: magnitud sin metadatos`)
+    if (typeof node === 'number') throw new Error(`${path}: quantity without metadata`)
     return
   }
   const fields = node as Record<string, unknown>
   if ('confidence' in fields && !confidences.some(confidence => confidence === fields.confidence)) {
-    throw new Error(`${path}: confianza inválida`)
+    throw new Error(`${path}: invalid confidence`)
   }
   if ('value' in fields) {
     const { value, unit, confidence, source } = fields
     if (confidence === 'unknown') {
       if (value !== null || source !== 'no publicado') {
-        throw new Error(`${path}: un dato desconocido debe quedar null y sin fuente publicada`)
+        throw new Error(`${path}: an unknown datum must stay null with no published source`)
       }
     } else if (value === null || !confidence || !isSource(source, confidence, fields.note)) {
-      throw new Error(`${path}: falta valor, confianza o fuente`)
+      throw new Error(`${path}: missing value, confidence or source`)
     }
     const numbers = typeof value === 'number' ? [value] : Array.isArray(value) ? value : undefined
     if (numbers && (!hasText(unit) || !numbers.every(Number.isFinite))) {
-      throw new Error(`${path}: magnitud inválida o sin unidad`)
+      throw new Error(`${path}: invalid quantity or missing unit`)
     }
     return
   }
   if ('confidence' in fields && (!isSourceUrl(fields.source) || fields.confidence === 'unknown')) {
-    throw new Error(`${path}: fuente inválida`)
+    throw new Error(`${path}: invalid source`)
   }
   for (const [key, value] of Object.entries(fields)) {
     if (key !== 't_sec') checkMetadata(value, `${path}.${key}`)
@@ -93,16 +93,16 @@ function validateFlight(data: typeof rawFlight): asserts data is typeof rawFligh
         || !['official', 'reported', 'estimate'].includes(event.confidence)
         || (event.as_flown_note !== null && !hasText(event.as_flown_note))
         || !['stack', 'booster', 'ship'].includes(event.vehicle)) {
-      throw new Error(`Timeline inválida cerca de ${event.id}`)
+      throw new Error(`Invalid timeline near ${event.id}`)
     }
     if ('altitude_m' in event && event.altitude_m?.unit !== 'm') {
-      throw new Error(`Unidad de altitud inválida en ${event.id}`)
+      throw new Error(`Invalid altitude unit in ${event.id}`)
     }
     ids.add(event.id)
     previous = event.t_sec
   }
   if (data.timeline[0]?.id !== 'liftoff' || data.timeline[0].t_sec !== 0) {
-    throw new Error('La timeline debe empezar en el despegue (T+0)')
+    throw new Error('The timeline must start at liftoff (T+0)')
   }
 }
 

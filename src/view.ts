@@ -158,7 +158,7 @@ export function mount(root: HTMLElement): () => void {
 
   const $ = <T extends HTMLElement>(sel: string) => {
     const el = root.querySelector<T>(sel)
-    if (!el) throw new Error(`Falta el elemento ${sel}`)
+    if (!el) throw new Error(`Missing element ${sel}`)
     return el
   }
   const stage = $('[data-role=stage]')

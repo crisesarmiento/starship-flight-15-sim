@@ -17,7 +17,7 @@ export class DynLine {
     this.geo.setPositions(new Float32Array(capacity * 3))
     const attr = this.geo.getAttribute('instanceStart')
     if (!(attr instanceof THREE.InterleavedBufferAttribute) || !(attr.data instanceof THREE.InstancedInterleavedBuffer)) {
-      throw new Error('LineGeometry cambió su formato interno')
+      throw new Error('LineGeometry changed its internal format')
     }
     this.data = attr.data
     this.material = new LineMaterial({ color, linewidth: width, transparent: opacity < 1, opacity, worldUnits: false })

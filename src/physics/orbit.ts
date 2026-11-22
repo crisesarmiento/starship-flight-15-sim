@@ -63,7 +63,7 @@ export function orbitPath(r: Readonly<Vec3>, v: Readonly<Vec3>): { points: Vec3[
 // accumulates integration error through the 20+ hours of coast.
 export function keplerFrom(state: State, epoch: number): (time: number) => State {
   const g = geometry(state.r, state.v)
-  if (!g || g.a === null) throw new Error('La propagación local requiere una elipse no degenerada')
+  if (!g || g.a === null) throw new Error('Local propagation requires a non-degenerate ellipse')
   const { a, e, peri, side } = g
   const ellipticY = Math.sqrt(1 - e * e)
   const e0 = Math.atan2(dot(state.r, side) / ellipticY, dot(state.r, peri) + a * e)

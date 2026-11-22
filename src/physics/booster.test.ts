@@ -4,7 +4,7 @@ import { ascentAt } from './ascent'
 import { boosterAt } from './booster'
 import { earthRadiusM, localPoint, norm, sub, timeAt, toFixed } from './frame'
 
-it('empalma el ascenso y muestra desvío, hover y FTS sin volver al pad', () => {
+it('joins the ascent trajectory continuously and shows divert, hover, and FTS without returning to the pad', () => {
   const stageTime = timeAt('hot_staging')
   const separated = boosterAt(stageTime)
   expect(norm(sub(separated.r, ascentAt(stageTime).r))).toBeLessThan(1e-6)

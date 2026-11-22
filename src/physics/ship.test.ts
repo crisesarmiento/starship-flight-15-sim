@@ -4,7 +4,7 @@ import { dot, earthRadiusM, localPoint, norm, sub, timeAt, toFixed, unit } from 
 import { elements } from './orbit'
 import { entryHandoff, shipAt } from './ship'
 
-it('mantiene continuidad de r/v en empalmes, cambia perigeo y conserva costa kepleriana', () => {
+it('keeps r/v continuous at joins, changes perigee, and preserves Keplerian coast', () => {
   const join = flight.model.ship.kepler_join_s.value
   for (const t of [timeAt('ship_ascent_cutoff'), join, 1570, 1590, 77757, 77767]) {
     expect(norm(sub(shipAt(t - 0.001).r, shipAt(t + 0.001).r)), `${t}: r`).toBeLessThan(20)
@@ -20,10 +20,10 @@ it('mantiene continuidad de r/v en empalmes, cambia perigeo y conserva costa kep
   expect(elements(shipAt(74_515)).periodS).toBeCloseTo(inserted.periodS!, 6)
   expect(elements(shipAt(79_845)).perigeeM).toBeCloseTo(after.perigeeM!, 4)
   expect(norm(shipAt(79_846).r) - earthRadiusM).toBeGreaterThan(0)
-  console.info(`Perigeos pre/post inserción y post desórbita: ${[before, inserted, after].map(o => o.perigeeM!.toFixed(0)).join(' / ')} m`)
+  console.info(`Perigees before insertion, after insertion, and after deorbit: ${[before, inserted, after].map(o => o.perigeeM!.toFixed(0)).join(' / ')} m`)
 })
 
-it('avanza al este durante el puente de ascenso sin regresar sobre el pad', () => {
+it('moves east during the ascent bridge without passing back over the pad', () => {
   const intervals = [141, 489, flight.model.ship.kepler_join_s.value, 1570, 1590]
   const longitude = (t: number) => {
     const { r } = toFixed(shipAt(t), t)
@@ -39,7 +39,7 @@ it('avanza al este durante el puente de ascenso sin regresar sobre el pad', () =
   }
 })
 
-it('declara el corte de entrada y usa tramos locales descendentes sin picos ni reversión', () => {
+it('declares the entry cut and uses descending local segments without spikes or reversals', () => {
   const entry = timeAt('entry')
   expect(entryHandoff.time).toBe(entry)
   expect(norm(sub(shipAt(entry - 0.001).r, entryHandoff.before.r))).toBeLessThan(10)
@@ -61,13 +61,13 @@ it('declara el corte de entrada y usa tramos locales descendentes sin picos ni r
       expect(speed, `${t}: |v|`).toBeGreaterThan(floors[i - 1])
       expect(dot(unit(fixed.r), fixed.v), `${t}: radial`).toBeLessThan(0)
       const longitudeRateSign = fixed.r[0] * fixed.v[1] - fixed.r[1] * fixed.v[0]
-      expect(longitudeRateSign, `${t}: oeste`).toBeLessThan(0)
+      expect(longitudeRateSign, `${t}: westward`).toBeLessThan(0)
     }
   }
-  console.info(`Corte entrada: Δr ${entryHandoff.distanceM.toFixed(0)} m; Δv vectorial ${entryHandoff.velocityGapMs.toFixed(0)} m/s`)
+  console.info(`Entry cut: Δr ${entryHandoff.distanceM.toFixed(0)} m; vector Δv ${entryHandoff.velocityGapMs.toFixed(0)} m/s`)
 })
 
-it('conserva las ventanas públicas y termina con catch terrestre en Pad 2', () => {
+it('preserves public timing windows and ends with a catch on land at Pad 2', () => {
   for (const [id, reference, tolerance] of [
     ['ship_ascent_cutoff', 489, 2], ['insertion_start', 1570, 5], ['insertion_shutdown', 1590, 5],
     ['payload_deploy_start', 2101, 5], ['payload_deploy_complete', 4660, 5],
