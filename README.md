@@ -91,7 +91,7 @@ The [timeline and parameters](data/flight15.json) include their sources. The [re
 
 Every HUD value has a confidence label: **official**, **reported**, **estimated**, **calculated**, **interpolated**, or **no data**. Even an official event time is approximate, and it does not make the vehicle's position at that time official.
 
-The FTS coordinates, actual propellant load, dry masses, and exact second of liftoff were not published. Design capacities are not measured loads. The vehicle datasheet lists 1.614 tf for Ship; adding the per-engine figures yields 1.575 tf. The simulation does not average them.
+The FTS coordinates, actual propellant load, dry masses, and exact second of liftoff were not published. Design capacities are not measured loads. The vehicle datasheet lists 1,614 tf for Ship; adding the per-engine figures yields 1,575 tf. The simulation does not average them.
 
 The clock follows approximate mission milestones rather than automatically detecting Max Q, engine ignitions, or the catch. The stack's ascent integrates gravity, thrust, propellant consumption, and drag. A radial adjustment brings the ascent through the reported separation altitude. The model's masses, Isp, Cd, and initial propellant load are assumptions, not measurements of B22 or S42. The booster's return and Ship's final segment are cinematic reconstructions.
 
