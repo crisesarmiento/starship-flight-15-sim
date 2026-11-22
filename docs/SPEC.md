@@ -20,7 +20,7 @@ Vehicles: Super Heavy Booster 22 and Ship 42, both of the V3 (Block 3) generatio
 
 **Booster.** It ascended on 33 Raptor engines. After hot-staging, it flipped and relit 32 of the 33 engines planned for boostback. The burn ended early due to a low fuel mass alarm; the root cause was still under investigation as of 14 November. The GNC aborted the catch during coast and diverted the booster to a point in the Gulf. It performed the landing burn, cut its engines while hovering over the water, and triggered the flight termination system (FTS) at shutdown. There was no booster catch. SpaceX did not publish splashdown coordinates or an exact distance.
 
-**Ship.** It completed a nominal ascent burn, shut down its engines, and later lit a single Raptor for orbital insertion. SpaceX and the webcast described an orbit of about 275 km. Jonathan McDowell reported an insertion burn of about 92 m/s that produced a nearly circular orbit at 276 km. The Ship deployed all 26 Starlink V3 satellites, and contact was established with all of them. After more than 20 hours in space (about 14 orbits, about 22,5 hours after liftoff), it performed a deorbit burn with one sea-level Raptor, reentered, flew a final “swoosh” over the Gulf, and was caught by Mechazilla's arms at the same Pad 2. It was the first catch of a Starship upper stage. Spaceflight Now places the catch at 15:20 CST on 14 November (21:20 UTC; 18:20 Córdoba time).
+**Ship.** It completed a nominal ascent burn, shut down its engines, and later lit a single Raptor for orbital insertion. SpaceX and the webcast described an orbit of about 275 km. Jonathan McDowell reported an insertion burn of about 92 m/s that produced a nearly circular orbit at 276 km. The Ship deployed all 26 Starlink V3 satellites, and contact was established with all of them. After more than 20 hours in space (about 14 orbits, about 22.5 hours after liftoff), it performed a deorbit burn with one sea-level Raptor, reentered, flew a final “swoosh” over the Gulf, and was caught by Mechazilla's arms at the same Pad 2. It was the first catch of a Starship upper stage. Spaceflight Now places the catch at 15:20 CST on 14 November (21:20 UTC; 18:20 Córdoba time).
 
 SpaceX's public timeline says “All Times Approximate”. The table still lists T+00:06:35 as “Super Heavy landing burn shutdown and catch”, but the booster was not caught on the actual flight. Use those times as a public reference while showing the actual outcome (hover, shutdown, FTS).
 
@@ -94,14 +94,14 @@ There are three approaches. C is recommended for v1.
 
 **C. Hybrid (recommended).** Integrate the trajectory in 3D (start in the launch plane if needed, then move to a simple ECEF or ECI frame):
 
-- Use inverse-square gravity and the WGS 84 Earth gravitational parameter (μ = 3,986004418 × 10¹⁴ m³/s²). Source: [NIMA TR8350.2 / WGS 84](https://earth-info.nga.mil/index.php?dir=wgs84&action=wgs84).
+- Use inverse-square gravity and the WGS 84 Earth gravitational parameter (μ = 3.986004418 × 10¹⁴ m³/s²). Source: [NIMA TR8350.2 / WGS 84](https://earth-info.nga.mil/index.php?dir=wgs84&action=wgs84).
 - Atmosphere: [U.S. Standard Atmosphere 1976](https://ntrs.nasa.gov/citations/19770009539) for density versus altitude. Start with a constant, adjustable Cd and label it as an estimate.
 - Thrust and mass flow: `ṁ = F / (Isp × g0)`, using official thrust and labeling Isp as an estimate if no current official figure exists.
 - Timeline events (ignition, shutdown, separation, diversion, FTS, catch) trigger phase changes at public T+ times.
 - If the physics drifts, as it will given the missing mass and aerodynamic data, a guidance layer targets the next public event (its time and, if available, its altitude). Record the residual. The HUD must not pass off a guided or interpolated value as real telemetry.
 - The booster abort is not optional: boostback shuts down at T+00:03:02, the vehicle diverts offshore (east/southeast over the Gulf, without inventing a distance), and ends in hover + FTS.
 
-Integrator: Runge–Kutta 4 or a stable semi-implicit method, with a step of 0,05–0,1 s during burns and a larger step during orbital coast. Deterministic: same seed, same run.
+Integrator: Runge–Kutta 4 or a stable semi-implicit method, with a step of 0.05–0.1 s during burns and a larger step during orbital coast. Deterministic: same seed, same run.
 
 ## 6. Data format: `data/flight15.json`
 
@@ -146,20 +146,20 @@ Starting values (official unless otherwise noted):
 | --- | ---: | --- | --- |
 | Stack height | 124 m | official | [SpaceX Starship](https://www.spacex.com/vehicles/starship) |
 | Diameter | 9 m | official | Same source |
-| Ship: height, propellant, thrust | 52 m; 1.600 t; 1.614 tf | official | Same source |
-| Super Heavy: height, propellant, thrust | 72 m; 3.650 t; 8.240 tf | official | Same source |
+| Ship: height, propellant, thrust | 52 m; 1,600 t; 1,614 tf | official | Same source |
+| Super Heavy: height, propellant, thrust | 72 m; 3,650 t; 8,240 tf | official | Same source |
 | Engines | Booster: 33 Raptor (13 steerable center engines, 20 around the perimeter); Ship: 3 Raptor + 3 RVac | official | Same source |
-| Raptor (vehicle page): diameter, height, thrust | 1,3 m; 2,9 m; 250 tf | official | Same source |
-| Raptor 3 SL thrust / vacuum thrust / SL engine mass | 250 tf; 275 tf; 1.525 kg | official | [V3 update, 12 May 2026](https://www.spacex.com/updates) |
+| Raptor (vehicle page): diameter, height, thrust | 1.3 m; 2.9 m; 250 tf | official | Same source |
+| Raptor 3 SL thrust / vacuum thrust / SL engine mass | 250 tf; 275 tf; 1,525 kg | official | [V3 update, 12 May 2026](https://www.spacex.com/updates) |
 | Pad | Orbital Launch Pad 2, Starbase, Texas | official | [Flight 15](https://www.spacex.com/launches/starship-flight-15/) |
-| Pad coordinates | 25,99677° N, 97,15799° W | reported | [Launch Library 2, pad 235](https://ll.thespacedevs.com/2.2.0/pad/235/) — third-party database, sufficient for v1 |
+| Pad coordinates | 25.99677° N, 97.15799° W | reported | [Launch Library 2, pad 235](https://ll.thespacedevs.com/2.2.0/pad/235/) — third-party database, sufficient for v1 |
 | Orbit | ~275 km | reported | SpaceX / webcast; McDowell: nearly circular at 276 km |
 | Separation altitude | ~65 km | reported | Space.com, approximate figure |
 | Booster and Ship dry mass | not published | unknown | SpaceX does not give it on the current vehicle page |
 | Isp | not on the current vehicle page | estimate / unknown | A SpaceX tweet from 3 August 2024 cited 350 s for the sea-level variant. Treat this as dated and disputed (vacuum Isp for the SL engine?). Adjustable |
 | Cd, reference area, mass of each Starlink V3, FTS coordinates, Max Q altitude, separation speed | not published | unknown | Leave null or label as estimates |
 
-Do not “fix” this discrepancy: 3 × 250 tf + 3 × 275 tf = 1.575 tf, but the vehicle page gives 1.614 tf for the Ship. Keep both figures in the JSON, each with its own source. Do not silently average them.
+Do not “fix” this discrepancy: 3 × 250 tf + 3 × 275 tf = 1,575 tf, but the vehicle page gives 1,614 tf for the Ship. Keep both figures in the JSON, each with its own source. Do not silently average them.
 
 Propellant capacity is a design limit, not the actual Flight 15 load, which was not published. The sim can start from those limits and reduce the mass when tuning the model, as long as the adjustment is documented.
 
@@ -272,7 +272,7 @@ That note provides evidence for evaluating the model stack. This document does n
 
 - Without dry mass or Cd, pure physics is not viable. That is why the spec calls for the hybrid approach and clear confidence labels.
 - The official table still says “catch” for the booster. Implementing that literally would misrepresent the flight.
-- A 22,5 h flight cannot run at 1× in real time throughout; compress the coast.
+- A 22.5 h flight cannot run at 1× in real time throughout; compress the coast.
 - The orchestrator may try to write code or skip stages. The prompt asks it to delegate and go stage by stage.
 - A long run can consume quota. Stop at stage boundaries and save the report even if the run is incomplete.
 - Launch Library 2 coordinates come from a third party. They are sufficient for v1, but are not an official SpaceX survey.
@@ -283,7 +283,7 @@ That note provides evidence for evaluating the model stack. This document does n
 | --- | --- |
 | [SpaceX: Starship Flight 15](https://www.spacex.com/launches/starship-flight-15/) | Official account, outcome, countdown, and timeline (approximate times) |
 | [SpaceX: Starship vehicle](https://www.spacex.com/vehicles/starship) | Heights, diameter, propellant, thrust, engine count, Raptor 250 tf |
-| [SpaceX Updates (V3, 12 May 2026)](https://www.spacex.com/updates) | Raptor 3: 250 / 275 tf, mass 1.525 kg; Super Heavy V3 with 3 grid fins; Pad 2 |
+| [SpaceX Updates (V3, 12 May 2026)](https://www.spacex.com/updates) | Raptor 3: 250 / 275 tf, mass 1,525 kg; Super Heavy V3 with 3 grid fins; Pad 2 |
 | [Space.com: liftoff and orbit](https://www.space.com/space-exploration/launches-spacecraft/spacex-starship-flight-15-chopsticks-double-catch-super-heavy-ship) | ~16:47 CST, ~275 km, ~20 s insertion, 26 Starlink, ~14 orbits |
 | [Space.com: photos and ~65 km](https://www.space.com/space-exploration/launches-spacecraft/relive-starships-historic-flight-15-with-our-best-photos-from-launch-and-mechazilla-tower-catch) | Approximate separation altitude |
 | [Space.com: booster abort](https://www.space.com/space-exploration/launches-spacecraft/spacex-says-starship-flight-15-booster-aborted-chopsticks-landing-catch-after-launch-due-to-guidance-issue-video) | Fuel alarm, GNC clarification, 13 engines, hover, and FTS |

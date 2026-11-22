@@ -12,7 +12,7 @@ Independent reference: [SPEC §2 and §8](SPEC.md) and [copy of the public table
 There are 26 approximate public milestones plus one extra FTS row: the account places the FTS at cutoff, without publishing an independent second.
 The clock is imposed; ignitions, cutoffs, deployment and final states are also driven by the program. Measuring when their output changes checks the implementation, not a physical prediction of those times.
 Max Q, return checks, entry, transonic, subsonic and flip are compared as phase markers: they are not physical detections of dynamic pressure, Mach or attitude.
-Each reference is sampled every 0,25 s (±tolerance plus 2 s) and every detected transition is refined by bisection; at T+0 the initial state is observed.
+Each reference is sampled every 0.25 s (±tolerance plus 2 s) and every detected transition is refined by bisection; at T+0 the initial state is observed.
 Residuals are **observed − reference**. A marker with no transition, or an ambiguous one, does not count as passed.
 
 | Milestone | Public T+ (s) | Tolerance | Imposed clock: measured marker (Δs) | Effects observed in `sample` (Δs) |

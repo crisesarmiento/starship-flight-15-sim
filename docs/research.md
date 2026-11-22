@@ -67,7 +67,7 @@ SpaceX, postflight account (nearly verbatim):
 
 > The booster performed its directional flip maneuver and relit 32 of the planned 33 Raptor engines for the boostback burn. The boostback burn ended early due to low fuel mass, with the root cause under investigation. The booster’s guidance, navigation and control triggered an automated abort during coast and diverted itself successfully to an offshore landing location. It successfully executed a landing burn with the engines cutting off while hovering over the Gulf. Upon landing burn shutdown, the Super Heavy’s flight termination system was triggered.
 
-Dan Huot clarified (Space.com and Spaceflight Now), ~16,5 h into the mission, that it was not “a GNC failure”. The GNC detected that the booster was out of position for the catch, aborted, and diverted it to the contingency site in the Gulf. Kate Tice, 14 Nov webcast: “Early indications are that the booster ended its boostback [burn] early due to a low fuel mass alarm.”
+Dan Huot clarified (Space.com and Spaceflight Now), ~16.5 h into the mission, that it was not “a GNC failure”. The GNC detected that the booster was out of position for the catch, aborted, and diverted it to the contingency site in the Gulf. Kate Tice, 14 Nov webcast: “Early indications are that the booster ended its boostback [burn] early due to a low fuel mass alarm.”
 
 Space.com (Malik): “activating 13 of its Raptor engines as planned”, hover, shutdown, FTS, “exploded a few feet above the waves… about 6.5 minutes after liftoff.”
 
@@ -87,7 +87,7 @@ Spaceflight Now describes reentry “over the Pacific Ocean and made a supersoni
 
 Jonathan McDowell (@planet4589), 14 Nov 2026, cited in Wikipedia footnote [3]: “Ship reached initial orbit at T+8:10, single-engine 18s insertion burn at T+26:06 of about 92 m/s raised perigee to near-circular orbit at 276 km.” The original tweet was not consulted for this research; it is recorded via Wikipedia's citation. The SpaceX table puts insertion at 00:26:10–00:26:30 (20 s). The start times differ by a few seconds and the durations are 18 vs 20 s; both accounts give approximate figures. Use the SpaceX table as the public clock and record McDowell's 92 m/s / 276 km as reported figures.
 
-Wikipedia lists a periapsis of 276 km, an apoapsis of 278 km, and an inclination of 30,5°. Only the periapsis has footnote [3]. **Do not treat 278 km or 30,5° as well sourced.** The safest description is “a nearly circular low orbit at about 275–276 km”.
+Wikipedia lists a periapsis of 276 km, an apoapsis of 278 km, and an inclination of 30.5°. Only the periapsis has footnote [3]. **Do not treat 278 km or 30.5° as well sourced.** The safest description is “a nearly circular low orbit at about 275–276 km”.
 
 <a name="3-línea-de-tiempo-oficial-copia-de-trabajo"></a>
 
@@ -136,14 +136,14 @@ Approximate burn durations calculated from the table: boostback 36 s (02:26–03
 
 https://www.spacex.com/vehicles/starship
 
-- Stack: 124 m / 407 ft tall; 9 m / 29,5 ft in diameter; payload “100+ t”.
-- Starship (upper stage): 52 m / 171 ft; 9 m; propellant 1.600 t / 3,5 Mlb; thrust 1.614 tf / 3,5 Mlbf; payload 100+ t.
-- Super Heavy: 72 m / 236 ft; 9 m; propellant 3.650 t / 8 Mlb; thrust 8.240 tf / 18,1 Mlbf; 33 Raptor engines; subcooled methane and liquid oxygen; “13 maneuverable engines in the center and the remaining 20 around the perimeter”.
+- Stack: 124 m / 407 ft tall; 9 m / 29.5 ft in diameter; payload “100+ t”.
+- Starship (upper stage): 52 m / 171 ft; 9 m; propellant 1,600 t / 3.5 Mlb; thrust 1,614 tf / 3.5 Mlbf; payload 100+ t.
+- Super Heavy: 72 m / 236 ft; 9 m; propellant 3,650 t / 8 Mlb; thrust 8,240 tf / 18.1 Mlbf; 33 Raptor engines; subcooled methane and liquid oxygen; “13 maneuverable engines in the center and the remaining 20 around the perimeter”.
 - Ship: “six engines, three Raptor engines, and three Raptor Vacuum (RVac) engines”.
-- Raptor (vehicle page, with one set of figures): diameter 1,3 m / 4,2 ft; height 2,9 m / 9,5 ft; thrust 250 tf / 551 klbf.
+- Raptor (vehicle page, with one set of figures): diameter 1.3 m / 4.2 ft; height 2.9 m / 9.5 ft; thrust 250 tf / 551 klbf.
 - The vehicle page **does not publish** dry mass, liftoff mass, Isp, reference area, or Cd.
 
-Internal check; do not “correct” these discrepancies: 33 × 250 tf = 8.250 tf, but the booster specs say 8.240 tf. 3 × 250 + 3 × 275 = 1.575 tf, but the Ship specs say 1.614 tf. Keep both figures in each case, with their sources.
+Internal check; do not “correct” these discrepancies: 33 × 250 tf = 8,250 tf, but the booster specs say 8,240 tf. 3 × 250 + 3 × 275 = 1,575 tf, but the Ship specs say 1,614 tf. Keep both figures in each case, with their sources.
 
 ### Official figures from the V3 update (12 May 2026)
 
@@ -167,25 +167,25 @@ SpaceX does not publish dry mass for Super Heavy V3 or Ship V3 on the current ve
 
 Wikipedia lists a dry mass of 275 t for Super Heavy under Block 1/2, not Block 3. Do not use it as the mass of B22.
 
-The FAA's June 2022 PEA describes an earlier design (it mentions up to ~3.700 t of propellant and a maximum liftoff mass of ~5.000 t, and still lists 37 engines). **Do not use these figures for Flight 15 / V3.** They only document an older design envelope.
+The FAA's June 2022 PEA describes an earlier design (it mentions up to ~3,700 t of propellant and a maximum liftoff mass of ~5,000 t, and still lists 37 engines). **Do not use these figures for Flight 15 / V3.** They only document an older design envelope.
 
 This research found third-party estimates (post-Flight 12 analyses, blogs) with dry masses of roughly ~250 t for the booster and ~170 t for the Ship. They were not adopted: they are unofficial, the original work with a reproducible method was not consulted, and for v1 it is more honest to leave the values `unknown` and tune the model.
 
-Mass of the 26 Starlink V3 satellites: not on the Flight 15 page. Figures of ~2.000–2.500 kg per satellite circulate in connection with “Gen3” FCC filings, but the primary PDF was not verified, nor was whether “Gen3” is exactly the V3 flown here. **Gap.** If an FCC filing is cited later, the mass can be entered as `reported`.
+Mass of the 26 Starlink V3 satellites: not on the Flight 15 page. Figures of ~2,000–2,500 kg per satellite circulate in connection with “Gen3” FCC filings, but the primary PDF was not verified, nor was whether “Gen3” is exactly the V3 flown here. **Gap.** If an FCC filing is cited later, the mass can be entered as `reported`.
 
-Propellant 3.650 t / 1.600 t: design capacity, not necessarily the load on 13-11. The LOX/CH4 split (Wikipedia, based on a mixture ratio) was not treated as official.
+Propellant 3,650 t / 1,600 t: design capacity, not necessarily the load on 13-11. The LOX/CH4 split (Wikipedia, based on a mixture ratio) was not treated as official.
 
 ### Site
 
 Pad 2, Starbase, Texas. Launch Library 2, GET https://ll.thespacedevs.com/2.2.0/pad/235/ : `"latitude": "25.99677", "longitude": "-97.15799"`, name “Orbital Launch Pad 2”, mount “Orbital Launch Mount B”, time zone America/Chicago. This is a third-party database. It is sufficient to locate the scene, but is not an official site plan.
 
-Tower / Mechazilla height: SpaceX does not give an exact height on the vehicle page (“two of the tallest launch towers in the world”). Figures such as 144,5 m appear in unofficial wikis. **Do not specify an official height.** For v1, use a recognizable tower at a reasonable scale without claiming an exact height.
+Tower / Mechazilla height: SpaceX does not give an exact height on the vehicle page (“two of the tallest launch towers in the world”). Figures such as 144.5 m appear in unofficial wikis. **Do not specify an official height.** For v1, use a recognizable tower at a reasonable scale without claiming an exact height.
 
 ### Atmosphere and gravity (public models, not flight data)
 
-- WGS 84, μ = 3,986004418 × 10¹⁴ m³/s². https://earth-info.nga.mil/index.php?dir=wgs84&action=wgs84
+- WGS 84, μ = 3.986004418 × 10¹⁴ m³/s². https://earth-info.nga.mil/index.php?dir=wgs84&action=wgs84
 - U.S. Standard Atmosphere 1976. https://ntrs.nasa.gov/citations/19770009539
-- Conventional g0 for Isp: 9,80665 m/s² (standard value, not a SpaceX figure).
+- Conventional g0 for Isp: 9.80665 m/s² (standard value, not a SpaceX figure).
 
 <a name="5-qué-no-apareció-huecos-que-importan-al-sim"></a>
 
@@ -200,7 +200,7 @@ Tower / Mechazilla height: SpaceX does not give an exact height on the vehicle p
 7. Actual propellant load for this flight, as distinct from capacity.
 8. Mass of each Starlink V3 satellite and thus of the payload.
 9. The exact second of liftoff as published by SpaceX.
-10. A reliable citation for the apoapsis of 278 km and inclination of 30,5°.
+10. A reliable citation for the apoapsis of 278 km and inclination of 30.5°.
 11. Official tower height and catch height.
 12. Official altitude/speed telemetry versus time (the webcast may have shown overlays; no official numerical profile was transcribed for this research).
 13. Full text of FAA license VOL 23-129 Rev. 10 (only its existence was confirmed through press reports and the FAA index).
@@ -210,7 +210,7 @@ These gaps are why the sim uses hybrid physics: integrate with the available dat
 ## 6. Implications for the sim (brief)
 
 - The booster outcome is abort + FTS, not a catch.
-- The Ship is caught at Pad 2 after ~22,5 h; compress the coast.
+- The Ship is caught at Pad 2 after ~22.5 h; compress the coast.
 - V3 model: three grid fins, 33 + 6 engines, booster landing burn on 13, Ship 3–2–1.
 - Every number in the JSON has a source and confidence level.
 - Do not promote a 2024 tweet or a Wikipedia recap to “official for 2026”.
