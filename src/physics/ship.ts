@@ -69,12 +69,12 @@ export function shipAt(time: number): VehicleState {
     return { ...state, method, status, propellantKg: null }
   }
   if (time < join) return out(curveAt(time, ascentKnots),
-    'Puente cinematográfico de ascenso de Ship y costa inicial; no telemetría', time < seco ? 'ascent' : 'coast')
-  if (time < insertionStart) return out(preInsertion(time), 'Costa kepleriana preinserción; órbita osculante del modelo', 'coast')
-  if (time < insertionEnd) return out(insertion(time), 'Inserción integrada, pulso fijo con Δv reportado y ancla orbital', 'insertion')
-  if (time < deorbitStart) return out(orbitalCoast(time), 'Costa kepleriana anclada a la altitud orbital reportada', 'orbit')
-  if (time < deorbitEnd) return out(deorbit(time), 'Desórbita integrada con pulso retrógrado fijo estimado', 'deorbit')
-  if (time < entry) return out(preEntry(time), 'Costa kepleriana hacia la entrada; no predicción del corredor real', 'pre-entry')
-  return out(curveAt(time, entryKnots), 'Curva cinematográfica local sobre el Golfo tras un corte explícito de posición y velocidad; no telemetría',
+    'Cinematic Ship ascent bridge and initial coast; not telemetry', time < seco ? 'ascent' : 'coast')
+  if (time < insertionStart) return out(preInsertion(time), 'Keplerian pre-insertion coast; osculating orbit of the model', 'coast')
+  if (time < insertionEnd) return out(insertion(time), 'Integrated insertion, fixed pulse with reported Δv and orbital anchor', 'insertion')
+  if (time < deorbitStart) return out(orbitalCoast(time), 'Keplerian coast anchored to the reported orbital altitude', 'orbit')
+  if (time < deorbitEnd) return out(deorbit(time), 'Integrated deorbit with an estimated fixed retrograde pulse', 'deorbit')
+  if (time < entry) return out(preEntry(time), 'Keplerian coast toward entry; not a prediction of the real corridor', 'pre-entry')
+  return out(curveAt(time, entryKnots), 'Local cinematic curve over the Gulf after an explicit position and velocity cut; not telemetry',
     time >= catchTime ? 'caught' : time >= landing ? 'landing-burn' : 'entry')
 }

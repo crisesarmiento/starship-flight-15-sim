@@ -1,101 +1,105 @@
-# Notas crudas de investigación — Starship Flight 15
+# Raw research notes — Starship Flight 15
 
-Fecha de la pesquisa: 19 de noviembre de 2026, hora de Córdoba (UTC−3).  
-Regla usada: no inventar números. Si un dato no aparece en una fuente, se anota como hueco.
+Research date: 19 November 2026, Córdoba time (UTC−3).<br>
+Rule: Do not invent numbers. If a figure does not appear in a source, record it as a gap.
 
-El Flight 15 **ya voló** (13–14 de noviembre de 2026). No hace falta basar la sim en un plan previo ni en un vuelo anterior. Lo que sigue es el vuelo tal como lo describen fuentes públicas.
+Flight 15 **already flew** (13–14 November 2026). There is no need to base the sim on a preflight plan or an earlier flight. What follows is the flight as described by public sources.
 
-## 1. Fuentes primarias y de prensa, en orden
+## 1. Primary and press sources, in order
 
-1. SpaceX, página de la misión: https://www.spacex.com/launches/starship-flight-15/  
-   Consultado el 19-11-2026. Relato post-vuelo, countdown y “FLIGHT TIMELINE / All Times Approximate”.
-2. SpaceX, ficha del vehículo: https://www.spacex.com/vehicles/starship  
-   También: https://www.spacex.com/vehicles/starship/technical-specifications (mismo contenido al consultarla).
-3. SpaceX Updates, “Introducing Starship V3”, 12 de mayo de 2026: https://www.spacex.com/updates  
-   El texto está en esa página de actualizaciones (entrada del 12 may 2026). Incluye empujes de Raptor 3, masa del motor y los tres grid fins del Super Heavy V3.
-4. Space.com, Josh Dinner, 13 nov 2026: https://www.space.com/space-exploration/launches-spacecraft/spacex-starship-flight-15-chopsticks-double-catch-super-heavy-ship  
-   Despegue, órbita ~275 km, inserción, carga útil.
-5. Space.com, fotos y separación: https://www.space.com/space-exploration/launches-spacecraft/relive-starships-historic-flight-15-with-our-best-photos-from-launch-and-mechazilla-tower-catch  
-   “Starship soared approximately 40 miles (65 km) overhead” en la separación.
-6. Space.com, Tariq Malik, actualizado 14 nov 2026: https://www.space.com/space-exploration/launches-spacecraft/spacex-says-starship-flight-15-booster-aborted-chopsticks-landing-catch-after-launch-due-to-guidance-issue-video  
-   Alarma de combustible, aclaración de Huot sobre el GNC, 13 motores, hover, FTS.
-7. Spaceflight Now, cobertura: https://spaceflightnow.com/2026/11/13/live-coverage-starship-flight-15-attempts-to-recover-full-vehicle-in-double-launch-pad-catch/  
-   Horarios locales, B22 / S42, catch ~15:20 CST, reentrada.
-8. Wikipedia, Starship flight 15: https://en.wikipedia.org/wiki/Starship_flight_test_15  
-   Útil como índice de citas. No usar un número de la wiki si la nota al pie no lo sostiene.
-9. Launch Library 2, pad 235: https://ll.thespacedevs.com/2.2.0/pad/235/  
-   Coordenadas de Pad 2 (terceros).
+1. SpaceX, mission page: https://www.spacex.com/launches/starship-flight-15/ <br>
+   Accessed 19-11-2026. Postflight account, countdown, and “FLIGHT TIMELINE / All Times Approximate”.
+2. SpaceX, vehicle page: https://www.spacex.com/vehicles/starship <br>
+   Also: https://www.spacex.com/vehicles/starship/technical-specifications (same content when accessed).
+3. SpaceX Updates, “Introducing Starship V3”, 12 May 2026: https://www.spacex.com/updates <br>
+   The text appears on that updates page (12 May 2026 entry). It includes Raptor 3 thrust figures, engine mass, and Super Heavy V3's three grid fins.
+4. Space.com, Josh Dinner, 13 Nov 2026: https://www.space.com/space-exploration/launches-spacecraft/spacex-starship-flight-15-chopsticks-double-catch-super-heavy-ship <br>
+   Liftoff, ~275 km orbit, insertion, and payload.
+5. Space.com, photos and separation: https://www.space.com/space-exploration/launches-spacecraft/relive-starships-historic-flight-15-with-our-best-photos-from-launch-and-mechazilla-tower-catch <br>
+   “Starship soared approximately 40 miles (65 km) overhead” at separation.
+6. Space.com, Tariq Malik, updated 14 Nov 2026: https://www.space.com/space-exploration/launches-spacecraft/spacex-says-starship-flight-15-booster-aborted-chopsticks-landing-catch-after-launch-due-to-guidance-issue-video <br>
+   Fuel alarm, Huot's clarification about the GNC, 13 engines, hover, and FTS.
+7. Spaceflight Now, coverage: https://spaceflightnow.com/2026/11/13/live-coverage-starship-flight-15-attempts-to-recover-full-vehicle-in-double-launch-pad-catch/ <br>
+   Local times, B22 / S42, catch at ~15:20 CST, and reentry.
+8. Wikipedia, Starship flight 15: https://en.wikipedia.org/wiki/Starship_flight_test_15 <br>
+   Useful as an index of citations. Do not use a wiki figure if the footnote does not support it.
+9. Launch Library 2, pad 235: https://ll.thespacedevs.com/2.2.0/pad/235/ <br>
+   Pad 2 coordinates (third-party source).
 10. WGS 84: https://earth-info.nga.mil/index.php?dir=wgs84&action=wgs84
 11. U.S. Standard Atmosphere 1976 (NASA NTRS): https://ntrs.nasa.gov/citations/19770009539
-12. FAA, contexto Starship/Starbase: https://www.faa.gov/space/stakeholder_engagement/spacex_starship  
-    Licencia citada en prensa: VOL 23-129 Rev. 10, 13 nov 2026, un solo Flight 15 más reentrada. No se descargó el PDF de la Rev. 10 en esta pesquisa.
-13. PEA de la FAA, 2022 (diseño viejo, no V3): https://www.faa.gov/sites/faa.gov/files/2022-06/PEA_for_SpaceX_Starship_Super_Heavy_at_Boca_Chica_FINAL.pdf
+12. FAA, Starship/Starbase context: https://www.faa.gov/space/stakeholder_engagement/spacex_starship <br>
+    License cited in the press: VOL 23-129 Rev. 10, 13 Nov 2026, authorizing a single Flight 15 launch and reentry. The Rev. 10 PDF was not downloaded for this research.
+13. FAA PEA, 2022 (older design, not V3): https://www.faa.gov/sites/faa.gov/files/2022-06/PEA_for_SpaceX_Starship_Super_Heavy_at_Boca_Chica_FINAL.pdf
 
-Otras notas de prensa que coinciden en lo sustancial, usadas como cruce, no como fuente de números nuevos:
+Other press reports agree on the main points and were used to cross-check, not as sources of new numbers:
 
-- CNBC (catch de la Ship, booster al Golfo): https://www.cnbc.com/2026/11/14/spacex-plans-to-try-first-ever-catch-of-starship-rocket-from-orbit.html
-- CNBC (despegue): https://www.cnbc.com/2026/11/13/spacex-launches-starship-in-key-test-flight-of-massive-rocket.html
+- CNBC (Ship catch, booster diversion to the Gulf): https://www.cnbc.com/2026/11/14/spacex-plans-to-try-first-ever-catch-of-starship-rocket-from-orbit.html
+- CNBC (liftoff): https://www.cnbc.com/2026/11/13/spacex-launches-starship-in-key-test-flight-of-massive-rocket.html
 - The Register: https://www.theregister.com/science/2026/11/16/spacex-catches-starship-on-the-first-try/5310059
-- The Space Road (recuento): https://thespaceroad.com/articles/starship-flight-15-recap/
-- Seeking Alpha (licencia FAA Rev. 10): https://seekingalpha.com/news/4672602-faa-revises-spacex-starship-license-authorizes-single-flight-15-launch
+- The Space Road (recap): https://thespaceroad.com/articles/starship-flight-15-recap/
+- Seeking Alpha (FAA license Rev. 10): https://seekingalpha.com/news/4672602-faa-revises-spacex-starship-license-authorizes-single-flight-15-launch
 
-No se usó como fuente de verdad la telemetría de aficionados (p. ej. https://telemetry.starshipspaceprogram.com/), ni wikis no oficiales, ni Reddit, para fijar números de v1.
+Amateur telemetry (e.g., https://telemetry.starshipspaceprogram.com/), unofficial wikis, and Reddit were not used as authoritative sources for v1 figures.
 
-## 2. El vuelo, con citas
+## 2. The flight, with citations
 
-### Fecha, sitio, vehículos
+### Date, site, and vehicles
 
 SpaceX: “On Friday, November 13, Starship lifted off from Starbase, Texas on its 15th flight. And on Saturday, November 14, Starship returned to Starbase, Texas… Flight 15 started with the Super Heavy booster ascending away from Pad 2 at Starbase under the power of 33 Raptor engines.”
 
-Spaceflight Now y Space.com identifican Booster 22 y Ship 42. Spaceflight Now: despegue “at 4:47 p.m. CST (5:47 p.m. EST / 2247 UTC) on Friday, Nov. 13”. Una epígrafe de la misma nota dice “4:48 p.m. CST”. Space.com (Dinner, desde Starbase): “5:47 p.m. ET (2247 GMT; 4:47 p.m. local Texas time)”.
+Spaceflight Now and Space.com identify Booster 22 and Ship 42. Spaceflight Now gives liftoff “at 4:47 p.m. CST (5:47 p.m. EST / 2247 UTC) on Friday, Nov. 13”. A caption in the same article says “4:48 p.m. CST”. Space.com (Dinner, reporting from Starbase): “5:47 p.m. ET (2247 GMT; 4:47 p.m. local Texas time)”.
 
-SpaceX no publica el segundo exacto en la página de la misión.
+SpaceX does not give the exact second on the mission page.
 
-Wikipedia da “November 13, 2026, 22:47:36 UTC (4:47:36 pm CST)” con notas [1] y [2]. La [2] es la página de SpaceX (sin ese segundo). La [1] es un documento CADENA de planificación del 8 de octubre de 2026, anterior al vuelo. **No tratar 22:47:36 UTC como cifra oficial.** Dato de trabajo: alrededor de las 22:47 UTC (16:47 CST; 19:47 hora de Córdoba).
+Wikipedia gives “November 13, 2026, 22:47:36 UTC (4:47:36 pm CST)” with footnotes [1] and [2]. Footnote [2] points to the SpaceX page, which does not give that second. Footnote [1] points to a CADENA planning document dated 8 October 2026, before the flight. **Do not treat 22:47:36 UTC as official.** Working time: around 22:47 UTC (16:47 CST; 19:47 Córdoba time).
 
-Catch de la Ship: Spaceflight Now “at 3:20 p.m. CST (2120 UTC)”. SpaceX dice que volvió al mismo sitio “22.5 hours prior” y la tabla oficial pone la catch a T+22:32:34 (tiempos aproximados). Wikipedia arma 22 h 32 min 32 s y 21:20:08 UTC; esa aritmética depende de adoptar 22:47:36 UTC como despegue, así que no se copia como oficial.
+Ship catch: Spaceflight Now says “at 3:20 p.m. CST (2120 UTC)”. SpaceX says it returned to the site it had left “22.5 hours prior”, and its official table places the catch at T+22:32:34 (approximate times). Wikipedia gives 22 h 32 min 32 s and 21:20:08 UTC. That arithmetic assumes a liftoff time of 22:47:36 UTC, so do not copy it as official.
 
-Ventana: prensa y recuentos coinciden en que abrió a las 16:45 CST. No es un dato necesario para la sim.
+Launch window: Press reports and recaps agree it opened at 16:45 CST. The sim does not need this detail.
 
-Generación: cuarto vuelo V3 / Block 3. El V3 debutó en el Flight 12 (22 may 2026, Pad 2), según https://www.spacex.com/launches/starship-flight-12/.
+Generation: Fourth V3 / Block 3 flight. V3 debuted on Flight 12 (22 May 2026, Pad 2), according to https://www.spacex.com/launches/starship-flight-12/.
 
-Nombre de la carga: Wikipedia y bases de lanzamiento citan “Starlink Group 31-2”. SpaceX habla de “26 Starlink V3 satellites” sin ese nombre de grupo en el texto consultado.
+Payload name: Wikipedia and launch databases call it “Starlink Group 31-2”. SpaceX refers to “26 Starlink V3 satellites” without giving that group name in the text consulted.
 
-### Booster, como voló
+### Booster as flown
 
-SpaceX, texto post-vuelo (cita casi textual):
+SpaceX, postflight account (nearly verbatim):
 
 > The booster performed its directional flip maneuver and relit 32 of the planned 33 Raptor engines for the boostback burn. The boostback burn ended early due to low fuel mass, with the root cause under investigation. The booster’s guidance, navigation and control triggered an automated abort during coast and diverted itself successfully to an offshore landing location. It successfully executed a landing burn with the engines cutting off while hovering over the Gulf. Upon landing burn shutdown, the Super Heavy’s flight termination system was triggered.
 
-Aclaración de Dan Huot (Space.com y Spaceflight Now), ~16,5 h into the mission: no fue “un fallo de GNC”. El GNC detectó que el booster no estaba donde tenía que estar para la catch, abortó y se fue al punto de contingencia en el Golfo. Kate Tice, 14 nov, webcast: “Early indications are that the booster ended its boostback [burn] early due to a low fuel mass alarm.”
+Dan Huot clarified (Space.com and Spaceflight Now), ~16,5 h into the mission, that it was not “a GNC failure”. The GNC detected that the booster was out of position for the catch, aborted, and diverted it to the contingency site in the Gulf. Kate Tice, 14 Nov webcast: “Early indications are that the booster ended its boostback [burn] early due to a low fuel mass alarm.”
 
-Space.com (Malik): “activating 13 of its Raptor engines as planned”, hover, corte, FTS, “exploded a few feet above the waves… about 6.5 minutes after liftoff.”
+Space.com (Malik): “activating 13 of its Raptor engines as planned”, hover, shutdown, FTS, “exploded a few feet above the waves… about 6.5 minutes after liftoff.”
 
-No apareció una distancia en km ni un lat/lon del splashdown en las fuentes oficiales ni en la prensa citada. Hueco.
+Neither the official sources nor the cited press reports give a splashdown distance in km or its lat/lon. This remains a gap.
 
-La tabla de SpaceX, en T+00:06:35, todavía dice “Super Heavy landing burn shutdown and catch”. Ese rótulo no describe el vuelo real. Los horarios de inicio/corte de la quema (00:06:10 / 00:06:35) pueden ser los del plan aproximado; se usan como referencia pública, con la nota de desenlace real.
+The SpaceX table still says “Super Heavy landing burn shutdown and catch” at T+00:06:35. That label does not describe the actual flight. The burn start and shutdown times (00:06:10 / 00:06:35) may come from the approximate plan. Use them as a public reference, with a note on the actual outcome.
 
-### Ship, como voló
+<a name="ship-como-voló"></a>
 
-SpaceX: quema de ascenso nominal, costa breve, “reigniting a single Raptor engine for an orbital insertion burn”. Después, 26 Starlink V3, “contact was made soon after with every satellite”. Costa larga, “more than 20 hours in space”. Desórbita: “successfully relit a single Raptor sea-level engine”. Regreso: “navigated its way back to the east coast of Texas, flew a final swoosh maneuver out over the Gulf… 22.5 hours prior. After breaking through the clouds, three Raptor engines ignited for a landing flip and slow descent into Mechazilla’s waiting arms, which closed to catch Starship for the very first time.”
+### Ship as flown
 
-Space.com (Dinner), citando a Huot: “nominal orbit insertion… around 170 miles (275 kilometers) at T+26 minutes and 10 seconds.” Inserción “lasting about 20 seconds”. Despliegue “over a 42-minute span starting 35 minutes after launch.” Tres de los V3 llevaban cámaras para el escudo térmico. Chequeos de contingencia para un regreso temprano al Pacífico: ~10 min después del deploy, T+7 h 15 min, T+20 h 41 min (coinciden con la tabla de SpaceX: Hawái / Chile / Hawái). Desórbita prevista “10-second… at approximately T+21 hours and 36 minutes”. También había zona de contingencia en el Golfo para la Ship si no se podía hacer la catch.
+SpaceX: nominal ascent burn, brief coast, then “reigniting a single Raptor engine for an orbital insertion burn”. Next came deployment of 26 Starlink V3 satellites: “contact was made soon after with every satellite”. A long coast followed, with “more than 20 hours in space”. Deorbit: “successfully relit a single Raptor sea-level engine”. Return: “navigated its way back to the east coast of Texas, flew a final swoosh maneuver out over the Gulf… 22.5 hours prior. After breaking through the clouds, three Raptor engines ignited for a landing flip and slow descent into Mechazilla’s waiting arms, which closed to catch Starship for the very first time.”
 
-Spaceflight Now: reentrada “over the Pacific Ocean and made a supersonic flight across Mexico and the South West United States before turning out over the ocean” hacia Pad 2. “14 orbits.”
+Space.com (Dinner), citing Huot: “nominal orbit insertion… around 170 miles (275 kilometers) at T+26 minutes and 10 seconds.” The insertion was “lasting about 20 seconds”. Deployment was “over a 42-minute span starting 35 minutes after launch.” Three of the V3 satellites carried cameras for observing the heat shield. Contingency checks for an early return to the Pacific: ~10 min after deployment, T+7 h 15 min, and T+20 h 41 min (consistent with the SpaceX table: Hawaii / Chile / Hawaii). The planned deorbit burn was “10-second… at approximately T+21 hours and 36 minutes”. The Ship also had a contingency zone in the Gulf if the catch could not proceed.
 
-Jonathan McDowell (@planet4589), 14 nov 2026, citado por Wikipedia nota [3]: “Ship reached initial orbit at T+8:10, single-engine 18s insertion burn at T+26:06 of about 92 m/s raised perigee to near-circular orbit at 276 km.” No se abrió el tuit original en esta pesquisa; se registra vía la cita de Wikipedia. La tabla de SpaceX pone inserción 00:26:10–00:26:30 (20 s). Hay un desfase de unos segundos y de 18 vs 20 s: ambos son aproximados. Usar la tabla de SpaceX como reloj público y anotar los 92 m/s / 276 km de McDowell como dato reportado.
+Spaceflight Now describes reentry “over the Pacific Ocean and made a supersonic flight across Mexico and the South West United States before turning out over the ocean” toward Pad 2. “14 orbits.”
 
-Wikipedia lista periapsis 276 km, apoapsis 278 km e inclinación 30,5°. Solo el periapsis tiene la nota [3]. **No tratar 278 km ni 30,5° como bien citados.** El dato más seguro es “órbita baja de unos 275–276 km, casi circular”.
+Jonathan McDowell (@planet4589), 14 Nov 2026, cited in Wikipedia footnote [3]: “Ship reached initial orbit at T+8:10, single-engine 18s insertion burn at T+26:06 of about 92 m/s raised perigee to near-circular orbit at 276 km.” The original tweet was not consulted for this research; it is recorded via Wikipedia's citation. The SpaceX table puts insertion at 00:26:10–00:26:30 (20 s). The start times differ by a few seconds and the durations are 18 vs 20 s; both accounts give approximate figures. Use the SpaceX table as the public clock and record McDowell's 92 m/s / 276 km as reported figures.
 
-## 3. Línea de tiempo oficial (copia de trabajo)
+Wikipedia lists a periapsis of 276 km, an apoapsis of 278 km, and an inclination of 30,5°. Only the periapsis has footnote [3]. **Do not treat 278 km or 30,5° as well sourced.** The safest description is “a nearly circular low orbit at about 275–276 km”.
 
-Fuente: https://www.spacex.com/launches/starship-flight-15/ — “All Times Approximate”.
+<a name="3-línea-de-tiempo-oficial-copia-de-trabajo"></a>
 
-Countdown (no hace falta animarlo en v1, queda como contexto): T−50:00 GO for prop load; T−35:33 / 35:30 LOX y CH4 del booster; T−35:12 / 35:11 LOX y CH4 de la Ship; T−21:40 engine chill; T−02:50 / 02:10 fin de carga; T−00:30 GO for launch; T−00:17 flame diverter; T−00:03 startup; T−00:00 “Excitement guaranteed”.
+## 3. Official timeline (working copy)
 
-Vuelo:
+Source: https://www.spacex.com/launches/starship-flight-15/ — “All Times Approximate”.
 
-| T+ | Evento, texto de SpaceX |
+Countdown (for context; no need to animate it in v1): T−50:00 GO for prop load; T−35:33 / 35:30 booster LOX and CH4; T−35:12 / 35:11 Ship LOX and CH4; T−21:40 engine chill; T−02:50 / 02:10 loading complete; T−00:30 GO for launch; T−00:17 flame diverter; T−00:03 startup; T−00:00 “Excitement guaranteed”.
+
+Flight:
+
+| T+ | Event, SpaceX wording |
 | --- | --- |
 | 00:00:00 | Liftoff |
 | 00:00:58 | Max Q (moment of peak aerodynamic stress on the rocket) |
@@ -104,7 +108,7 @@ Vuelo:
 | 00:02:26 | Super Heavy boostback burn start |
 | 00:03:02 | Super Heavy boostback burn shutdown |
 | 00:06:10 | Super Heavy landing burn start |
-| 00:06:35 | Super Heavy landing burn shutdown and catch  ← rótulo no coincide con el vuelo |
+| 00:06:35 | Super Heavy landing burn shutdown and catch  ← label does not match the actual flight |
 | 00:08:09 | Starship engine cutoff |
 | 00:26:10 | Starship orbital insertion burn start |
 | 00:26:30 | Starship orbital insertion burn shutdown |
@@ -124,87 +128,89 @@ Vuelo:
 | 22:32:33 | Landing burn 2 to 1 engine |
 | 22:32:34 | Starship landing burn shutdown and catch |
 
-Duración de quemas que se pueden calcular de esa tabla (aproximadas): boostback 36 s (02:26–03:02); landing burn booster 25 s (06:10–06:35); inserción 20 s; desórbita 10 s; quema de aterrizaje de la Ship 18 s (22:32:16–22:32:34).
+Approximate burn durations calculated from the table: boostback 36 s (02:26–03:02); booster landing burn 25 s (06:10–06:35); insertion 20 s; deorbit 10 s; Ship landing burn 18 s (22:32:16–22:32:34).
 
-## 4. Parámetros del vehículo
+## 4. Vehicle parameters
 
-### Oficiales, ficha de SpaceX (consultada 19-11-2026)
+### Official figures from the SpaceX vehicle page (accessed 19-11-2026)
 
 https://www.spacex.com/vehicles/starship
 
-- Stack: 124 m / 407 ft de altura; 9 m / 29,5 ft de diámetro; payload “100+ t”.
-- Starship (etapa superior): 52 m / 171 ft; 9 m; propelente 1.600 t / 3,5 Mlb; empuje 1.614 tf / 3,5 Mlbf; payload 100+ t.
-- Super Heavy: 72 m / 236 ft; 9 m; propelente 3.650 t / 8 Mlb; empuje 8.240 tf / 18,1 Mlbf; 33 Raptor; metano y oxígeno líquido subenfriados; “13 maneuverable engines in the center and the remaining 20 around the perimeter”.
+- Stack: 124 m / 407 ft tall; 9 m / 29,5 ft in diameter; payload “100+ t”.
+- Starship (upper stage): 52 m / 171 ft; 9 m; propellant 1.600 t / 3,5 Mlb; thrust 1.614 tf / 3,5 Mlbf; payload 100+ t.
+- Super Heavy: 72 m / 236 ft; 9 m; propellant 3.650 t / 8 Mlb; thrust 8.240 tf / 18,1 Mlbf; 33 Raptor engines; subcooled methane and liquid oxygen; “13 maneuverable engines in the center and the remaining 20 around the perimeter”.
 - Ship: “six engines, three Raptor engines, and three Raptor Vacuum (RVac) engines”.
-- Raptor (bloque de la ficha, un solo juego de cifras): diámetro 1,3 m / 4,2 ft; altura 2,9 m / 9,5 ft; empuje 250 tf / 551 klbf.
-- La ficha **no publica** masa seca, masa de despegue, Isp, área de referencia ni Cd.
+- Raptor (vehicle page, with one set of figures): diameter 1,3 m / 4,2 ft; height 2,9 m / 9,5 ft; thrust 250 tf / 551 klbf.
+- The vehicle page **does not publish** dry mass, liftoff mass, Isp, reference area, or Cd.
 
-Chequeo interno, no “corregir”: 33 × 250 tf = 8.250 tf, la ficha del booster dice 8.240 tf. 3 × 250 + 3 × 275 = 1.575 tf, la ficha de la Ship dice 1.614 tf. Dejar ambas cifras con su fuente.
+Internal check; do not “correct” these discrepancies: 33 × 250 tf = 8.250 tf, but the booster specs say 8.240 tf. 3 × 250 + 3 × 275 = 1.575 tf, but the Ship specs say 1.614 tf. Keep both figures in each case, with their sources.
 
-### Oficiales, actualización V3 (12 may 2026)
+### Official figures from the V3 update (12 May 2026)
 
 https://www.spacex.com/updates — “Introducing Starship V3”
 
 - “Raptor 3 engines deliver increased thrust, with sea-level variants now producing 250 tf (551,000 lbf) up from 230 tf (507,000 lbf), while vacuum engines produce 275 tf (606,000 lbf) up from 258 tf (568,000 lbf).”
 - “Mass of the Raptor sea-level engines has been reduced to 1,525 kg from 1,630 kg. Overall vehicle-level mass savings reach approximately 1 ton per engine…”
-- Super Heavy V3: **tres** grid fins (antes cuatro), 50 % más grandes, relojadas para la catch, más bajas por el calor del hot-staging; hot stage integrado (ya no interstage descartable); 33 motores; protección en los 13 centrales (TVC); dos quick disconnects.
-- Starship V3: tanques más grandes, PEZ dispenser mejorado, sistemas para vuelos largos, cuatro drogues de docking a sotavento, etc.
-- Flight 12 = primer vuelo desde Pad 2.
+- Super Heavy V3: **three** grid fins (previously four), 50 % larger, clocked for the catch, and mounted lower because of hot-staging heat; integrated hot stage (no longer a disposable interstage); 33 engines; protection for the 13 center engines (TVC); two quick disconnects.
+- Starship V3: larger tanks, improved PEZ dispenser, systems for long flights, four docking drogues on the leeward side, etc.
+- Flight 12 = first flight from Pad 2.
 
-Esto importa para el modelo 3D: tres aletas, no cuatro.
+This matters for the 3D model: three fins, not four.
 
 ### Isp
 
-La ficha actual de SpaceX no da Isp. Un tuit de @SpaceX del 3 de agosto de 2024 (ampliamente citado; no se reabrió el tuit en esta pesquisa) presentaba Raptor 3 “sea level variant” con “Specific impulse: 350s” y “Engine mass: 1525kg”, entonces con empuje 280 tf (cifra de 2024, después actualizada a 250 tf en mayo 2026). Varios recuentos (p. ej. artículos que citan a Dan Huot) dicen que esos 350 s eran el Isp de vacío del motor de nivel del mar, no el Isp al nivel del mar. Wikipedia (Super Heavy Block 3) pone SL 330 s / vac 350 s; no se verificó una fuente primaria sólida para los 330 s. **Tratar cualquier Isp como estimación ajustable.** Cifras viejas de 2018–2019 (327 s SL / 350–380 s vac) son de otra generación; no usarlas como si fueran Raptor 3 de 2026.
+The current SpaceX vehicle page does not give Isp. A 3 August 2024 tweet from @SpaceX (widely cited; not revisited for this research) introduced the Raptor 3 “sea level variant” with “Specific impulse: 350s” and “Engine mass: 1525kg”, and a thrust of 280 tf at the time (the 2024 figure, later updated to 250 tf in May 2026). Several accounts, including articles citing Dan Huot, say those 350 s were the sea-level engine's vacuum Isp, not its sea-level Isp. Wikipedia (Super Heavy Block 3) lists SL 330 s / vac 350 s; no solid primary source was verified for the 330 s. **Treat any Isp figure as an adjustable estimate.** Older figures from 2018–2019 (327 s SL / 350–380 s vac) are for another generation; do not use them as 2026 Raptor 3 figures.
 
-### Masas secas y masa de despegue
+### Dry masses and liftoff mass
 
-SpaceX no publica masa seca del Super Heavy V3 ni de la Ship V3 en la ficha actual.
+SpaceX does not publish dry mass for Super Heavy V3 or Ship V3 on the current vehicle page.
 
-Wikipedia lista 275 t vacías para Super Heavy en el bloque de Block 1/2, no en el de Block 3. No copiar eso como masa de B22.
+Wikipedia lists a dry mass of 275 t for Super Heavy under Block 1/2, not Block 3. Do not use it as the mass of B22.
 
-La PEA de la FAA de junio 2022 habla de un diseño anterior (menciona hasta ~3.700 t de propelente y una masa máxima de despegue de ~5.000 t, y en ese texto aún aparecen 37 motores). **No usar esos números como si fueran el Flight 15 / V3.** Solo documentan un sobre de diseño viejo.
+The FAA's June 2022 PEA describes an earlier design (it mentions up to ~3.700 t of propellant and a maximum liftoff mass of ~5.000 t, and still lists 37 engines). **Do not use these figures for Flight 15 / V3.** They only document an older design envelope.
 
-En esta pesquisa aparecieron estimaciones de terceros (análisis post Flight 12, blogs) con masas secas del orden de ~250 t el booster y ~170 t la nave. No se adoptaron: no son oficiales, no se abrió el trabajo original con método reproducible, y para v1 es más honesto dejar `unknown` y ajustar.
+This research found third-party estimates (post-Flight 12 analyses, blogs) with dry masses of roughly ~250 t for the booster and ~170 t for the Ship. They were not adopted: they are unofficial, the original work with a reproducible method was not consulted, and for v1 it is more honest to leave the values `unknown` and tune the model.
 
-Masa de los 26 Starlink V3: no está en la página del Flight 15. Circulan cifras de ~2.000–2.500 kg por satélite ligadas a trámites FCC de “Gen3”; no se verificó el PDF primario ni que “Gen3” sea exactamente el V3 de este vuelo. **Hueco.** Si más adelante se cita un FCC filing, se puede cargar como `reported`.
+Mass of the 26 Starlink V3 satellites: not on the Flight 15 page. Figures of ~2.000–2.500 kg per satellite circulate in connection with “Gen3” FCC filings, but the primary PDF was not verified, nor was whether “Gen3” is exactly the V3 flown here. **Gap.** If an FCC filing is cited later, the mass can be entered as `reported`.
 
-Propelente 3.650 t / 1.600 t: capacidad de diseño, no necesariamente la carga del 13-11. La partición LOX/CH4 (Wikipedia, a partir de una relación de mezcla) no se tomó como oficial.
+Propellant 3.650 t / 1.600 t: design capacity, not necessarily the load on 13-11. The LOX/CH4 split (Wikipedia, based on a mixture ratio) was not treated as official.
 
-### Sitio
+### Site
 
-Pad 2, Starbase, Texas. Launch Library 2, GET https://ll.thespacedevs.com/2.2.0/pad/235/ : `"latitude": "25.99677", "longitude": "-97.15799"`, nombre “Orbital Launch Pad 2”, mount “Orbital Launch Mount B”, timezone America/Chicago. Es una base de datos de terceros. Suficiente para colocar la escena; no es un plano oficial.
+Pad 2, Starbase, Texas. Launch Library 2, GET https://ll.thespacedevs.com/2.2.0/pad/235/ : `"latitude": "25.99677", "longitude": "-97.15799"`, name “Orbital Launch Pad 2”, mount “Orbital Launch Mount B”, time zone America/Chicago. This is a third-party database. It is sufficient to locate the scene, but is not an official site plan.
 
-Altura de la torre / Mechazilla: SpaceX no da un metro exacto en la ficha (“two of the tallest launch towers in the world”). Cifras tipo 144,5 m aparecen en wikis no oficiales. **No fijar una altura oficial.** En v1, torre reconocible a escala razonable, sin afirmar el metro.
+Tower / Mechazilla height: SpaceX does not give an exact height on the vehicle page (“two of the tallest launch towers in the world”). Figures such as 144,5 m appear in unofficial wikis. **Do not specify an official height.** For v1, use a recognizable tower at a reasonable scale without claiming an exact height.
 
-### Atmósfera y gravedad (modelos públicos, no del vuelo)
+### Atmosphere and gravity (public models, not flight data)
 
 - WGS 84, μ = 3,986004418 × 10¹⁴ m³/s². https://earth-info.nga.mil/index.php?dir=wgs84&action=wgs84
 - U.S. Standard Atmosphere 1976. https://ntrs.nasa.gov/citations/19770009539
-- g0 convencional para Isp: 9,80665 m/s² (estándar, no es un dato de SpaceX).
+- Conventional g0 for Isp: 9,80665 m/s² (standard value, not a SpaceX figure).
 
-## 5. Qué no apareció (huecos que importan al sim)
+<a name="5-qué-no-apareció-huecos-que-importan-al-sim"></a>
 
-1. Masas secas (y masa real de despegue) de B22 y S42.
-2. Isp oficial vigente de Raptor 3 SL y RVac, al nivel del mar y en vacío.
-3. Cd, área de referencia y cualquier coeficiente aerodinámico.
-4. Altitud y velocidad de Max Q (solo está el tiempo, T+58 s).
-5. Velocidad en la separación. Altitud solo aproximada por Space.com (~65 km).
-6. Coordenadas o distancia del splashdown / FTS del booster.
-7. Carga real de propelente en este vuelo (vs capacidad).
-8. Masa de cada Starlink V3 y por lo tanto de la carga.
-9. Segundo exacto del despegue, publicado por SpaceX.
-10. Apoapsis 278 km e inclinación 30,5° sin cita sólida.
-11. Altura oficial de la torre y altura de catch.
-12. Telemetría oficial de altitud/velocidad vs tiempo (el webcast puede haber mostrado overlays; no se transcribió un perfil numérico oficial en esta pesquisa).
-13. Texto completo de la licencia FAA VOL 23-129 Rev. 10 (solo se confirmó su existencia por prensa y por el índice de la FAA).
+## 5. What we did not find (gaps that matter to the sim)
 
-Estos huecos son la razón de la física híbrida: se integra lo que hay, se contrasta con la timeline pública y, si hace falta, se guía sin disfrazar el residual.
+1. Dry masses (and actual liftoff mass) for B22 and S42.
+2. Current official Isp for Raptor 3 SL and RVac, at sea level and in vacuum.
+3. Cd, reference area, and any aerodynamic coefficients.
+4. Altitude and speed at Max Q (only the time is available, T+58 s).
+5. Separation speed. The only altitude figure is Space.com's estimate (~65 km).
+6. Coordinates or distance for the booster splashdown / FTS.
+7. Actual propellant load for this flight, as distinct from capacity.
+8. Mass of each Starlink V3 satellite and thus of the payload.
+9. The exact second of liftoff as published by SpaceX.
+10. A reliable citation for the apoapsis of 278 km and inclination of 30,5°.
+11. Official tower height and catch height.
+12. Official altitude/speed telemetry versus time (the webcast may have shown overlays; no official numerical profile was transcribed for this research).
+13. Full text of FAA license VOL 23-129 Rev. 10 (only its existence was confirmed through press reports and the FAA index).
 
-## 6. Implicaciones para la sim (muy corto)
+These gaps are why the sim uses hybrid physics: integrate with the available data, compare against the public timeline, and guide the trajectory if needed without concealing the residual.
 
-- El desenlace del booster es aborto + FTS, no catch.
-- La Ship hace catch en Pad 2 después de ~22,5 h; comprimir la costa.
-- Modelo V3: tres grid fins, 33 + 6 motores, quema de aterrizaje del booster con 13, Ship 3–2–1.
-- Cada número en el JSON lleva fuente y confianza.
-- Un tuit de 2024 o un recuento de Wikipedia no se promociona a “oficial de 2026”.
+## 6. Implications for the sim (brief)
+
+- The booster outcome is abort + FTS, not a catch.
+- The Ship is caught at Pad 2 after ~22,5 h; compress the coast.
+- V3 model: three grid fins, 33 + 6 engines, booster landing burn on 13, Ship 3–2–1.
+- Every number in the JSON has a source and confidence level.
+- Do not promote a 2024 tweet or a Wikipedia recap to “official for 2026”.

@@ -47,7 +47,7 @@ it('declares the entry cut and uses descending local segments without spikes or 
   expect(entryHandoff.distanceM).toBeGreaterThan(1_000)
   expect(entryHandoff.velocityGapMs).toBeGreaterThan(1_000)
   expect(norm(entryHandoff.before.r)).toBeCloseTo(norm(entryHandoff.after.r), 5)
-  expect(shipAt(entry).method).toMatch(/corte explícito/)
+  expect(shipAt(entry).method).toMatch(/explicit position and velocity cut/)
   const times = [entry, 80974, 81013, 81136, 81138, 81154]
   const ceilings = [2500, 400, 350, 110, 100]
   const floors = [250, 200, 50, 35, 0]

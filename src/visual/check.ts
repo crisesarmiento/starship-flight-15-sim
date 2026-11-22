@@ -7,7 +7,7 @@ import { EVENT_LABELS, MODE_LABELS } from './labels'
 import { attitudeQuaternion, ecefToEci, eciToEcef, enuAt, geodeticToScene, noseDirection, SUN_DIRECTION, toScene, type AttitudeTimes } from './frames'
 import { buildManeuvers, dvBadge, dvValueText } from './maneuvers'
 import { Overlays } from './overlays'
-import { engineBadge, stateBadge, statusEs, telemetryRows } from './telemetry'
+import { engineBadge, stateBadge, STATUS_EN, telemetryRows } from './telemetry'
 import { buildTimeScale } from './timeScale'
 import { buildBooster, buildShip } from './vehicles'
 
@@ -176,7 +176,7 @@ export function runVisualChecks(): CheckResult[] {
   const deo = byId('deorbit')
   add('deorbit: 58 m/s from a local source with an estimated badge', deo?.dv.kind === 'estimate' && deo.dv.valueMs === 58 && !/^https?:/.test(deo.dv.source) && dvBadge(deo) === 'estimate' && deo.coreValue === 58, `${deo?.dv.kind} ${dvValueText(deo!)}`)
   const unk = mv.filter((x) => x.dv.kind === 'unknown')
-  add('unpublished Δv uses a display label instead of a numeric value, with no value invented by the core', unk.length === 5 && unk.every((x) => x.coreValue === null && dvValueText(x) === 'no evaluable' && dvBadge(x) === 'nodata'), unk.map((x) => x.id).join(' '))
+  add('unpublished Δv uses a display label instead of a numeric value, with no value invented by the core', unk.length === 5 && unk.every((x) => x.coreValue === null && dvValueText(x) === 'not evaluable' && dvBadge(x) === 'nodata'), unk.map((x) => x.id).join(' '))
   add('no maneuver uses the calculated badge', mv.every((x) => dvBadge(x) !== 'calculated'), mv.map(dvBadge).join(' '))
 
   // ---- HUD honesty
@@ -249,7 +249,7 @@ export function runVisualChecks(): CheckResult[] {
     statuses.add(f.ship.status)
     statuses.add(f.booster.status)
   }
-  const raw = [...statuses].filter((x) => statusEs(x) === x)
+  const raw = [...statuses].filter((x) => !(x in STATUS_EN))
   add('all core statuses have display labels', raw.length === 0, `${statuses.size} statuses; missing display labels: ${raw.join(', ') || 'none'}`)
 
   return out

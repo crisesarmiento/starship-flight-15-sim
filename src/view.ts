@@ -56,47 +56,47 @@ export function mount(root: HTMLElement): () => void {
       </svg>
       <div>
         <h1>Starship <em>Flight&nbsp;15</em></h1>
-        <p>Simulación educativa con datos públicos</p>
+        <p>Educational simulation with public data</p>
       </div>
     </header>
 
-    <nav class="switch rise" style="--d:1" aria-label="Cámara">
+    <nav class="switch rise" style="--d:1" aria-label="Camera">
       ${CAMERA_MODES.map((m) => `<button data-mode-btn="${m}" title="${MODE_LABELS[m].hint} (${MODE_LABELS[m].key})"${m === 'pad' ? ' class="on"' : ''}>${MODE_LABELS[m].name}</button>`).join('')}
-      <button data-role="reset" title="Reencuadrar: volver a la vista inicial del modo">Centrar <kbd>R</kbd></button>
+      <button data-role="reset" title="Recenter: go back to the mode's initial view">Recenter <kbd>R</kbd></button>
     </nav>
-    <div class="toggles rise" style="--d:2" aria-label="Capas">
-      <button data-opt="orbit" class="on" title="Órbita osculante en vivo (L)">Órbita <kbd>L</kbd></button>
-      <button data-opt="track" title="Traza en tierra (G)">Traza en tierra <kbd>G</kbd></button>
-      <button data-opt="trails" class="on" title="Rastro de los vehículos (K)">Rastros <kbd>K</kbd></button>
-      <button data-opt="visualScale" class="on" title="Agranda los vehículos al alejar la cámara (E)">Escala visual <kbd>E</kbd></button>
-      <button data-opt="labels" class="on" title="Etiquetas (N)">Etiquetas <kbd>N</kbd></button>
+    <div class="toggles rise" style="--d:2" aria-label="Layers">
+      <button data-opt="orbit" class="on" title="Live osculating orbit (L)">Orbit <kbd>L</kbd></button>
+      <button data-opt="track" title="Ground track (G)">Ground track <kbd>G</kbd></button>
+      <button data-opt="trails" class="on" title="Vehicle trails (K)">Trails <kbd>K</kbd></button>
+      <button data-opt="visualScale" class="on" title="Enlarges the vehicles as the camera moves away (E)">Visual scale <kbd>E</kbd></button>
+      <button data-opt="labels" class="on" title="Labels (N)">Labels <kbd>N</kbd></button>
     </div>
     <div class="strip" data-role="strip"></div>
 
-    <section class="panel clock rise" style="--d:2" aria-label="Reloj de misión">
+    <section class="panel clock rise" style="--d:2" aria-label="Mission clock">
       <div class="tplus" data-role="tplus">T+00:00:00</div>
       <div class="local" data-role="local"></div>
-      <div class="phase"><span class="tag">Evento</span><strong data-role="phase">—</strong></div>
+      <div class="phase"><span class="tag">Event</span><strong data-role="phase">—</strong></div>
     </section>
 
-    <section class="panel hud rise" style="--d:3" aria-label="Telemetría">
-      <h2>Telemetría
+    <section class="panel hud rise" style="--d:3" aria-label="Telemetry">
+      <h2>Telemetry
         <span class="tabs" role="tablist">
-          <button data-hud="ship" class="on" role="tab" title="Telemetría de la Ship (V)">Ship</button>
-          <button data-hud="booster" role="tab" title="Telemetría del booster (V)">Booster</button>
+          <button data-hud="ship" class="on" role="tab" title="Ship telemetry (V)">Ship</button>
+          <button data-hud="booster" role="tab" title="Booster telemetry (V)">Booster</button>
         </span>
       </h2>
       <dl data-role="hud"></dl>
       <p class="method" data-role="method"></p>
     </section>
 
-    <aside class="panel log rise" style="--d:4" aria-label="Registro de eventos">
-      <h2>Registro de eventos <span class="count" data-role="count"></span></h2>
+    <aside class="panel log rise" style="--d:4" aria-label="Event log">
+      <h2>Event log <span class="count" data-role="count"></span></h2>
       <ol data-role="log"></ol>
     </aside>
 
-    <aside class="panel mnv rise" style="--d:5" aria-label="Maniobras">
-      <h2>Maniobras · Δv</h2>
+    <aside class="panel mnv rise" style="--d:5" aria-label="Maneuvers">
+      <h2>Maneuvers · Δv</h2>
       <ul data-role="mnv"></ul>
     </aside>
 
@@ -104,54 +104,54 @@ export function mount(root: HTMLElement): () => void {
 
     <footer class="transport rise" style="--d:5">
       <div class="controls">
-        <button data-role="prev" title="Evento anterior (,)" aria-label="Evento anterior">&#9198;</button>
-        <button data-role="play" class="play" title="Reproducir / pausar (Espacio)" aria-label="Reproducir">&#9654;</button>
-        <button data-role="next" title="Próximo evento (.)" aria-label="Próximo evento">&#9197;</button>
-        <div class="speeds" role="group" aria-label="Velocidad">
-          ${SPEEDS.map((s, i) => `<button data-speed="${s}" class="${i === 0 ? 'on' : ''}" title="Tecla ${i + 1}">${s}×</button>`).join('')}
+        <button data-role="prev" title="Previous event (,)" aria-label="Previous event">&#9198;</button>
+        <button data-role="play" class="play" title="Play / pause (Space)" aria-label="Play">&#9654;</button>
+        <button data-role="next" title="Next event (.)" aria-label="Next event">&#9197;</button>
+        <div class="speeds" role="group" aria-label="Speed">
+          ${SPEEDS.map((s, i) => `<button data-speed="${s}" class="${i === 0 ? 'on' : ''}" title="Key ${i + 1}">${s}×</button>`).join('')}
         </div>
-        <button data-role="help" class="ghost" title="Atajos de teclado (H)">Atajos <kbd>H</kbd></button>
-        <button data-role="src" class="ghost" title="Fuentes de los datos (I)">Fuentes <kbd>I</kbd></button>
+        <button data-role="help" class="ghost" title="Keyboard shortcuts (H)">Shortcuts <kbd>H</kbd></button>
+        <button data-role="src" class="ghost" title="Data sources (I)">Sources <kbd>I</kbd></button>
       </div>
       <div class="scrub">
         <div class="ticks" data-role="ticks"></div>
-        <input type="range" min="0" max="10000" step="1" value="0" data-role="scrub" aria-label="Momento de la misión" />
-        <div class="ends"><span>T+00:00:00</span><span class="mid">escala comprimida: los tramos cortos se ven más anchos</span><span>${fmtT(duration)}</span></div>
+        <input type="range" min="0" max="10000" step="1" value="0" data-role="scrub" aria-label="Mission time" />
+        <div class="ends"><span>T+00:00:00</span><span class="mid">compressed scale: short segments look wider</span><span>${fmtT(duration)}</span></div>
       </div>
     </footer>
 
     <div class="disclaimer">
-      <b>Aviso:</b> aproximación educativa y visual armada con datos públicos. No es un producto oficial de SpaceX, no usa telemetría interna y no sirve para operación ni análisis del vuelo.
-      Costas simplificadas; actitud, plumas, satélites y torre son esquemáticos.
+      <b>Notice:</b> This unofficial fan simulation is not affiliated with SpaceX. It uses public data, not internal telemetry, and is not suitable for operations or flight analysis.
+      Simplified coastlines; attitude, plumes, satellites and tower are schematic.
     </div>
 
     <div class="help" data-role="helpbox" hidden>
       <div class="help-card">
-        <h2>Atajos</h2>
+        <h2>Shortcuts</h2>
         <ul>
-          <li><kbd>Espacio</kbd> reproducir / pausar</li>
-          <li><kbd>←</kbd> <kbd>→</kbd> ${STEP_S} s atrás / adelante (con <kbd>Shift</kbd>, ${STEP_BIG_S} s)</li>
-          <li><kbd>,</kbd> <kbd>.</kbd> evento anterior / próximo</li>
-          <li><kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> <kbd>4</kbd> velocidad 1× · 10× · 100× · 1000× (<kbd>−</kbd> <kbd>+</kbd> para bajar o subir)</li>
-          <li><kbd>Inicio</kbd> <kbd>Fin</kbd> ir al despegue / a la catch</li>
-          <li>Cámara: <kbd>T</kbd> Tierra · <kbd>O</kbd> órbita · <kbd>S</kbd> Ship · <kbd>B</kbd> booster · <kbd>P</kbd> torre · <kbd>F</kbd> libre · <kbd>R</kbd> reencuadrar</li>
-          <li>Capas: <kbd>L</kbd> órbita · <kbd>G</kbd> traza en tierra · <kbd>K</kbd> rastros · <kbd>E</kbd> escala visual · <kbd>N</kbd> etiquetas</li>
-          <li><kbd>V</kbd> telemetría de Ship o booster · <kbd>I</kbd> fuentes</li>
-          <li>Mouse: arrastrar orbita, rueda hace zoom, botón derecho desplaza</li>
+          <li><kbd>Space</kbd> play / pause</li>
+          <li><kbd>←</kbd> <kbd>→</kbd> ${STEP_S} s back / forward (with <kbd>Shift</kbd>, ${STEP_BIG_S} s)</li>
+          <li><kbd>,</kbd> <kbd>.</kbd> previous / next event</li>
+          <li><kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> <kbd>4</kbd> speed 1× · 10× · 100× · 1000× (<kbd>−</kbd> <kbd>+</kbd> to go down or up)</li>
+          <li><kbd>Home</kbd> <kbd>End</kbd> jump to liftoff / to the catch</li>
+          <li>Camera: <kbd>T</kbd> Earth · <kbd>O</kbd> orbit · <kbd>S</kbd> Ship · <kbd>B</kbd> booster · <kbd>P</kbd> tower · <kbd>F</kbd> free · <kbd>R</kbd> recenter</li>
+          <li>Layers: <kbd>L</kbd> orbit · <kbd>G</kbd> ground track · <kbd>K</kbd> trails · <kbd>E</kbd> visual scale · <kbd>N</kbd> labels</li>
+          <li><kbd>V</kbd> Ship or booster telemetry · <kbd>I</kbd> sources</li>
+          <li>Mouse: drag to orbit, wheel to zoom, right button to pan</li>
         </ul>
-        <button data-role="help-close">Cerrar</button>
+        <button data-role="help-close">Close</button>
       </div>
     </div>
 
     <div class="help" data-role="srcbox" hidden>
       <div class="help-card wide">
-        <h2>Fuentes</h2>
-        <p class="small">Cada número del archivo de datos lleva su fuente y su nivel de confianza. Esto es lo que se cita:</p>
+        <h2>Sources</h2>
+        <p class="small">Every number in the data file carries its source and confidence level. This is what is cited:</p>
         <ul class="srclist">
           ${collectSources().map((s) => `<li><a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.host)}</a> <span>${esc(s.url)}</span></li>`).join('')}
         </ul>
-        <p class="small">El núcleo calcula posición, velocidad y órbita; si un valor sale guiado por la línea de tiempo o interpolado, el HUD lo dice. El punto exacto del FTS no fue publicado${splash.value === null ? ' y las coordenadas del splashdown tampoco' : ''}.</p>
-        <button data-role="src-close">Cerrar</button>
+        <p class="small">The core calculates position, velocity and orbit; if a value is driven by the timeline or interpolated, the HUD says so. The exact FTS point was not published${splash.value === null ? ', nor were the splashdown coordinates' : ''}.</p>
+        <button data-role="src-close">Close</button>
       </div>
     </div>
   </div>`
@@ -184,7 +184,7 @@ export function mount(root: HTMLElement): () => void {
   try {
     scene = createScene(stage)
   } catch (err) {
-    stage.innerHTML = `<div class="nogl"><h2>No se pudo iniciar WebGL</h2><p>Probá con otro navegador o activá la aceleración por hardware.</p></div>`
+    stage.innerHTML = `<div class="nogl"><h2>Could not start WebGL</h2><p>Try another browser or enable hardware acceleration.</p></div>`
     console.error(err)
     throw err
   }
@@ -220,7 +220,7 @@ export function mount(root: HTMLElement): () => void {
   mnvEl.innerHTML = maneuvers
     .map((m) => {
       const known = m.dv.kind !== 'unknown'
-      const link = m.dv.kind === 'reported' ? ` <a href="${esc(m.dv.source)}" target="_blank" rel="noopener noreferrer" title="${esc(m.dv.source)}">fuente</a>` : ''
+      const link = m.dv.kind === 'reported' ? ` <a href="${esc(m.dv.source)}" target="_blank" rel="noopener noreferrer" title="${esc(m.dv.source)}">source</a>` : ''
       return `<li data-id="${m.id}" class="${known ? 'known' : 'unk'}">
         <button type="button" data-t="${m.t0}" title="${esc(dvSourceText(m))}">
           <span class="n">${esc(m.label)}</span>
@@ -276,7 +276,7 @@ export function mount(root: HTMLElement): () => void {
     if (p && t >= duration) seek(0)
     playing = p
     playBtn.innerHTML = p ? '&#10074;&#10074;' : '&#9654;'
-    playBtn.setAttribute('aria-label', p ? 'Pausar' : 'Reproducir')
+    playBtn.setAttribute('aria-label', p ? 'Pause' : 'Play')
     playBtn.classList.toggle('on', p)
   }
   function setSpeed(s: number) {
@@ -477,9 +477,9 @@ export function mount(root: HTMLElement): () => void {
     const ctext = c ? `Córdoba · ${c.date} · ${c.time}` : ''
     if (local.dataset.v !== ctext) {
       local.dataset.v = ctext
-      local.innerHTML = c ? `<span>Córdoba · ${esc(c.date)} · <b>${c.time}</b></span><i title="El despegue fue reportado por la prensa alrededor de las 22:47 UTC; SpaceX no publicó el segundo exacto">aprox.</i>` : ''
+      local.innerHTML = c ? `<span>Córdoba · ${esc(c.date)} · <b>${c.time}</b></span><i title="Liftoff was reported by the press at around 22:47 UTC; SpaceX did not publish the exact second">approx.</i>` : ''
     }
-    const text = idx >= 0 ? eventLabel(timeline[idx].id, timeline[idx].label) : 'Antes del despegue'
+    const text = idx >= 0 ? eventLabel(timeline[idx].id, timeline[idx].label) : 'Before liftoff'
     if (text !== cachedPhase) {
       phase.textContent = text
       cachedPhase = text
@@ -492,14 +492,14 @@ export function mount(root: HTMLElement): () => void {
     const sDone = s.time >= catchT
     const warn = orbitWarning(s)
     const chips = [
-      `<div class="chip ${bDone ? 'fts' : ''}"><b>Booster 22</b><span>${bDone ? 'FTS sobre el Golfo · sin catch · posición no publicada' : 'en vuelo'}</span></div>`,
-      `<div class="chip ${sDone ? 'catch' : ''}"><b>Ship 42</b><span>${sDone ? 'atrapada en Pad 2' : 'en vuelo'}</span></div>`,
-      `<div class="chip"><b>Starlink V3</b><span>${s.satellites.length} de ${payloadCount} en órbita</span></div>`,
-      st.scale > 1.05 ? `<div class="chip warn"><b>Escala visual</b><span>vehículos ×${st.scale < 10 ? st.scale.toFixed(1) : Math.round(st.scale)}</span></div>` : '',
+      `<div class="chip ${bDone ? 'fts' : ''}"><b>Booster 22</b><span>${bDone ? 'FTS over the Gulf · no catch · position not published' : 'in flight'}</span></div>`,
+      `<div class="chip ${sDone ? 'catch' : ''}"><b>Ship 42</b><span>${sDone ? 'caught at Pad 2' : 'in flight'}</span></div>`,
+      `<div class="chip"><b>Starlink V3</b><span>${s.satellites.length} of ${payloadCount} in orbit</span></div>`,
+      st.scale > 1.05 ? `<div class="chip warn"><b>Visual scale</b><span>vehicles ×${st.scale < 10 ? st.scale.toFixed(1) : Math.round(st.scale)}</span></div>` : '',
       s.time >= entryHandoff.time
-        ? `<div class="chip warn wide"><b>Entrada · corte explícito del modelo</b><span>Desde ${fmtT(entryHandoff.time)} la Ship sigue una curva cinematográfica local: el núcleo corta posición y velocidad (salto de ${Math.round(entryHandoff.distanceM / 1000).toLocaleString('es-AR')} km y ${Math.round(entryHandoff.velocityGapMs).toLocaleString('es-AR')} m/s). Los valores son interpolados, no telemetría, y las estelas no cruzan el corte.</span></div>`
+        ? `<div class="chip warn wide"><b>Entry · explicit model cut</b><span>From ${fmtT(entryHandoff.time)} the Ship follows a local cinematic curve: the core cuts position and velocity (jump of ${Math.round(entryHandoff.distanceM / 1000).toLocaleString('es-AR')} km and ${Math.round(entryHandoff.velocityGapMs).toLocaleString('es-AR')} m/s). Values are interpolated, not telemetry, and the trails do not cross the cut.</span></div>`
         : '',
-      warn && s.ship.status !== 'caught' ? `<div class="chip warn"><b>Órbita</b><span>${esc(warn)}</span></div>` : '',
+      warn && s.ship.status !== 'caught' ? `<div class="chip warn"><b>Orbit</b><span>${esc(warn)}</span></div>` : '',
     ].join('')
     if (chips !== cachedStrip) {
       strip.innerHTML = chips

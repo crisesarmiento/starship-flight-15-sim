@@ -1,5 +1,6 @@
 {
   "name": "starship-flight-15-sim",
+  "description": "An unofficial, browser-based fan simulation of Starship Flight 15 using public data. Not affiliated with SpaceX.",
   "version": "0.1.0",
   "private": true,
   "type": "module",

@@ -4,7 +4,7 @@ type KnownConfidence = 'official' | 'reported' | 'estimate'
 type Confidence = KnownConfidence | 'unknown'
 
 type Datum<T> = T extends null
-  ? { readonly value: null; readonly confidence: 'unknown'; readonly source: 'no publicado' }
+  ? { readonly value: null; readonly confidence: 'unknown'; readonly source: 'not published' }
   : { readonly value: T; readonly confidence: KnownConfidence; readonly source: string }
 
 type TypedData<T> = T extends { value: infer Value }
@@ -62,7 +62,7 @@ function checkMetadata(node: unknown, path: string): void {
   if ('value' in fields) {
     const { value, unit, confidence, source } = fields
     if (confidence === 'unknown') {
-      if (value !== null || source !== 'no publicado') {
+      if (value !== null || source !== 'not published') {
         throw new Error(`${path}: an unknown datum must stay null with no published source`)
       }
     } else if (value === null || !confidence || !isSource(source, confidence, fields.note)) {

@@ -11,21 +11,21 @@ export type Probe = {
   from?: Selector
 }
 
-const event = (id: string): Probe => ({ label: 'Evento', read: state => state.event.id, to: id })
+const event = (id: string): Probe => ({ label: 'Event', read: state => state.event.id, to: id })
 const engines = (vehicle: 'booster' | 'ship', from: Selector, to: Selector): Probe => ({
-  label: vehicle === 'booster' ? 'Motores Booster' : 'Motores Ship',
+  label: vehicle === 'booster' ? 'Booster engines' : 'Ship engines',
   read: state => vehicle === 'booster' ? state.boosterEngines : state.shipEngines,
   from,
   to,
 })
 const satellites = (from: number, to: number): Probe => ({
-  label: 'Satélites',
+  label: 'Satellites',
   read: state => state.satellites.length,
   from,
   to,
 })
 const status = (vehicle: 'booster' | 'ship', to: string): Probe => ({
-  label: `Estado ${vehicle}`,
+  label: `Status ${vehicle}`,
   read: state => state[vehicle].status,
   to,
 })

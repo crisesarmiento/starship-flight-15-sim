@@ -9,7 +9,7 @@ function metadataAt(node: unknown, path: string): void {
     if ('value' in fields) {
       if (fields.confidence === 'unknown') {
         expect(fields.value, path).toBeNull()
-        expect(fields.source, path).toBe('no publicado')
+        expect(fields.source, path).toBe('not published')
       } else {
         expect(['official', 'reported', 'estimate'], path).toContain(fields.confidence)
         expect(fields.source, path).toMatch(fields.confidence === 'estimate'
@@ -38,16 +38,16 @@ function metadataAt(node: unknown, path: string): void {
 
 describe('Flight 15: local data', () => {
   it('loads metadata and preserves data confidence levels', () => {
-    expect(flight.meta.disclaimer).toMatch(/no es información oficial/i)
-    expect(flight.meta.timeline_note).toMatch(/aproximados/i)
+    expect(flight.meta.disclaimer).toMatch(/not official flight information/i)
+    expect(flight.meta.timeline_note).toMatch(/approximate/i)
     expect(flight.mission.orbit.altitude_km).toMatchObject({
       value: 275, confidence: 'reported', unit: 'km',
     })
     expect(flight.vehicle.booster.dry_mass_kg).toMatchObject({
-      value: null, confidence: 'unknown', source: 'no publicado', unit: 'kg',
+      value: null, confidence: 'unknown', source: 'not published', unit: 'kg',
     })
     expect(flight.timeline.find(event => event.id === 'max_q')?.altitude_m).toMatchObject({
-      value: null, confidence: 'unknown', source: 'no publicado', unit: 'm',
+      value: null, confidence: 'unknown', source: 'not published', unit: 'm',
     })
     metadataAt(flight, 'flight')
   })
@@ -84,7 +84,7 @@ describe('Flight 15: local data', () => {
     ])
     const shutdown = flight.timeline.find(event => event.id === 'booster_landing_burn_shutdown')
     expect(shutdown?.label).not.toMatch(/catch/i)
-    expect(shutdown?.as_flown_note).toMatch(/No hubo catch/)
-    expect(flight.timeline.at(-1)?.as_flown_note).toMatch(/Catch en Pad 2/)
+    expect(shutdown?.as_flown_note).toMatch(/There was no catch/)
+    expect(flight.timeline.at(-1)?.as_flown_note).toMatch(/Catch at Pad 2/)
   })
 })

@@ -6,7 +6,7 @@ export function fmtT(t: number): string {
   return `T+${pad(s / 3600)}:${pad((s % 3600) / 60)}:${pad(s % 60)}`
 }
 
-const cordobaDate = new Intl.DateTimeFormat('es-AR', {
+const cordobaDate = new Intl.DateTimeFormat('en-US', {
   timeZone: 'America/Argentina/Cordoba',
   weekday: 'short',
   day: 'numeric',
@@ -70,12 +70,12 @@ export function fmtDeg(d: number | null, digits = 2): string {
   return `${new Intl.NumberFormat('es-AR', { minimumFractionDigits: digits, maximumFractionDigits: digits }).format(d)}°`
 }
 
-/** Latitude/longitude with hemisphere letters (Spanish: N, S, E, O). */
+/** Latitude/longitude with hemisphere letters (N, S, E, W). */
 export function fmtLat(d: number): string {
   return `${new Intl.NumberFormat('es-AR', { minimumFractionDigits: 3, maximumFractionDigits: 3 }).format(Math.abs(d))}° ${d >= 0 ? 'N' : 'S'}`
 }
 export function fmtLon(d: number): string {
-  return `${new Intl.NumberFormat('es-AR', { minimumFractionDigits: 3, maximumFractionDigits: 3 }).format(Math.abs(d))}° ${d >= 0 ? 'E' : 'O'}`
+  return `${new Intl.NumberFormat('es-AR', { minimumFractionDigits: 3, maximumFractionDigits: 3 }).format(Math.abs(d))}° ${d >= 0 ? 'E' : 'W'}`
 }
 
 export function fmtPeriod(s: number | null): string {
