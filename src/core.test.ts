@@ -2,8 +2,8 @@ import { describe, expect, it } from 'vitest'
 import { altitudeNote, burnDeltaV, duration, earthRadiusM, eventAt, flight, orbitPath, sample } from './core'
 import { norm, sub } from './physics/frame'
 
-describe('Flight 15: seek de la misión', () => {
-  it('resuelve cada hito en el instante exacto; el FTS gana el empate con el corte', () => {
+describe('Flight 15: mission seeking', () => {
+  it('resolves each milestone at its exact time and gives FTS priority over engine shutdown at the same time', () => {
     for (const event of flight.timeline) {
       const expectedId = event.id === 'booster_landing_burn_shutdown' ? 'booster_fts' : event.id
       expect(eventAt(event.t_sec).id).toBe(expectedId)
@@ -14,7 +14,7 @@ describe('Flight 15: seek de la misión', () => {
     expect(eventAt(395.001).id).toBe('booster_fts')
   })
 
-  it('hace seek determinista hacia adelante y atrás, incluso fuera del recorrido', () => {
+  it('seeks deterministically forward and backward, even outside the mission timeline', () => {
     expect(duration).toBe(81154)
     const descent = sample(81153.5)
     expect(descent).toMatchObject({ time: 81153.5, shipEngines: 1, event: { id: 'landing_2_to_1' } })
@@ -24,7 +24,7 @@ describe('Flight 15: seek de la misión', () => {
     for (const t of [duration + 1, Infinity]) expect(sample(t)).toEqual(sample(duration))
   })
 
-  it('expone la altitud como reconstruida y conserva las referencias reportadas', () => {
+  it('identifies altitude as reconstructed and preserves reported reference values', () => {
     expect(altitudeNote).toMatch(/reconstruida.*no telemetría/i)
     expect(sample(0).altitudeM).toBeCloseTo(0)
     expect(sample(141).altitudeM).toBeCloseTo(65000)
@@ -50,13 +50,13 @@ describe('Flight 15: seek de la misión', () => {
     [81146, 0, 2],
     [81153, 0, 1],
     [81154, 0, 0],
-  ])('en T+%is da %i motores del booster y %i de la Ship', (t, boosterEngines, shipEngines) => {
+  ])('at T+%is, reports %i booster engines and %i Ship engines', (t, boosterEngines, shipEngines) => {
     expect(sample(t)).toMatchObject({ boosterEngines, shipEngines })
   })
 })
 
-describe('Flight 15: telemetría reconstruida y despliegue', () => {
-  it('respeta marcos ECI/ECEF, masas desconocidas y desenlaces terminales', () => {
+describe('Flight 15: reconstructed telemetry and deployment', () => {
+  it('respects ECI/ECEF frames, unknown masses, and final vehicle states', () => {
     const launch = sample(0)
     expect(launch.earthAngleRad).toBe(0)
     expect(launch.ship.latitudeDeg).toBeCloseTo(flight.site.latitude_deg.value, 10)
@@ -72,7 +72,7 @@ describe('Flight 15: telemetría reconstruida y despliegue', () => {
     expect(sample(duration).ship.downrangeM).toBeLessThan(1e-6)
   })
 
-  it('dibuja la elipse desde r/v y sólo el arco exterior si el perigeo es subterráneo', () => {
+  it('draws the ellipse from r/v and shows only the exterior arc if perigee is below the surface', () => {
     const inserted = sample(1590)
     const aligned = orbitPath(inserted.ship.r, inserted.ship.v)
     expect(aligned.points.length).toBeGreaterThan(100)
@@ -93,7 +93,7 @@ describe('Flight 15: telemetría reconstruida y despliegue', () => {
     expect(burnDeltaV('unknown')).toBeNull()
   })
 
-  it('despliega 26 estados independientes en su ventana y no los desorbita con la Ship', () => {
+  it('deploys 26 satellites with independent states in the deployment window and does not deorbit them with the Ship', () => {
     expect(sample(2100.999).satellites).toEqual([])
     const start = sample(2101)
     expect(start.satellites.map(s => s.id)).toEqual([1])

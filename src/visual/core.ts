@@ -16,6 +16,6 @@ export function frameAt(t: number): Sample {
 
 export function eventTime(id: string): number {
   const e = core.flight.timeline.find((x) => x.id === id)
-  if (!e) throw new Error(`Falta el evento ${id} en la línea de tiempo`)
+  if (!e) throw new Error(`Missing event ${id} in the timeline`)
   return e.t_sec
 }

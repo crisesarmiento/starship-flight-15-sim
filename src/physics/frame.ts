@@ -53,6 +53,6 @@ export function localPoint(eastM: number, northM: number, altitudeM: number): Ve
 
 export function timeAt(id: string): number {
   const event = flight.timeline.find(e => e.id === id)
-  if (!event) throw new Error(`Falta el evento ${id}`)
+  if (!event) throw new Error(`Missing event ${id}`)
   return event.t_sec
 }

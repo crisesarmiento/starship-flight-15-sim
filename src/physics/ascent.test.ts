@@ -3,7 +3,7 @@ import { flight } from '../flight'
 import { ascentAt, densityAt, stagingRawAltitudeM, stagingResidualM } from './ascent'
 import { earthRadiusM, norm, scale, sub, timeAt } from './frame'
 
-it('integra el ascenso, consume propelente y deja visible el residual bruto', () => {
+it('integrates ascent, consumes propellant, and exposes the raw residual', () => {
   const start = ascentAt(0)
   const end = ascentAt(timeAt('hot_staging'))
   const anchor = flight.timeline.find(e => e.id === 'hot_staging')!.altitude_m!.value!
@@ -15,16 +15,16 @@ it('integra el ascenso, consume propelente y deja visible el residual bruto', ()
   expect(Math.abs(stagingResidualM)).toBeLessThanOrEqual(10_000)
   expect(Math.abs(norm(end.r) - earthRadiusM - anchor)).toBeLessThan(1e-6)
   expect(norm(sub(end.r, ascentAt(140.999).r))).toBeLessThan(10)
-  console.info(`Hot-staging: bruto ${stagingRawAltitudeM.toFixed(1)} m; residual ${stagingResidualM.toFixed(1)} m`)
+  console.info(`Hot-staging: raw altitude ${stagingRawAltitudeM.toFixed(1)} m; residual ${stagingResidualM.toFixed(1)} m`)
 })
 
-it('deriva la corrección radial incluyendo el cambio de dirección', () => {
+it('differentiates the radial correction, including the change in direction', () => {
   const time = 100.03, h = 0.01
   const finiteDifference = scale(sub(ascentAt(time + h).r, ascentAt(time - h).r), 1 / (2 * h))
   expect(norm(sub(finiteDifference, ascentAt(time).v))).toBeLessThan(1e-3)
 })
 
-it('respeta las densidades estándar de referencia y extiende hacia vacío sobre 86 km', () => {
+it('matches standard reference densities and trends toward vacuum above 86 km', () => {
   // Cross-check independent of the JSON: PDAS SI geometric-altitude table at
   // 0/30/32/70 km (https://www.pdas.com/atmosTable1SI.html). At 11 km use
   // the PDAS lower-atmosphere equations, evaluated at geometric altitude.
@@ -43,7 +43,7 @@ it('respeta las densidades estándar de referencia y extiende hacia vacío sobre
   expect(densityAt(Infinity)).toBe(0)
 })
 
-it('usa las referencias públicas de tiempo de ascenso como eventos impuestos', () => {
+it('uses public ascent timings as fixed event times', () => {
   for (const [id, reference] of [['max_q', 58], ['meco', 139], ['hot_staging', 141]] as const) {
     expect(Math.abs(timeAt(id) - reference)).toBeLessThanOrEqual(2)
   }

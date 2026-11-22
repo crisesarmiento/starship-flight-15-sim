@@ -36,8 +36,8 @@ function metadataAt(node: unknown, path: string): void {
   }
 }
 
-describe('Flight 15: datos locales', () => {
-  it('carga metadatos y conserva la confianza de los datos', () => {
+describe('Flight 15: local data', () => {
+  it('loads metadata and preserves data confidence levels', () => {
     expect(flight.meta.disclaimer).toMatch(/no es información oficial/i)
     expect(flight.meta.timeline_note).toMatch(/aproximados/i)
     expect(flight.mission.orbit.altitude_km).toMatchObject({
@@ -52,7 +52,7 @@ describe('Flight 15: datos locales', () => {
     metadataAt(flight, 'flight')
   })
 
-  it('tiene todos los hitos públicos, ordenados, y alinea FTS con el corte', () => {
+  it('lists all public milestones in order and aligns FTS with engine shutdown', () => {
     expect(flight.timeline.map(event => [event.id, event.t_sec])).toEqual([
       ['liftoff', 0],
       ['max_q', 58],

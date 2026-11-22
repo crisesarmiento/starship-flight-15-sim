@@ -17,12 +17,12 @@ beforeAll(() => {
 
 function timeOf(id: string): number {
   const time = observedTime(rows.find(row => row.id === id))
-  if (time === null) throw new Error(`No hay una observación única de ${id}`)
+  if (time === null) throw new Error(`No unique observation for ${id}`)
   return time
 }
 
 function required<T>(value: T | null, label: string): T {
-  if (value === null) throw new Error(`Sin muestra de ${label}`)
+  if (value === null) throw new Error(`No sample for ${label}`)
   return value
 }
 
@@ -32,23 +32,23 @@ function within(label: string, actual: number | null, expected: number, toleranc
   expect(Math.abs(value - expected), label).toBeLessThanOrEqual(tolerance)
 }
 
-describe('Línea de tiempo pública, no derivada de los datos del simulador', () => {
-  it('el JSON tiene los 26 hitos públicos y el FTS, en el orden y T+ de la copia pública', () => {
+describe('Public timeline independent of simulator data', () => {
+  it('lists all 26 public milestones and FTS in the published order and at the published T+ times', () => {
     expect(references).toHaveLength(27)
     expect(data.timeline.map(event => [event.id, event.t_sec]))
       .toEqual(references.map(ref => [ref.id, ref.time]))
   })
 
-  it.each(references)('$id: el hito y sus efectos observables caen dentro de ±$tolerance s', ({ id }) => {
+  it.each(references)('$id: the milestone and its observable effects fall within ±$tolerance s', ({ id }) => {
     const row = rows.find(candidate => candidate.id === id)!
     const allEvidence = [...(row.clock ? [row.clock] : []), ...row.effects]
     for (const { label, transitions } of allEvidence) {
-      expect(transitions, `${id} · ${label}: se esperaba una única transición en la ventana`).toHaveLength(1)
+      expect(transitions, `${id} · ${label}: expected exactly one transition in the window`).toHaveLength(1)
       within(`${id} · ${label} (s)`, transitions[0].time, row.time, row.tolerance)
     }
   })
 
-  it('el estado inicial de despegue va seguido de ascenso', () => {
+  it('begins ascending after the initial liftoff state', () => {
     const initial = sample(timeOf('liftoff'))
     const ascending = sample(initial.time + 2)
     expect(initial.shipEngines).toBe(0)
@@ -56,60 +56,60 @@ describe('Línea de tiempo pública, no derivada de los datos del simulador', ()
   })
 })
 
-describe('Trayectoria guiada y elementos orbitales', () => {
-  it('registra el residual bruto y mide la altitud de staging ajustada', () => {
+describe('Guided trajectory and orbital elements', () => {
+  it('records the raw residual and measures the adjusted staging altitude', () => {
     expect(Number.isFinite(metrics.stagingRawM)).toBe(true)
     const staging = required(metrics.staging, 'staging')
-    within('Altitud Ship en staging (m)', staging.ship.altitudeM, referenceAltitude.staging, 10_000)
-    within('Altitud derivada del vector de staging (m)', norm(staging.ship.r) - earthRadiusM, staging.ship.altitudeM, 1)
+    within('Ship altitude at staging (m)', staging.ship.altitudeM, referenceAltitude.staging, 10_000)
+    within('Altitude derived from the staging position vector (m)', norm(staging.ship.r) - earthRadiusM, staging.ship.altitudeM, 1)
   })
 
-  it('sube el perigeo con la inserción y alcanza ~275 km en el estado posterior', () => {
-    const before = required(metrics.insertionBefore, 'pre-inserción')
-    const after = required(metrics.insertionAfter, 'post-inserción')
+  it('raises perigee during insertion and reaches ~275 km afterward', () => {
+    const before = required(metrics.insertionBefore, 'pre-insertion')
+    const after = required(metrics.insertionAfter, 'post-insertion')
     const beforeOrbit = osculating(before.ship)
     const afterOrbit = osculating(after.ship)
-    expect(beforeOrbit.perigeeM, 'Perigeo suborbital antes de inserción').toBeLessThan(120_000)
-    expect(afterOrbit.energy, 'Aumenta la energía orbital').toBeGreaterThan(beforeOrbit.energy)
-    within('Altitud post-inserción (m)', after.ship.altitudeM, referenceAltitude.orbit, 15_000)
-    within('Altitud derivada del estado post-inserción (m)', afterOrbit.radius - earthRadiusM, after.ship.altitudeM, 1)
-    within('Perigeo post-inserción (m)', after.orbit.perigeeM, referenceAltitude.orbit, 15_000)
-    within('Perigeo calculado desde r y v (m)', after.orbit.perigeeM, afterOrbit.perigeeM, 1)
-    within('Apogeo calculado desde r y v (m)', after.orbit.apogeeM, afterOrbit.apogeeM, 1)
-    within('Inclinación calculada desde r y v (°)', after.orbit.inclinationDeg, afterOrbit.inclinationDeg, 0.001)
-    within('Período calculado desde r y v (s)', after.orbit.periodS, afterOrbit.periodS, 0.01)
-    within('Excentricidad calculada desde r y v', after.orbit.eccentricity, afterOrbit.eccentricity, 0.00001)
+    expect(beforeOrbit.perigeeM, 'Suborbital perigee before insertion').toBeLessThan(120_000)
+    expect(afterOrbit.energy, 'Orbital energy increases').toBeGreaterThan(beforeOrbit.energy)
+    within('Post-insertion altitude (m)', after.ship.altitudeM, referenceAltitude.orbit, 15_000)
+    within('Altitude derived from the post-insertion state (m)', afterOrbit.radius - earthRadiusM, after.ship.altitudeM, 1)
+    within('Post-insertion perigee (m)', after.orbit.perigeeM, referenceAltitude.orbit, 15_000)
+    within('Perigee calculated from r and v (m)', after.orbit.perigeeM, afterOrbit.perigeeM, 1)
+    within('Apogee calculated from r and v (m)', after.orbit.apogeeM, afterOrbit.apogeeM, 1)
+    within('Inclination calculated from r and v (°)', after.orbit.inclinationDeg, afterOrbit.inclinationDeg, 0.001)
+    within('Period calculated from r and v (s)', after.orbit.periodS, afterOrbit.periodS, 0.01)
+    within('Eccentricity calculated from r and v', after.orbit.eccentricity, afterOrbit.eccentricity, 0.00001)
   })
 
-  it('la desórbita baja el perigeo dentro de la atmósfera', () => {
-    const before = osculating(required(metrics.deorbitBefore, 'pre-desórbita').ship)
-    const after = required(metrics.deorbitAfter, 'post-desórbita')
+  it('lowers perigee into the atmosphere during deorbit', () => {
+    const before = osculating(required(metrics.deorbitBefore, 'pre-deorbit').ship)
+    const after = required(metrics.deorbitAfter, 'post-deorbit')
     const afterOrbit = osculating(after.ship)
-    expect(afterOrbit.energy, 'Disminuye la energía orbital').toBeLessThan(before.energy)
+    expect(afterOrbit.energy, 'Orbital energy decreases').toBeLessThan(before.energy)
     expect(afterOrbit.perigeeM).toBeLessThan(before.perigeeM)
-    expect(afterOrbit.perigeeM, 'Perigeo bajo la interfaz de entrada de la simulación')
-      .toBeLessThan(required(metrics.entry, 'entrada').ship.altitudeM)
-    within('Perigeo calculado desde r y v (m)', after.orbit.perigeeM, afterOrbit.perigeeM, 1)
+    expect(afterOrbit.perigeeM, 'Perigee below the simulated entry interface')
+      .toBeLessThan(required(metrics.entry, 'entry').ship.altitudeM)
+    within('Perigee calculated from r and v (m)', after.orbit.perigeeM, afterOrbit.perigeeM, 1)
   })
 
-  it('el corte cinematográfico de entrada se declara y coincide con los dos estados ECI observados', () => {
+  it('declares the cinematic entry cut and matches both observed ECI states', () => {
     const cut = metrics.entryCut
-    within('T+ del corte frente al marcador de entrada observado (s)', cut.time, timeOf('entry'), 0.000001)
-    within('Salto de posición ECI (m)', cut.distanceM, cut.measuredDistanceM, 0.001)
-    within('Salto vectorial de velocidad ECI (m/s)', cut.velocityGapMs, cut.measuredVelocityGapMs, 0.001)
+    within('Cut T+ versus the observed entry marker (s)', cut.time, timeOf('entry'), 0.000001)
+    within('ECI position discontinuity (m)', cut.distanceM, cut.measuredDistanceM, 0.001)
+    within('ECI velocity vector discontinuity (m/s)', cut.velocityGapMs, cut.measuredVelocityGapMs, 0.001)
 
     const previous = sample(cut.time - 0.0001).ship
     const following = sample(cut.time).ship
     // The first sample is 0.1 ms before the cut, so its position may
     // differ by ~0.8 m at orbital speed. These are consistency bounds,
     // not limits on the size of either discontinuity.
-    within('Posición previa frente a sample (m)', distance(cut.before.r, previous.r), 0, 2)
-    within('Velocidad previa frente a sample (m/s)', distance(cut.before.v, previous.v), 0, 0.01)
-    within('Posición posterior frente a sample (m)', distance(cut.after.r, following.r), 0, 0.001)
-    within('Velocidad posterior frente a sample (m/s)', distance(cut.after.v, following.v), 0, 0.001)
+    within('Pre-cut position versus sample (m)', distance(cut.before.r, previous.r), 0, 2)
+    within('Pre-cut velocity versus sample (m/s)', distance(cut.before.v, previous.v), 0, 0.01)
+    within('Post-cut position versus sample (m)', distance(cut.after.r, following.r), 0, 0.001)
+    within('Post-cut velocity versus sample (m/s)', distance(cut.after.v, following.v), 0, 0.001)
   })
 
-  it('si el modelo informa un Δv de quema, es positivo y finito', () => {
+  it('reports a positive, finite Δv when the model provides one for a burn', () => {
     for (const { id, deltaV } of metrics.burns) {
       if (deltaV === null) continue
       expect(Number.isFinite(deltaV), id).toBe(true)
@@ -118,8 +118,8 @@ describe('Trayectoria guiada y elementos orbitales', () => {
   })
 })
 
-describe('Despliegue y desenlace', () => {
-  it('cada Starlink se separa una sola vez, dentro de la ventana, y continúa con un estado propio', () => {
+describe('Deployment and mission outcomes', () => {
+  it('separates each Starlink exactly once within the window and tracks its state independently afterward', () => {
     const start = timeOf('payload_deploy_start')
     const end = timeOf('payload_deploy_complete')
     const ids = new Set<number>()
@@ -127,9 +127,9 @@ describe('Despliegue y desenlace', () => {
     for (let t = start; t <= end; t = Math.min(t + 1, end)) {
       const current = sample(t).satellites
       const currentIds = new Set(current.map(satellite => satellite.id))
-      expect(currentIds.size, `T+${t}: IDs duplicados`).toBe(current.length)
-      expect([...ids].every(id => currentIds.has(id)), `T+${t}: desapareció un Starlink`).toBe(true)
-      expect(current.length - ids.size, `T+${t}: se esperan separaciones individuales`).toBeLessThanOrEqual(1)
+      expect(currentIds.size, `T+${t}: duplicate IDs`).toBe(current.length)
+      expect([...ids].every(id => currentIds.has(id)), `T+${t}: a Starlink disappeared`).toBe(true)
+      expect(current.length - ids.size, `T+${t}: expected one-at-a-time separations`).toBeLessThanOrEqual(1)
       for (const id of currentIds) ids.add(id)
       if (t === end) break
     }
@@ -142,29 +142,29 @@ describe('Despliegue y desenlace', () => {
     for (const [i, satellite] of later.satellites.entries()) {
       expect(ids.has(satellite.id)).toBe(true)
       expect(Number.isInteger(satellite.id)).toBe(true)
-      expect(norm(satellite.r), `Starlink ${satellite.id} está sobre la Tierra`).toBeGreaterThan(earthRadiusM)
-      expect(norm(satellite.v), `Starlink ${satellite.id} se mueve`).toBeGreaterThan(0)
-      expect(distance(satellite.r, later.ship.r), `Starlink ${satellite.id} separado de la Ship`).toBeGreaterThan(0)
+      expect(norm(satellite.r), `Starlink ${satellite.id} is above Earth's surface`).toBeGreaterThan(earthRadiusM)
+      expect(norm(satellite.v), `Starlink ${satellite.id} is moving`).toBeGreaterThan(0)
+      expect(distance(satellite.r, later.ship.r), `Starlink ${satellite.id} is separate from the Ship`).toBeGreaterThan(0)
       const following = required(next.satellites.find(other => other.id === satellite.id) ?? null, `Starlink ${satellite.id}`)
-      expect(distance(satellite.r, following.r), `Starlink ${satellite.id} avanza`).toBeGreaterThan(0)
+      expect(distance(satellite.r, following.r), `Starlink ${satellite.id} moves between samples`).toBeGreaterThan(0)
       for (const other of later.satellites.slice(0, i)) {
-        expect(distance(satellite.r, other.r), `Starlinks ${satellite.id} y ${other.id} no coinciden`).toBeGreaterThan(0)
+        expect(distance(satellite.r, other.r), `Starlinks ${satellite.id} and ${other.id} occupy different positions`).toBeGreaterThan(0)
       }
     }
     expect(new Set(later.satellites.map(satellite => satellite.id))).toEqual(ids)
   })
 
-  it('el booster se aleja hacia el Golfo, termina bajo y lento, y queda en FTS sin catch', () => {
+  it('diverts the booster toward the Gulf and reaches FTS at low altitude and speed without a catch', () => {
     const hover = required(metrics.hover, 'pre-FTS')
     const fts = required(metrics.fts, 'FTS')
-    const site = required(metrics.hoverSite, 'sitio de FTS')
+    const site = required(metrics.hoverSite, 'FTS site')
     expect(site.eastOfPad).toBe(true)
     // Classify as away from the pad; no distance or coordinates are fitted to the actual FTS.
     expect(site.padDistanceM).toBeGreaterThan(100)
     expect(hover.booster.altitudeM).toBeGreaterThan(0)
     expect(hover.booster.altitudeM).toBeLessThan(150)
     expect(hover.booster.surfaceSpeedMs).toBeGreaterThanOrEqual(0)
-    expect(hover.booster.surfaceSpeedMs, 'Velocidad baja justo antes del corte (m/s)').toBeLessThan(25)
+    expect(hover.booster.surfaceSpeedMs, 'Low speed just before engine shutdown (m/s)').toBeLessThan(25)
     expect(hover.boosterEngines).toBeGreaterThan(0)
     expect(fts.boosterEngines).toBe(0)
     expect(fts.booster.status).toBe('fts')
@@ -173,9 +173,9 @@ describe('Despliegue y desenlace', () => {
     expect(sample(timeOf('ship_catch')).booster.status).toBe('fts')
   })
 
-  it('la Ship corta los motores y queda atrapada en Pad 2', () => {
-    const caught = required(metrics.caught, 'catch Ship')
-    const site = required(metrics.catchSite, 'sitio de catch')
+  it('shuts down the Ship engines and catches it at Pad 2', () => {
+    const caught = required(metrics.caught, 'Ship catch')
+    const site = required(metrics.catchSite, 'catch site')
     expect(caught.ship.status).toBe('caught')
     expect(caught.shipEngines).toBe(0)
     // Pedagogical location check, not an as-flown precision claim.

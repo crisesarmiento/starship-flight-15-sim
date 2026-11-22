@@ -10,7 +10,7 @@ const areaM2 = Math.PI * (flight.vehicle.stack.diameter_m.value / 2) ** 2
 const stageTime = timeAt('hot_staging')
 const mecoTime = timeAt('meco')
 const stagingAnchorM = flight.timeline.find(e => e.id === 'hot_staging')?.altitude_m?.value
-if (stagingAnchorM == null) throw new Error('Falta altitud reportada de hot-staging')
+if (stagingAnchorM == null) throw new Error('Missing reported hot-staging altitude')
 
 type AscentState = State & { propellantKg: number }
 type Derivative = { dr: Vec3; dv: Vec3; fuelRate: number }
