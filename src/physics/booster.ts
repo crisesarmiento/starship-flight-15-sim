@@ -22,6 +22,7 @@ export function boosterAt(time: number): VehicleState {
   return { ...curveAt(time, knots), propellantKg: null,
     method: time >= ftsTime ? 'Cinematic FTS marker; not a vehicle state after the FTS'
       : 'Cinematic curve; illustrative divert and offshore point, no guidance or telemetry',
+    provenance: 'interpolated',
     status: time >= ftsTime ? 'fts' : time >= landingTime ? 'landing-burn'
       : time >= coastTime ? 'divert' : time >= boostbackStart ? 'boostback' : 'separated' }
 }
