@@ -1,110 +1,110 @@
-# Starship Flight 15 · recorrido de la misión
+# Starship Flight 15 · Mission walkthrough
 
-Simulación interactiva en el navegador del vuelo de prueba Starship Flight 15, armada con datos públicos.
+An interactive, unofficial fan simulation of the Starship Flight 15 test flight, built from public data and playable in your browser.
 
-**Aproximación educativa. No es un producto oficial de SpaceX, no está afiliada a SpaceX y no muestra telemetría interna.** No sirve para operar vehículos ni para sacar conclusiones forenses sobre el vuelo.
+**This educational approximation is not an official SpaceX product, is not affiliated with SpaceX, and does not show internal telemetry.** Do not use it to operate vehicles or draw forensic conclusions about the flight.
 
-![Recorrido de la misión: despegue, órbita, despliegue de Starlink V3 y catch en Pad 2](docs/media/starship-flight-15.gif)
+![Mission walkthrough: liftoff, orbit, Starlink V3 deployment, and catch at Pad 2](docs/media/starship-flight-15.gif)
 
-## Qué incluye
+## Features
 
-- **Cámaras interactivas:** Tierra, órbita, Ship, booster, torre y vista libre, con zoom y reencuadre.
-- **Tiempo:** reproducción a 1×, 10×, 100× o 1000×, barra de busca y registro de eventos.
-- **La misión completa:** del despegue a la catch de la Ship en Pad 2, y el FTS del booster sobre el Golfo (no volvió a la torre).
-- **Órbita osculante en vivo,** con perigeo y apogeo calculados desde la posición y la velocidad.
-- **Despliegue de 26 Starlink V3,** que después siguen sus órbitas sin acompañar a la Ship en el regreso.
-- **Maniobras con Δv,** cuando el modelo puede evaluarlo.
-- **Telemetría con fuente y nivel de confianza** (oficial, reportado, estimado, calculado, interpolado o sin dato).
+- **Interactive cameras:** Earth, orbit, Ship, booster, tower, and free view, with zoom and recentering.
+- **Playback:** 1×, 10×, 100×, or 1000× speed, a seek bar, and an event log.
+- **The full mission:** from liftoff to the Ship catch at Pad 2, including activation of the booster's flight termination system (FTS) over the Gulf. The booster did not return to the tower.
+- **Live osculating orbit,** with perigee and apogee calculated from position and velocity.
+- **Deployment of 26 Starlink V3 satellites,** which stay in their own orbits as Ship returns.
+- **Maneuvers with Δv,** where the model can calculate it.
+- **Telemetry with sources and confidence labels** (official, reported, estimated, calculated, interpolated, or no data).
 
-## Galería
+## Gallery
 
-El Flight 15 termina con la Ship atrapada por los brazos en Pad 2. El booster no regresó: en T+00:06:35 queda sobre el Golfo, corta los motores y se activa el FTS.
+The Flight 15 simulation ends with Ship caught by the tower arms at Pad 2. The booster does not return: at T+00:06:35, it is over the Gulf when its engines shut down and the FTS activates.
 
-**Despegue en Pad 2.** T+00:00:08, cámara de la torre.
+**Liftoff from Pad 2.** T+00:00:08, tower camera.
 
-![El stack sale de los brazos de Pad 2 con los 33 motores encendidos](docs/media/01-liftoff-pad.png)
+![The stack lifts clear of the arms at Pad 2 with all 33 engines firing](docs/media/01-liftoff-pad.png)
 
-**Máxima presión dinámica (Max Q).** T+00:00:58, cámara de la Ship.
+**Maximum dynamic pressure (Max Q).** T+00:00:58, Ship camera.
 
-![El stack en ascenso contra el limbo de la Tierra, a unos 8 km](docs/media/02-maxq-ascent.png)
+![The stack ascending against Earth's limb at about 8 km](docs/media/02-maxq-ascent.png)
 
-**Separación en caliente.** T+00:02:23, cámara de la Ship.
+**Hot staging.** T+00:02:23, Ship camera.
 
-![La Ship ya separada y el Super Heavy alejándose con una estela](docs/media/03-hot-staging.png)
+![Ship after separation, with Super Heavy receding and leaving a trail](docs/media/03-hot-staging.png)
 
-**Boostback del Super Heavy.** T+00:02:37, cámara del booster, 32 de 33 motores.
+**Super Heavy boostback.** T+00:02:37, booster camera, 32 of 33 engines firing.
 
-![El Super Heavy en la quema de boostback, con plumas, sobre el limbo de la Tierra](docs/media/04-boostback-return.png)
+![Super Heavy during its boostback burn, with exhaust plumes visible above Earth's limb](docs/media/04-boostback-return.png)
 
-**Inserción y órbita en vivo.** T+00:27:30, cámara de órbita. Perigeo y apogeo en 275 km, anclados a una referencia, no predichos por el modelo.
+**Orbital insertion and live orbit.** T+00:27:30, orbit camera. Perigee and apogee are both at 275 km, anchored to a reference rather than predicted by the model.
 
-![La Tierra vista desde la cámara de órbita, con la traza osculante y el apogeo rotulado](docs/media/05-orbit-perigee-apogee.png)
+![Earth from the orbit camera, with the osculating orbit trace and a labeled apogee](docs/media/05-orbit-perigee-apogee.png)
 
-**Despliegue de Starlink V3.** T+01:12:47, cámara de la Ship, 23 de 26 satélites ya en órbita.
+**Starlink V3 deployment.** T+01:12:47, Ship camera, with 23 of 26 satellites already in orbit.
 
-![La Ship en órbita, rodeada de satélites Starlink V3, con el limbo de la Tierra abajo](docs/media/06-starlink-v3-deploy.png)
+![Ship in orbit, surrounded by Starlink V3 satellites, with Earth's limb below](docs/media/06-starlink-v3-deploy.png)
 
-**Reentrada.** T+22:29:33, cámara de la Ship, a 11 km. En T+22:10:46 hay un corte de escena declarado, no una maniobra.
+**Reentry.** T+22:29:33, Ship camera, at 11 km. At T+22:10:46, the simulation makes an explicitly marked scene cut, not a maneuver.
 
-![La Ship en orientación de reentrada, con estela, sobre el limbo de la Tierra](docs/media/07-reentry.png)
+![Ship in reentry attitude, leaving a trail above Earth's limb](docs/media/07-reentry.png)
 
-**Catch en Pad 2.** T+22:32:34, cámara de la torre. La Ship queda atrapada por los brazos.
+**Catch at Pad 2.** T+22:32:34, tower camera. The tower arms catch Ship.
 
-![La Ship atrapada por los brazos de la torre en Pad 2](docs/media/08-catch-pad2.png)
+![Ship held by the tower arms at Pad 2](docs/media/08-catch-pad2.png)
 
-## Controles
+## Controls
 
-| Qué hace | Cómo |
+| Action | Control |
 | --- | --- |
-| Reproducir o pausar | `Espacio` |
-| Velocidad 1×, 10×, 100×, 1000× | `1` `2` `3` `4` (también `−` y `+`) |
-| Evento anterior / siguiente | `,` y `.`, o un clic en el registro |
-| Buscar un instante | Arrastrar la barra (la escala está comprimida: los tramos cortos se ven más anchos) |
-| Saltar 10 s o 60 s | `←` `→` (con `Shift`, 60 s) |
-| Ir al despegue o a la catch | `Inicio` / `Fin` |
-| Cámara | `T` Tierra, `O` órbita, `S` Ship, `B` booster, `P` torre, `F` libre. `R` reencuadra |
-| Telemetría de la Ship o del booster | Clic en las pestañas, o `V` |
-| Capas | `L` órbita osculante, `G` traza en tierra, `K` rastros, `E` escala visual, `N` etiquetas |
-| Fuentes y atajos | `I` y `H` |
-| Mouse | Arrastrar para orbitar, rueda para acercar, botón derecho para desplazar |
+| Play or pause | `Space` |
+| Speed: 1×, 10×, 100×, 1000× | `1` `2` `3` `4` (or `−` and `+`) |
+| Previous / next event | `,` and `.`, or click an event in the log |
+| Seek to a point in time | Drag the seek bar (the scale is compressed so shorter segments are wider) |
+| Skip 10 s or 60 s | `←` `→` (hold `Shift` for 60 s) |
+| Jump to liftoff or catch | `Home` / `End` |
+| Camera | `T` Earth, `O` orbit, `S` Ship, `B` booster, `P` tower, `F` free view. `R` recenters the view |
+| Ship or booster telemetry | Click the tabs or press `V` |
+| Layers | `L` osculating orbit, `G` ground track, `K` trails, `E` visual scale, `N` labels |
+| Sources and shortcuts | `I` and `H` |
+| Mouse | Drag to orbit, scroll to zoom, right-drag to pan |
 
-`E` cambia solo la escala *visual* de los vehículos, no sus dimensiones ni la dinámica.
+`E` changes only the *visual* scale of the vehicles, not their dimensions or dynamics.
 
-Para ver la inserción sin esperar, elegí su inicio en el registro, activá la cámara **Órbita** y reproducí a 1×. Mirá cómo sube el perigeo durante la quema. Para comparar los regresos, saltá primero al FTS y después a la captura, con las cámaras **Booster** y **Torre** respectivamente.
+To watch orbital insertion without waiting, select its start in the event log, switch to the **Orbit** camera, and play at 1×. Watch the perigee rise during the burn. To compare the two vehicles' final phases, jump first to FTS with the **Booster** camera, then to the catch with the **Tower** camera.
 
-## Cómo correrlo
+## Run locally
 
-Con Node.js y npm instalados:
+With Node.js and npm installed:
 
 ```bash
 npm ci
 npm run dev
 ```
 
-Abrí la dirección local que imprime Vite. `npm ci` instala las versiones del lockfile; si preferís, también sirve `npm install`. Para las pruebas, `npm test`. Para el sitio estático, `npm run build`.
+Open the local address Vite prints. `npm ci` installs the versions in the lockfile; `npm install` also works. Run `npm test` for tests and `npm run build` to build the static site.
 
-La instalación necesita los paquetes de npm. La aplicación no pide servicios externos, mapas remotos ni claves.
+Installation requires npm packages. The app does not require external services, remote maps, or API keys.
 
-## Datos y fuentes
+## Data and sources
 
-La [línea de tiempo y los parámetros](data/flight15.json) conservan sus fuentes. El [informe de investigación](docs/research.md) documenta huecos y procedencia. El [informe de validación](docs/VALIDACION.md) cuantifica correcciones y límites.
+The [timeline and parameters](data/flight15.json) include their sources. The [research report](docs/research.md) documents data gaps and provenance. The [validation report](docs/VALIDACION.md) quantifies corrections and limitations.
 
-Cada valor del HUD lleva una etiqueta de confianza: **oficial**, **reportado**, **estimado**, **calculado**, **interpolado** o **sin dato**. Un horario oficial es aproximado: no convierte en oficial la posición del vehículo a esa hora.
+Every HUD value has a confidence label: **official**, **reported**, **estimated**, **calculated**, **interpolated**, or **no data**. Even an official event time is approximate, and it does not make the vehicle's position at that time official.
 
-No se publicaron las coordenadas del FTS, la carga real de propelente, las masas secas ni el segundo exacto de despegue. Las capacidades de diseño no son cargas medidas. La ficha da 1.614 tf para la Ship; la suma de las cifras por motor da 1.575 tf. No las promediamos.
+The FTS coordinates, actual propellant load, dry masses, and exact second of liftoff were not published. Design capacities are not measured loads. The vehicle datasheet lists 1,614 tf for Ship; adding the per-engine figures yields 1,575 tf. The simulation does not average them.
 
-El reloj sigue los hitos aproximados de la misión, no una detección automática de Max Q, encendidos o captura. El ascenso del stack integra gravedad, empuje, consumo y arrastre. Se le aplica un ajuste radial para pasar por la altitud de separación reportada. Las masas del modelo, el Isp, el Cd y la carga inicial son hipótesis, no mediciones de B22 o S42. El regreso del booster y el tramo final de la Ship son reconstrucciones cinematográficas.
+The clock follows approximate mission milestones rather than automatically detecting Max Q, engine ignitions, or the catch. The stack's ascent integrates gravity, thrust, propellant consumption, and drag. A radial adjustment brings the ascent through the reported separation altitude. The model's masses, Isp, Cd, and initial propellant load are assumptions, not measurements of B22 or S42. The booster's return and Ship's final segment are cinematic reconstructions.
 
-Para la inserción se usa un estado final anclado en una órbita circular de 275 km y un pulso de unos 92 m/s reportado indirectamente. Por eso el cierre en 275 km **no es una predicción**. El perigeo, apogeo, período e inclinación que ves se calculan desde posición y velocidad. La desórbita usa un pulso estimado. Los instantes individuales de liberación de los satélites y su separación relativa no son telemetría.
+Orbital insertion uses a final state anchored to a circular orbit at 275 km and an indirectly reported impulse of about 92 m/s. That is why ending at 275 km **is not a prediction**. The displayed perigee, apogee, period, and inclination are calculated from position and velocity. Deorbit uses an estimated impulse. Individual satellite release times and relative separation are not telemetry.
 
-**En T+22:10:46 hay un corte de escena, no una maniobra.** La órbita ilustrativa no determina dónde entró la Ship real. Para mostrar el regreso al Golfo, la reconstrucción conserva la altura pero cambia de posición y velocidad; no se inventó un corredor de reentrada. El [informe de validación](docs/VALIDACION.md) cuantifica ese salto por separado de las tolerancias de vuelo. No lo interpretes como un Δv de motor.
+**At T+22:10:46, there is a scene cut, not a maneuver.** The illustrative orbit does not establish where the real Ship entered the atmosphere. To show the return to the Gulf, the reconstruction preserves altitude but changes position and velocity without inventing a reentry corridor. The [validation report](docs/VALIDACION.md) quantifies that discontinuity separately from the flight tolerances. Do not interpret it as engine Δv.
 
-El mapa, la altura y la torre son esquemáticos. También lo son las costas, la actitud, las plumas y los satélites.
+The map, altitude, and tower are schematic, as are the coastlines, vehicle attitude, exhaust plumes, and satellites.
 
-## Cómo se construyó
+## How it was built
 
-La escena corre en el navegador con [three.js](https://threejs.org/), [Vite](https://vite.dev/) y TypeScript.
+The scene runs in the browser with [three.js](https://threejs.org/), [Vite](https://vite.dev/), and TypeScript.
 
-Se armó en una sola corrida de `/deepwork` en OpenCode, con el preset del repo `test-astra-sol-2026-11-19`: orquestador GPT-6.2 Astra y fixer GPT-6.2 Sol. El [informe de esa evaluación](NOTES-EVAL.md) detalla etapas, límites y el resultado de las pruebas.
+It was built in a single `/deepwork` run in OpenCode using the repository's `test-astra-sol-2026-11-19` preset: GPT-6.2 Astra as orchestrator and GPT-6.2 Sol as fixer. The [evaluation notes](NOTES-EVAL.md) detail the stages, limitations, and test results.
 
-[Especificación](docs/SPEC.md) · [Investigación y huecos](docs/research.md) · [Validación](docs/VALIDACION.md) · [Licencia MIT](LICENSE)
+[Specification](docs/SPEC.md) · [Research and data gaps](docs/research.md) · [Validation](docs/VALIDACION.md) · [MIT License](LICENSE)

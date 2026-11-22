@@ -167,8 +167,8 @@ export class Overlays {
           mesh.visible = true
           this.orbitAnchors.push({ id, text, pos: mesh.position.clone(), kind: 'apsis' })
         }
-        apsis(this.perigee, path.perigee, `Perigeo ${fmtKm(s.orbit.perigeeM)}`, 'perigee')
-        apsis(this.apogee, path.apogee, `Apogeo ${fmtKm(s.orbit.apogeeM)}`, 'apogee')
+        apsis(this.perigee, path.perigee, `Perigee ${fmtKm(s.orbit.perigeeM)}`, 'perigee')
+        apsis(this.apogee, path.apogee, `Apogee ${fmtKm(s.orbit.apogeeM)}`, 'apogee')
         if (s.booster.status !== 'fts' && s.booster.altitudeM > 1000) {
           const bp = orbitPath(s.booster.r, s.booster.v)
           this.boosterArc.set(this.buf, this.flat(bp.points))
@@ -215,7 +215,7 @@ export class Overlays {
       this.ftsRing.scale.setScalar(Math.max(marker * 2.2, base * 0.8))
       this.ftsRing.lookAt(this.tmp.clone().multiplyScalar(2))
       this.ftsRing.visible = true
-      out.push({ id: 'fts', text: 'FTS del booster · posición no publicada', pos: this.tmp.clone(), kind: 'fts' })
+      out.push({ id: 'fts', text: 'Booster FTS · position not published', pos: this.tmp.clone(), kind: 'fts' })
     } else {
       this.fireball.visible = false
       this.debris.visible = false
@@ -264,8 +264,8 @@ export class Overlays {
       const theta = frameAt(this.T.entryCut).earthAngleRad
       const mark = (id: string, text: string, r: readonly [number, number, number]) =>
         out.push({ id, text, pos: eciToEcef(toScene(r), theta), kind: 'ghost', fixed: true })
-      mark('cut-before', 'Corte de entrada · antes', entryHandoff.before.r)
-      mark('cut-after', `Corte de entrada · después (salto de ${Math.round(entryHandoff.distanceM / 1000).toLocaleString('es-AR')} km)`, entryHandoff.after.r)
+      mark('cut-before', 'Entry cut · before', entryHandoff.before.r)
+      mark('cut-after', `Entry cut · after (jump of ${Math.round(entryHandoff.distanceM / 1000).toLocaleString('en-US')} km)`, entryHandoff.after.r)
     }
     return out
   }

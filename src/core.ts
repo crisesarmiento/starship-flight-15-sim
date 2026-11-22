@@ -15,8 +15,8 @@ export { orbitPath } from './physics/orbit'
 export { entryHandoff } from './physics/ship'
 
 export const duration = flight.timeline[flight.timeline.length - 1].t_sec
-export const altitudeNote = 'Altitud reconstruida por fase (integrada, anclada o cinematográfica), no telemetría.'
-export const engineNote = 'Motores: recuentos publicados donde existen; remanente post-MECO estimado y hot-staging simplificado.'
+export const altitudeNote = 'Altitude reconstructed by phase (integrated, anchored or cinematic), not telemetry.'
+export const engineNote = 'Engines: published counts where available; the post-MECO count is estimated and hot staging is simplified.'
 
 function clampTime(t: number): number {
   return Number.isNaN(t) ? 0 : Math.min(duration, Math.max(0, t))
@@ -90,7 +90,7 @@ function rawVehicleAt(time: number, vehicle: 'booster' | 'ship'): VehicleState {
   return {
     ...state,
     propellantKg: vehicle === 'booster' ? state.propellantKg : flight.model.ascent.ship_propellant_kg.value,
-    method: 'Ascenso RK4 con ajuste radial hacia la referencia reportada de separación; no telemetría',
+    method: 'RK4 ascent with radial adjustment toward the reported separation reference; not telemetry',
     status: 'stack',
   }
 }

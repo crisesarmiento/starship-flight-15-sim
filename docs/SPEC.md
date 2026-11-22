@@ -1,118 +1,120 @@
-# Simulación Starship Flight 15
+# Starship Flight 15 Simulation
 
-**Aviso:** esto es una aproximación educativa y visual, armada con datos públicos. No es un producto oficial de SpaceX, no usa telemetría interna y no sirve para operación, seguridad ni análisis forense del vuelo. Si un número no tiene fuente, no se inventa: se marca como estimación o se deja vacío.
+**Disclaimer:** This is an educational, visual approximation based on public data. It is not an official SpaceX product, does not use internal telemetry, and is not suitable for operations, safety, or forensic flight analysis. If a number has no source, do not make one up: label it as an estimate or leave it blank.
 
-Investigación cerrada el 19 de noviembre de 2026 (hora de Córdoba, UTC−3). El vuelo ya ocurrió: no hace falta basarse en un plan anunciado ni en un vuelo anterior.
+Research was completed on 19 November 2026 (Córdoba time, UTC−3). The flight already happened, so there is no need to rely on a published plan or an earlier flight.
 
-## 1. Objetivo
+## 1. Goal
 
-Hacer un proyecto nuevo en GitHub, en three.js, que muestre de forma realista el lanzamiento y el regreso del Starship Flight 15: ascenso del Super Heavy, hot-staging, regreso del booster (con el desvío real, no una catch que no pasó), costa orbital de la nave, reentrada y catch de la Ship en la torre de Pad 2.
+Create a new GitHub project in three.js that realistically depicts the launch and return of Starship Flight 15: Super Heavy ascent, hot-staging, the booster return (including its actual diversion, not a catch that never happened), the Ship's orbital coast, reentry, and catch at the Pad 2 tower.
 
-El proyecto también sirve para evaluar el preset de OpenCode que va a usar Cristian: un orquestador (con revisiones tipo Oracle) y un implementador/fixer. El orquestador planea, reparte y revisa. El implementador escribe el código por etapas. Al final hay que anotar cómo le fue a cada rol, sin aplicar cambios al stack de modelos.
+The project also evaluates the OpenCode preset Cristian will use: an orchestrator (with Oracle-style reviews) and an implementer/fixer. The orchestrator plans, delegates, and reviews. The implementer writes the code in stages. At the end, record how each role performed without changing the model stack.
 
-Cristian implementa con OpenCode. Este documento es el spec, no el código.
+Cristian uses OpenCode for implementation. This document is the spec, not the code.
 
-## 2. Qué pasó en el vuelo real
+## 2. What happened on the actual flight
 
-El Flight 15 despegó el viernes 13 de noviembre de 2026 desde Pad 2, Starbase, Texas. La prensa ubica el despegue alrededor de las 16:47 CST (22:47 UTC; 19:47 hora de Córdoba). SpaceX no publicó el segundo exacto en la página de la misión. Algunos recuentos (por ejemplo Wikipedia) dan 22:47:36 UTC, pero la nota al pie no respalda bien ese segundo, así que el dato de trabajo es “alrededor de las 22:47 UTC”.
+Flight 15 lifted off on Friday, 13 November 2026, from Pad 2 at Starbase, Texas. Press reports place liftoff around 16:47 CST (22:47 UTC; 19:47 Córdoba time). SpaceX did not publish the exact second on the mission page. Some accounts, including Wikipedia, give 22:47:36 UTC, but the footnote does not adequately support that level of precision, so the working time is “around 22:47 UTC”.
 
-Vehículos: Super Heavy Booster 22 y Ship 42, ambos de la generación V3 (Block 3). Cuarto vuelo de esa generación. Carga: 26 satélites Starlink V3 (misión también citada como Starlink Group 31-2).
+Vehicles: Super Heavy Booster 22 and Ship 42, both of the V3 (Block 3) generation. This was the fourth flight of that generation. Payload: 26 Starlink V3 satellites (the mission is also listed as Starlink Group 31-2).
 
-**Booster.** Subió con 33 Raptor. Después del hot-staging hizo el flip y reencendió 32 de los 33 motores previstos para el boostback. La quema terminó temprano por una alarma de poca masa de combustible; la causa de raíz seguía en investigación al 14 de noviembre. El GNC abortó la catch durante la costa y desvió el booster a un punto en el Golfo. Hizo la quema de aterrizaje, cortó motores mientras quedaba en hover sobre el agua y, al apagar, se disparó el sistema de terminación de vuelo (FTS). No hubo catch del booster. SpaceX no publicó coordenadas ni distancia exacta del splashdown.
+**Booster.** It ascended on 33 Raptor engines. After hot-staging, it flipped and relit 32 of the 33 engines planned for boostback. The burn ended early due to a low fuel mass alarm; the root cause was still under investigation as of 14 November. The GNC aborted the catch during coast and diverted the booster to a point in the Gulf. It performed the landing burn, cut its engines while hovering over the water, and triggered the flight termination system (FTS) at shutdown. There was no booster catch. SpaceX did not publish splashdown coordinates or an exact distance.
 
-**Ship.** Completó una quema de ascenso nominal, cortó motores, y más tarde encendió un solo Raptor para insertarse en órbita. SpaceX y la transmisión hablaron de una órbita de unos 275 km. Jonathan McDowell reportó una inserción de unos 92 m/s que dejó una órbita casi circular a 276 km. La nave desplegó los 26 Starlink V3 y tuvo contacto con todos. Después de más de 20 horas en el espacio (unas 14 órbitas, unos 22,5 horas desde el despegue), hizo una quema de desórbita con un Raptor de nivel del mar, reentró, hizo un “swoosh” final sobre el Golfo y fue atrapada por los brazos de Mechazilla en el mismo Pad 2. Fue la primera catch de una etapa superior de Starship. Spaceflight Now ubica la catch a las 15:20 CST del 14 de noviembre (21:20 UTC; 18:20 hora de Córdoba).
+**Ship.** It completed a nominal ascent burn, shut down its engines, and later lit a single Raptor for orbital insertion. SpaceX and the webcast described an orbit of about 275 km. Jonathan McDowell reported an insertion burn of about 92 m/s that produced a nearly circular orbit at 276 km. The Ship deployed all 26 Starlink V3 satellites, and contact was established with all of them. After more than 20 hours in space (about 14 orbits, about 22.5 hours after liftoff), it performed a deorbit burn with one sea-level Raptor, reentered, flew a final “swoosh” over the Gulf, and was caught by Mechazilla's arms at the same Pad 2. It was the first catch of a Starship upper stage. Spaceflight Now places the catch at 15:20 CST on 14 November (21:20 UTC; 18:20 Córdoba time).
 
-La línea de tiempo pública de SpaceX dice “All Times Approximate”. Ojo: en esa tabla, T+00:06:35 sigue figurando como “Super Heavy landing burn shutdown and catch”, pero en el vuelo real no hubo catch del booster. Hay que usar esos horarios como referencia pública y mostrar el desenlace real (hover, corte, FTS).
+SpaceX's public timeline says “All Times Approximate”. The table still lists T+00:06:35 as “Super Heavy landing burn shutdown and catch”, but the booster was not caught on the actual flight. Use those times as a public reference while showing the actual outcome (hover, shutdown, FTS).
 
-### Línea de tiempo pública (SpaceX, tiempos aproximados)
+### Public timeline (SpaceX, approximate times)
 
-| T+ (h:min:s) | Evento | Qué usar en la sim |
+| T+ (h:min:s) | Event | What to use in the sim |
 | --- | --- | --- |
-| 00:00:00 | Liftoff | Despegue desde Pad 2 |
-| 00:00:58 | Max Q | Solo el instante; no hay altitud oficial |
-| 00:02:19 | Super Heavy MECO | Corte de la mayoría de los motores del booster |
-| 00:02:21 | Hot-staging | Encendido de la Ship y separación. Space.com estima unos 65 km de altitud |
-| 00:02:26 | Inicio del boostback | 32 de 33 motores previstos |
-| 00:03:02 | Corte del boostback | Corte anticipado por poca masa de combustible |
-| 00:06:10 | Inicio de la quema de aterrizaje del booster | 13 motores, según la cobertura del webcast |
-| 00:06:35 | Corte de la quema de aterrizaje | En la realidad: hover sobre el Golfo, corte y FTS. No es catch |
-| 00:08:09 | Corte de motores de la Ship (SECO / fin del ascenso) | Costa breve |
-| 00:26:10 – 00:26:30 | Quema de inserción orbital | Un solo Raptor, ~20 s (McDowell: ~18 s y ~92 m/s) |
-| 00:35:01 – 01:17:40 | Despliegue de carga | 26 Starlink V3, ~42 min |
-| 01:27:46 / 07:15:35 / 20:41:55 | Chequeos de regreso (Hawái, Chile, Hawái) | Hitos de costa; la misión siguió |
-| 21:35:57 – 21:36:07 | Quema de desórbita | Un Raptor de nivel del mar, ~10 s |
-| 22:10:46 | Reentrada | Inicio de la entrada atmosférica |
-| 22:29:34 | Transónico | |
-| 22:30:13 | Subsónico | |
-| 22:32:16 | Inicio de la quema de aterrizaje | Tres Raptor |
+| 00:00:00 | Liftoff | Liftoff from Pad 2 |
+| 00:00:58 | Max Q | Timing only; no official altitude |
+| 00:02:19 | Super Heavy MECO | Most booster engines shut down |
+| 00:02:21 | Hot-staging | Ship ignition and separation. Space.com estimates an altitude of about 65 km |
+| 00:02:26 | Boostback start | 32 of 33 planned engines |
+| 00:03:02 | Boostback shutdown | Early shutdown due to low fuel mass |
+| 00:06:10 | Booster landing burn start | 13 engines, according to webcast coverage |
+| 00:06:35 | Landing burn shutdown | Actual outcome: hover over the Gulf, shutdown, and FTS. No catch |
+| 00:08:09 | Ship engine cutoff (SECO / end of ascent) | Brief coast |
+| 00:26:10 – 00:26:30 | Orbital insertion burn | A single Raptor, ~20 s (McDowell: ~18 s and ~92 m/s) |
+| 00:35:01 – 01:17:40 | Payload deployment | 26 Starlink V3, ~42 min |
+| 01:27:46 / 07:15:35 / 20:41:55 | Return checks (Hawaii, Chile, Hawaii) | Coast milestones; the mission continued |
+| 21:35:57 – 21:36:07 | Deorbit burn | One sea-level Raptor, ~10 s |
+| 22:10:46 | Reentry | Start of atmospheric entry |
+| 22:29:34 | Transonic | |
+| 22:30:13 | Subsonic | |
+| 22:32:16 | Landing burn start | Three Raptor engines |
 | 22:32:18 | Landing flip | |
-| 22:32:26 | De 3 a 2 motores | |
-| 22:32:33 | De 2 a 1 motor | |
-| 22:32:34 | Corte y catch de la Ship | Primera catch de la etapa superior, Pad 2 |
+| 22:32:26 | From 3 to 2 engines | |
+| 22:32:33 | From 2 to 1 engine | |
+| 22:32:34 | Ship shutdown and catch | First upper-stage catch, Pad 2 |
 
-Fuentes de esta sección: [página oficial del Flight 15](https://www.spacex.com/launches/starship-flight-15/), [Space.com (despegue y 275 km)](https://www.space.com/space-exploration/launches-spacecraft/spacex-starship-flight-15-chopsticks-double-catch-super-heavy-ship), [Space.com (65 km en la separación y aborto del booster)](https://www.space.com/space-exploration/launches-spacecraft/relive-starships-historic-flight-15-with-our-best-photos-from-launch-and-mechazilla-tower-catch), [Space.com (alarma de combustible, 13 motores, FTS)](https://www.space.com/space-exploration/launches-spacecraft/spacex-says-starship-flight-15-booster-aborted-chopsticks-landing-catch-after-launch-due-to-guidance-issue-video), [Spaceflight Now](https://spaceflightnow.com/2026/11/13/live-coverage-starship-flight-15-attempts-to-recover-full-vehicle-in-double-launch-pad-catch/), [actualización V3 de SpaceX, 12 may 2026](https://www.spacex.com/updates). El tuit de McDowell está citado en [Wikipedia: Starship flight 15](https://en.wikipedia.org/wiki/Starship_flight_test_15).
+Sources for this section: [official Flight 15 page](https://www.spacex.com/launches/starship-flight-15/), [Space.com (liftoff and 275 km)](https://www.space.com/space-exploration/launches-spacecraft/spacex-starship-flight-15-chopsticks-double-catch-super-heavy-ship), [Space.com (65 km at separation and booster abort)](https://www.space.com/space-exploration/launches-spacecraft/relive-starships-historic-flight-15-with-our-best-photos-from-launch-and-mechazilla-tower-catch), [Space.com (fuel alarm, 13 engines, FTS)](https://www.space.com/space-exploration/launches-spacecraft/spacex-says-starship-flight-15-booster-aborted-chopsticks-landing-catch-after-launch-due-to-guidance-issue-video), [Spaceflight Now](https://spaceflightnow.com/2026/11/13/live-coverage-starship-flight-15-attempts-to-recover-full-vehicle-in-double-launch-pad-catch/), [SpaceX V3 update, 12 May 2026](https://www.spacex.com/updates). McDowell's tweet is cited in [Wikipedia: Starship flight 15](https://en.wikipedia.org/wiki/Starship_flight_test_15).
 
-## 3. Alcance
+## 3. Scope
 
-### v1 (esto es el proyecto)
+### v1 (in scope)
 
-- App web local con Vite, TypeScript y three.js. Sin APIs pagas, sin claves, sin backend.
-- Archivo `data/flight15.json` con parámetros, eventos y fuente de cada número.
-- Escena a escala: Tierra, zona de Starbase, Pad 2, una torre aproximada, booster y nave con las medidas oficiales (diámetro 9 m; alturas 72 m / 52 m / 124 m de stack).
-- El Super Heavy V3 tiene **tres** grid fins, no cuatro (lo dijo SpaceX en la actualización V3).
-- Reloj de misión, barra para scrubbing, registro de eventos y HUD: altitud, velocidad, distancia downrange, masa si está modelada, evento actual y si el valor es oficial, estimado o interpolado.
-- Cámaras: seguimiento del booster, de la Ship, torre/pad, libre y vista orbital/mapa.
-- Física híbrida (ver sección 5): integración de trayectoria, contrastada y, si hace falta, guiada por la línea de tiempo pública.
-- El booster se desvía al Golfo, hace hover y FTS. La Ship hace la catch. No mostrar una doble catch que no ocurrió.
-- La costa de ~22 h se comprime (control de velocidad 1×, 10×, 100×, “saltar al próximo evento”).
-- Disclaimer visible en la UI.
-- Pruebas automatizadas de carga de datos y de tolerancia contra la línea de tiempo.
-- Panel breve de fuentes.
+- Local web app using Vite, TypeScript, and three.js. No paid APIs, keys, or backend.
+- A `data/flight15.json` file with parameters, events, and a source for each number.
+- A scene to scale: Earth, the Starbase area, Pad 2, an approximate tower, and the booster and Ship at their official dimensions (9 m diameter; heights of 72 m / 52 m / 124 m for the full stack).
+- Super Heavy V3 has **three** grid fins, not four (as SpaceX said in its V3 update).
+- Mission clock, scrubber, event log, and HUD: altitude, speed, downrange distance, mass if modeled, current event, and whether each value is official, estimated, or interpolated.
+- Cameras: booster tracking, Ship tracking, tower/pad, free camera, and orbital/map view.
+- Hybrid physics (see section 5): integrate the trajectory, check it against the public timeline, and use that timeline to guide it if needed.
+- The booster diverts to the Gulf, hovers, and is terminated by the FTS. The Ship is caught. Do not show a double catch that did not happen.
+- Compress the ~22 h coast (1×, 10×, and 100× speed controls, plus “skip to next event”).
+- A visible disclaimer in the UI.
+- Automated data-loading and timeline tolerance tests.
+- A short sources panel.
 
-### Queda para después (no es v1)
+### Deferred (not in v1)
 
-- Aero de alta fidelidad, actitud 6 DoF completa, plasma/ablación, audio del webcast, modelos 3D fotorealistas, coordenadas exactas del FTS si algún día se publican, superponer telemetría de aficionados como si fuera oficial, multiplayer, ni app nativa.
+- High-fidelity aerodynamics, full 6 DoF attitude modeling, plasma/ablation, webcast audio, photorealistic 3D models, exact FTS coordinates if they are ever published, amateur telemetry overlays presented as official, multiplayer, and a native app.
 
-## 4. Stack técnico
+## 4. Technical stack
 
 - Vite + TypeScript + three.js.
-- Tests con Vitest (o el runner que ya traiga Vite).
-- Datos solo en archivos locales (`data/flight15.json`). Nada de OpenAI, mapas pagos ni tokens.
-- Modelos 3D simples (primitivas o glTF liviano hecho en el repo). Si se usa un modelo de terceros, tiene que ser de licencia libre y estar acreditado.
-- Tierra: esfera texturizada con un mapa de dominio público o una representación simple. No hace falta un globo comercial.
-- README en español, claro, con el aviso, cómo correr el proyecto y de dónde salen los datos.
+- Tests with Vitest (or the runner already included with Vite).
+- Data only in local files (`data/flight15.json`). No OpenAI, paid maps, or tokens.
+- Simple 3D models (primitives or lightweight glTF made in the repo). Any third-party model must have a free license and be credited.
+- Earth: a sphere textured with a public-domain map or a simple representation. No commercial globe is needed.
+- A clear README in Spanish with the disclaimer, instructions for running the project, and data sources.
 
-## 5. Cómo simular (recomendación: híbrido)
+<a name="5-cómo-simular-recomendación-híbrido"></a>
 
-Hay tres caminos. El recomendado para v1 es el C.
+## 5. Simulation approach (hybrid recommended)
 
-**A. Solo replay.** Interpolás una trayectoria que pase por los eventos públicos. Es prolijo y predecible, pero no pone a prueba la física ni al modelo.
+There are three approaches. C is recommended for v1.
 
-**B. Física pura.** Masa puntual, gravedad, arrastre y empuje. Choca con un problema de fondo: SpaceX no publica masas secas, ni Cd, ni la altitud/velocidad de casi ningún evento. Una física “pura” con números inventados miente.
+**A. Replay only.** Interpolate a trajectory through the public events. This is tidy and predictable, but it does not test the physics or the model.
 
-**C. Híbrido (recomendado).** Integrás la trayectoria en 3D (se puede arrancar en el plano del lanzamiento y después pasar a ECEF o ECI simple):
+**B. Pure physics.** Point mass, gravity, drag, and thrust. The basic problem is that SpaceX does not publish dry masses, Cd, or altitude and speed for almost any event. A “pure” physics simulation based on invented numbers would be misleading.
 
-- Gravedad inversamente proporcional al cuadrado. Usá la constante gravitacional de la Tierra de WGS 84 (μ = 3,986004418 × 10¹⁴ m³/s²). Fuente: [NIMA TR8350.2 / WGS 84](https://earth-info.nga.mil/index.php?dir=wgs84&action=wgs84).
-- Atmósfera: [U.S. Standard Atmosphere 1976](https://ntrs.nasa.gov/citations/19770009539) para densidad vs altitud. Cd inicial constante, declarado como estimación, ajustable.
-- Empuje y consumo de masa: `ṁ = F / (Isp × g0)`, con el empuje oficial y un Isp etiquetado como estimación si no hay cifra oficial vigente.
-- Eventos de la línea de tiempo (encendido, corte, separación, desvío, FTS, catch) disparan cambios de fase a los T+ públicos.
-- Si la física se desvía —va a pasar, porque faltan masas y aero—, una capa de guía apunta al próximo evento público (tiempo y, si existe, altitud). El residual se registra. El HUD no puede disfrazar un valor guiado o interpolado como telemetría real.
-- El aborto del booster no es opcional: el boostback se corta en T+00:03:02, el vehículo se desvía costa afuera (rumbo este/sureste sobre el Golfo, sin inventar kilómetros) y termina en hover + FTS.
+**C. Hybrid (recommended).** Integrate the trajectory in 3D (start in the launch plane if needed, then move to a simple ECEF or ECI frame):
 
-Integrador: Runge–Kutta 4 o un semi-implícito estable, paso de 0,05–0,1 s en las quemas y más holgado en la costa orbital. Determinista: misma semilla, misma corrida.
+- Use inverse-square gravity and the WGS 84 Earth gravitational parameter (μ = 3.986004418 × 10¹⁴ m³/s²). Source: [NIMA TR8350.2 / WGS 84](https://earth-info.nga.mil/index.php?dir=wgs84&action=wgs84).
+- Atmosphere: [U.S. Standard Atmosphere 1976](https://ntrs.nasa.gov/citations/19770009539) for density versus altitude. Start with a constant, adjustable Cd and label it as an estimate.
+- Thrust and mass flow: `ṁ = F / (Isp × g0)`, using official thrust and labeling Isp as an estimate if no current official figure exists.
+- Timeline events (ignition, shutdown, separation, diversion, FTS, catch) trigger phase changes at public T+ times.
+- If the physics drifts, as it will given the missing mass and aerodynamic data, a guidance layer targets the next public event (its time and, if available, its altitude). Record the residual. The HUD must not pass off a guided or interpolated value as real telemetry.
+- The booster abort is not optional: boostback shuts down at T+00:03:02, the vehicle diverts offshore (east/southeast over the Gulf, without inventing a distance), and ends in hover + FTS.
 
-## 6. Formato de datos: `data/flight15.json`
+Integrator: Runge–Kutta 4 or a stable semi-implicit method, with a step of 0.05–0.1 s during burns and a larger step during orbital coast. Deterministic: same seed, same run.
 
-Cada magnitud numérica lleva `value`, `unit`, `confidence` (`official`, `reported`, `estimate`, `unknown`) y `source` (URL o “no publicado”). Si `confidence` es `unknown`, `value` va `null`. Está prohibido rellenar un null con un número “que parezca razonable” sin etiquetarlo como estimación y sin dejar constancia en el README.
+## 6. Data format: `data/flight15.json`
 
-Estructura mínima:
+Every numerical quantity has `value`, `unit`, `confidence` (`official`, `reported`, `estimate`, `unknown`), and `source` (a URL or “not published”). If `confidence` is `unknown`, set `value` to `null`. Do not replace a null with a number that “looks reasonable” without labeling it as an estimate and documenting it in the README.
+
+Minimal structure:
 
 ```json
 {
   "meta": {
-    "disclaimer": "Aproximación con datos públicos. No es información oficial de vuelo.",
+    "disclaimer": "Approximation based on public data. This is not official flight information.",
     "researched_at": "2026-11-19",
-    "timezone_note": "T+ es tiempo de misión. El despegue local fue en America/Chicago (CST, UTC−6)."
+    "timezone_note": "T+ is mission time. The local time zone at liftoff was America/Chicago (CST, UTC−6)."
   },
   "mission": { },
   "site": { },
@@ -133,163 +135,163 @@ Estructura mínima:
     }
   ],
   "physics_estimates": {
-    "comment": "Solo parámetros no publicados. Se pueden ajustar. Nunca se presentan como oficiales."
+    "comment": "Only unpublished parameters. They can be adjusted. Never present them as official."
   }
 }
 ```
 
-Valores de partida (oficiales, salvo que se indique otra cosa):
+Starting values (official unless otherwise noted):
 
-| Magnitud | Valor | Confianza | Fuente |
+| Quantity | Value | Confidence | Source |
 | --- | ---: | --- | --- |
-| Altura del stack | 124 m | official | [SpaceX Starship](https://www.spacex.com/vehicles/starship) |
-| Diámetro | 9 m | official | idem |
-| Ship: altura, propelente, empuje | 52 m; 1.600 t; 1.614 tf | official | idem |
-| Super Heavy: altura, propelente, empuje | 72 m; 3.650 t; 8.240 tf | official | idem |
-| Motores | Booster 33 Raptor (13 centrales maniobrables, 20 en el perímetro); Ship 3 Raptor + 3 RVac | official | idem |
-| Raptor (página del vehículo): diámetro, altura, empuje | 1,3 m; 2,9 m; 250 tf | official | idem |
-| Raptor 3 SL / vacío / masa del motor SL | 250 tf; 275 tf; 1.525 kg | official | [Actualización V3, 12 may 2026](https://www.spacex.com/updates) |
+| Stack height | 124 m | official | [SpaceX Starship](https://www.spacex.com/vehicles/starship) |
+| Diameter | 9 m | official | Same source |
+| Ship: height, propellant, thrust | 52 m; 1,600 t; 1,614 tf | official | Same source |
+| Super Heavy: height, propellant, thrust | 72 m; 3,650 t; 8,240 tf | official | Same source |
+| Engines | Booster: 33 Raptor (13 steerable center engines, 20 around the perimeter); Ship: 3 Raptor + 3 RVac | official | Same source |
+| Raptor (vehicle page): diameter, height, thrust | 1.3 m; 2.9 m; 250 tf | official | Same source |
+| Raptor 3 SL thrust / vacuum thrust / SL engine mass | 250 tf; 275 tf; 1,525 kg | official | [V3 update, 12 May 2026](https://www.spacex.com/updates) |
 | Pad | Orbital Launch Pad 2, Starbase, Texas | official | [Flight 15](https://www.spacex.com/launches/starship-flight-15/) |
-| Coordenadas del pad | 25,99677° N, 97,15799° W | reported | [Launch Library 2, pad 235](https://ll.thespacedevs.com/2.2.0/pad/235/) — base de datos de terceros, suficiente para v1 |
-| Órbita | ~275 km | reported | SpaceX / transmisión; McDowell: casi circular a 276 km |
-| Altitud de separación | ~65 km | reported | Space.com, cifra aproximada |
-| Masa seca del booster y de la Ship | no publicada | unknown | SpaceX no la da en la ficha actual |
-| Isp | no está en la ficha actual | estimate / unknown | Un tuit de SpaceX del 3 ago 2024 citó 350 s para la variante de nivel del mar; hay que tratarlo como dato viejo y discutido (¿Isp de vacío del motor SL?). Ajustable |
-| Cd, área de referencia, masa de cada Starlink V3, coordenadas del FTS, altitud de Max Q, velocidad de separación | no publicados | unknown | Dejar null o estimar con etiqueta |
+| Pad coordinates | 25.99677° N, 97.15799° W | reported | [Launch Library 2, pad 235](https://ll.thespacedevs.com/2.2.0/pad/235/) — third-party database, sufficient for v1 |
+| Orbit | ~275 km | reported | SpaceX / webcast; McDowell: nearly circular at 276 km |
+| Separation altitude | ~65 km | reported | Space.com, approximate figure |
+| Booster and Ship dry mass | not published | unknown | SpaceX does not give it on the current vehicle page |
+| Isp | not on the current vehicle page | estimate / unknown | A SpaceX tweet from 3 August 2024 cited 350 s for the sea-level variant. Treat this as dated and disputed (vacuum Isp for the SL engine?). Adjustable |
+| Cd, reference area, mass of each Starlink V3, FTS coordinates, Max Q altitude, separation speed | not published | unknown | Leave null or label as estimates |
 
-Inconsistencia a no “arreglar”: 3 × 250 tf + 3 × 275 tf = 1.575 tf, pero la ficha del vehículo dice 1.614 tf para la Ship. En el JSON van las dos cifras, cada una con su fuente. No se promedia en silencio.
+Do not “fix” this discrepancy: 3 × 250 tf + 3 × 275 tf = 1,575 tf, but the vehicle page gives 1,614 tf for the Ship. Keep both figures in the JSON, each with its own source. Do not silently average them.
 
-Capacidad de propelente es un techo de diseño, no la carga real del Flight 15 (no publicada). La sim puede partir de esos techos y bajar masa en el ajuste, dejándolo asentado.
+Propellant capacity is a design limit, not the actual Flight 15 load, which was not published. The sim can start from those limits and reduce the mass when tuning the model, as long as the adjustment is documented.
 
-Hay un archivo de partida en `data/flight15.json`. Se puede completar, no se pueden promover estimaciones a oficiales.
+`data/flight15.json` is the starting file. You may fill it in, but do not promote estimates to official figures.
 
-## 7. Visualización
+## 7. Visualization
 
-- Tierra y la costa de Texas / el Golfo, con Pad 2 y una torre de captura. La altura exacta de la torre no está en la ficha de SpaceX: usar una torre reconocible, a escala razonable, y no afirmar un metro exacto.
-- Vehículos a escala, con 33 motores en el booster y 6 en la Ship. Tres grid fins en el V3. Plumas de escape simples según la cantidad de motores encendidos (33, 32, 13, 6, 3, 2, 1).
-- El FTS del booster se ve como pérdida del vehículo sobre el agua, no como aterrizaje suave ni como catch.
-- La Ship, al volver: aproximación desde el este de Texas, swoosh sobre el Golfo, flip, quema 3–2–1 y cierre de brazos.
-- HUD y scrubber siempre visibles. Al pausar, se puede saltar de evento a evento.
-- Un badge por dato: Oficial / Reportado / Estimado / Interpolado.
+- Earth and the Texas Gulf Coast, with Pad 2 and a catch tower. The exact tower height is not on SpaceX's vehicle page: use a recognizable tower at a reasonable scale, without claiming an exact height.
+- Vehicles to scale, with 33 engines on the booster and 6 on the Ship. Three grid fins on V3. Simple exhaust plumes based on the active engine count (33, 32, 13, 6, 3, 2, 1).
+- Show the booster FTS as a loss of the vehicle over water, not a soft landing or a catch.
+- On the Ship's return: approach from east Texas, swoosh over the Gulf, flip, 3–2–1 engine burn, and arm closure.
+- Keep the HUD and scrubber visible at all times. When paused, allow jumps between events.
+- Give each value a badge: Official / Reported / Estimated / Interpolated.
 
-### 7.1 Interacción y órbita (pedido de Cristian)
+### 7.1 Interaction and orbit (Cristian's request)
 
-- **Cámara manejable**: orbitar, zoom y paneo libres con el mouse, además de los modos de seguimiento (booster, Ship, torre/pad, Tierra entera y vista orbital). Transiciones suaves entre modos.
-- **Control de tiempo**: play, pausa, velocidades 1×, 10×, 100× y 1000×, scrubber para ir a cualquier momento y botones para saltar al evento anterior o al siguiente.
-- **Misión completa de punta a punta**: despegue, ascenso, hot-staging, regreso del booster como ocurrió, inserción orbital de la Ship, despliegue de los 26 Starlink V3 (cada satélite se separa y sigue su propia órbita, con su número), chequeos en órbita, quema de desórbita, reentrada y catch.
-- **Órbita en vivo**: dibujar la órbita osculante actual de la Ship (la elipse alrededor de la Tierra) calculada desde el vector de estado (r, v) en cada cuadro. Marcar el perigeo y el apogeo con sus valores. Durante una quema, la elipse y los valores tienen que cambiar en vivo. Trayectorias suborbitales: mostrar el arco y avisar que el perigeo está bajo la superficie. Mostrar la traza en tierra (ground track) como opción.
-- **Maniobras**: cada encendido (inserción, desórbita, etc.) aparece en la línea de tiempo con su Δv estimado y su fuente, y se ve en la escena (pluma y cambio de órbita).
-- **Panel de telemetría siempre visible**: T+, fase o evento actual, altitud, velocidad relativa a la superficie e inercial, downrange, aceleración en g, masa o propelente estimado, motores encendidos, perigeo, apogeo, inclinación, período orbital, excentricidad y latitud y longitud. Cada valor lleva su badge (Oficial / Reportado / Estimado / Calculado).
-- **Realismo**: Tierra en rotación (WGS 84), coordenadas reales de Pad 2 en Starbase y escala real, con una opción de escala visual para los vehículos cuando se ve la Tierra entera. Los elementos orbitales se calculan del estado (no se dibujan a mano).
-- Check: durante la quema de inserción el perigeo sube de valor negativo o suborbital hasta unos 275 km ± 15 km; durante la desórbita el perigeo baja dentro de la atmósfera; los 26 Starlink se separan en la ventana del despliegue; se puede recorrer todo con mouse y teclado sin abrir la consola.
+- **Camera controls**: Free orbit, zoom, and pan with the mouse, plus tracking and view modes (booster, Ship, tower/pad, whole Earth, and orbital view). Transition smoothly between modes.
+- **Time controls**: Play, pause, 1×, 10×, 100×, and 1000× speeds, a scrubber that can reach any moment, and buttons to skip to the previous or next event.
+- **Full mission from start to finish**: Liftoff, ascent, hot-staging, the booster return as it happened, Ship orbital insertion, deployment of all 26 Starlink V3 satellites (each separates, follows its own orbit, and has its own number), in-orbit checks, deorbit burn, reentry, and catch.
+- **Live orbit**: Draw the Ship's current osculating orbit (the ellipse around Earth) from the state vector (r, v) on each frame. Mark the perigee and apogee and show their values. The ellipse and values must update live during a burn. For suborbital trajectories, draw the arc and indicate that perigee is below the surface. Offer an optional ground track.
+- **Maneuvers**: Show each ignition (insertion, deorbit, etc.) on the timeline with its estimated Δv and source, and in the scene through the plume and orbital change.
+- **Always-visible telemetry panel**: T+, current phase or event, altitude, surface-relative and inertial speeds, downrange distance, acceleration in g, estimated mass or propellant, active engines, perigee, apogee, inclination, orbital period, eccentricity, latitude, and longitude. Give each value a badge (Official / Reported / Estimated / Calculated).
+- **Realism**: Use a rotating Earth (WGS 84), real coordinates for Pad 2 at Starbase, and real scale, with a visual scaling option for vehicles when viewing the whole Earth. Compute orbital elements from the state rather than drawing them by hand.
+- Check: During the insertion burn, perigee rises from a negative or suborbital value to about 275 km ± 15 km. During deorbit, perigee drops into the atmosphere. All 26 Starlink satellites separate within the deployment window. The entire mission can be navigated with the mouse and keyboard without opening the console.
 
-## 8. Criterios de validación
+## 8. Validation criteria
 
-La línea de tiempo de SpaceX es aproximada, así que las tolerancias miden coherencia con lo público, no precisión de vuelo.
+SpaceX's timeline is approximate, so the tolerances measure consistency with public information, not flight accuracy.
 
-| Fase | Qué comparar | Tolerancia v1 |
+| Phase | What to compare | v1 tolerance |
 | --- | --- | --- |
-| T+0 a SECO (0–8 min) | Instante de cada evento oficial | ± 2 s |
-| Inserción y despliegue | Instante de inicio/fin | ± 5 s |
-| Chequeos de costa y desórbita | Instante | ± 15 s |
-| Reentrada hasta catch | Instante de cada evento oficial | ± 5 s |
-| Altitud de separación | Si se usa el valor reportado de ~65 km | ± 10 km |
-| Altitud después de la inserción | ~275 km | ± 15 km |
-| Desenlace | Booster: desvío + hover + FTS, sin catch. Ship: catch en Pad 2 | Cualitativo, obligatorio |
-| Honestidad de datos | Ningún valor `unknown` aparece como oficial en el HUD | Test o checklist |
+| T+0 to SECO (0–8 min) | Time of each official event | ± 2 s |
+| Insertion and deployment | Start/end times | ± 5 s |
+| Coast checks and deorbit | Timing | ± 15 s |
+| Reentry through catch | Time of each official event | ± 5 s |
+| Separation altitude | If using the reported value of ~65 km | ± 10 km |
+| Post-insertion altitude | ~275 km | ± 15 km |
+| Outcome | Booster: diversion + hover + FTS, no catch. Ship: catch at Pad 2 | Qualitative, mandatory |
+| Data integrity | No `unknown` value appears as official in the HUD | Test or checklist |
 
-Si para entrar en tolerancia hay que guiar la trayectoria, el informe de validación lo dice y muestra el residual.
+If guidance is needed to keep the trajectory within tolerance, disclose it in the validation report and show the residual.
 
-## 9. Etapas (chicas y verificables)
+## 9. Stages (small and verifiable)
 
-El orquestador reparte cada etapa al implementador. No se pasa a la siguiente sin los checks de la actual y, en las etapas de física y desenlace, sin una pasada de revisión (Oracle).
+The orchestrator assigns each stage to the implementer. Do not move on until the current stage passes its checks and, for the physics and outcome stages, an Oracle review.
 
-### Etapa 0 — Andamiaje
+### Stage 0 — Scaffolding
 
-App Vite + TS + three.js que abre un canvas, un README con el aviso y `npm test` andando. Check: `npm run dev` muestra la escena vacía y el disclaimer.
+A Vite + TS + three.js app that opens a canvas, a README with the disclaimer, and a working `npm test` command. Check: `npm run dev` shows the empty scene and the disclaimer.
 
-### Etapa 1 — Datos
+### Stage 1 — Data
 
-`data/flight15.json` tipado, loader, tests: cada número tiene fuente; los `unknown` son null; la timeline tiene los eventos de la sección 2, con la nota de “no fue catch” en T+00:06:35. Check: los tests de datos pasan.
+Typed `data/flight15.json`, loader, and tests: each number has a source, `unknown` values are null, and the timeline includes the events in section 2 with a “no catch” note at T+00:06:35. Check: data tests pass.
 
-### Etapa 2 — Escena estática a escala
+### Stage 2 — Static scene to scale
 
-Tierra, pad, torre, stack en T=0. Medidas oficiales. Tres grid fins. Check: una captura o un test de cotas (diámetro 9 m, alturas 72/52/124 m).
+Earth, pad, tower, and stack at T=0. Official dimensions. Three grid fins. Check: a screenshot or a dimension test (9 m diameter, heights of 72/52/124 m).
 
-### Etapa 3 — Reloj, scrubber y HUD
+### Stage 3 — Clock, scrubber, and HUD
 
-Reloj de misión, scrubber, log de eventos y HUD sobre una trayectoria placeholder (aunque sea una curva de placeholder). Check: al mover el scrubber cambian el T+ y el evento; el placeholder está etiquetado como tal.
+Mission clock, scrubber, event log, and HUD over a placeholder trajectory, even if it is just a simple curve. Check: moving the scrubber changes T+ and the current event, and the placeholder is labeled as such.
 
-### Etapa 4 — Física de ascenso
+### Stage 4 — Ascent physics
 
-Integrador + gravedad + atmósfera + empuje hasta MECO y hot-staging. Check: los tiempos de Max Q (si se modela el instante), MECO y staging caen en ± 2 s; la altitud de staging, si se valida contra los 65 km reportados, cae en ± 10 km; el informe lista las estimaciones usadas.
+Integrator + gravity + atmosphere + thrust through MECO and hot-staging. Check: Max Q (if its timing is modeled), MECO, and staging are within ± 2 s; staging altitude, if validated against the reported 65 km, is within ± 10 km; and the report lists the estimates used.
 
-### Etapa 5 — Booster, como voló
+### Stage 5 — Booster as flown
 
-Flip, boostback con 32 motores, corte anticipado, desvío al Golfo, quema de 13 motores, hover, FTS. Check: no hay catch del booster; T+ de boostback y quema de aterrizaje en ± 2 s; el vehículo no vuelve a la torre.
+Flip, boostback on 32 engines, early shutdown, diversion to the Gulf, burn on 13 engines, hover, FTS. Check: there is no booster catch; boostback and landing burn T+ times are within ± 2 s; and the vehicle does not return to the tower.
 
-### Etapa 6 — Ship, como voló
+### Stage 6 — Ship as flown
 
-Ascenso a SECO, inserción, costa comprimida con los tres chequeos, desórbita, reentrada, transónico/subsónico, flip, quema 3–2–1, catch en Pad 2. Check: tiempos en tolerancia; altitud post-inserción ~275 km ± 15 km; la catch ocurre en la torre, no en el agua.
+Ascent to SECO, insertion, compressed coast with all three checks, deorbit, reentry, transonic/subsonic milestones, flip, 3–2–1 engine burn, and catch at Pad 2. Check: times are within tolerance, post-insertion altitude is ~275 km ± 15 km, and the catch is at the tower, not in the water.
 
-### Etapa 7 — Informe de validación
+### Stage 7 — Validation report
 
-Página o Markdown generado con sim vs línea de tiempo, residuales y lista de estimaciones. Check: todos los eventos de la tabla tienen una fila.
+A generated page or Markdown file comparing the sim against the timeline, with residuals and a list of estimates. Check: every event in the table has a row.
 
-### Etapa 7.5 — Órbita, Starlink y telemetría
+### Stage 7.5 — Orbit, Starlink, and telemetry
 
-Todo lo de la sección 7.1: elipse osculante en vivo con perigeo y apogeo, maniobras, despliegue de los 26 Starlink, panel completo y control de tiempo. Check: los de la sección 7.1.
+Everything in section 7.1: a live osculating ellipse with perigee and apogee, maneuvers, deployment of all 26 Starlink satellites, the full panel, and time controls. Use the checks in section 7.1.
 
-### Etapa 8 — Pulido
+### Stage 8 — Polish
 
-Cámaras de la sección 7, control de velocidad, panel de fuentes, swoosh reconocible, UI usable en un laptop. Check: se puede recorrer el vuelo entero sin abrir la consola.
+Cameras from section 7, speed controls, sources panel, a recognizable swoosh, and a UI usable on a laptop. Check: the entire flight can be navigated without opening the console.
 
-## 10. Evaluación del preset (qué anotar)
+## 10. Preset evaluation (what to record)
 
-Además del simulador, este trabajo es una corrida de prueba del preset oh-my-opencode-slim: GPT-6.2 Astra como orquestador y en las puertas de revisión Oracle, y GPT-6.2 Sol como implementador/fixer. Esos nombres son para la nota de evaluación. No hay que clavar IDs de modelo en el código, en el plan que se le pega a OpenCode ni en los commits: ahí se habla de roles.
+This project is also a test run of the oh-my-opencode-slim preset: GPT-6.2 Astra as orchestrator and at the Oracle review gates, and GPT-6.2 Sol as implementer/fixer. Those names are for the evaluation note. Do not hardcode model IDs in the code, the plan pasted into OpenCode, or commits. Refer to roles there.
 
-Al cerrar cada etapa, y al final del proyecto, Cristian o el orquestador dejan una nota (en el README o en `NOTES-EVAL.md`) con:
+At the end of each stage and at the end of the project, Cristian or the orchestrator leaves a note (in the README or in `NOTES-EVAL.md`) with:
 
-- **Rol:** orquestador, revisores Oracle, o implementador/fixer.
-- **Modelo o alias usado en esa corrida** (el que muestre OpenCode; no hardcodearlo en el repo).
-- **Qué hizo:** plan, implementación, corrección, revisión.
-- **Etapa** (0 a 8).
-- **Tiempo:** inicio y fin en hora de Córdoba, y duración aproximada.
-- **Cuota o costo visible:** si OpenCode o el proveedor muestran tokens, porcentaje de cuota o un aviso de límite, copiarlo. Si no se ve nada, escribir “no visible”.
-- **Calidad, en concreto:**
-  - ¿Leyó el spec antes de codear?
-  - ¿Inventó algún número? ¿Cuál?
-  - ¿Los tests de la etapa pasaron en el primer intento?
-  - ¿La revisión Oracle encontró algo de fondo o solo detalle?
-  - ¿El implementador respetó el alcance de v1?
-  - Nota 1–5 y una frase de por qué.
+- **Role:** orchestrator, Oracle reviewers, or implementer/fixer.
+- **Model or alias used in that run** (as shown by OpenCode; do not hardcode it in the repo).
+- **Work done:** planning, implementation, fixes, review.
+- **Stage** (0 through 8).
+- **Time:** start and finish in Córdoba time, and approximate duration.
+- **Visible quota or cost:** if OpenCode or the provider shows token counts, a quota percentage, or a limit notice, record it. If nothing is shown, write “not visible”.
+- **Specific quality checks:**
+  - Did the agent read the spec before coding?
+  - Did it invent any numbers? Which ones?
+  - Did the stage's tests pass on the first try?
+  - Did the Oracle review find a substantive issue or only minor details?
+  - Did the implementer stay within the v1 scope?
+  - Give a score of 1–5 and one sentence explaining it.
 
-Esa nota es evidencia para el stack. No se cambia ningún preset con este documento.
+That note provides evidence for evaluating the model stack. This document does not change any preset.
 
-## 11. Riesgos
+## 11. Risks
 
-- Sin masa seca ni Cd, la física pura no cierra. Por eso el híbrido y las etiquetas de honestidad.
-- La tabla oficial todavía dice “catch” en el booster. Si se implementa literal, el sim miente.
-- Un vuelo de 22,5 h no se puede renderizar en tiempo real a 1× todo el rato: hay que comprimir la costa.
-- El orquestador puede querer escribir código o saltear etapas. El prompt le pide delegar e ir etapa por etapa.
-- Una corrida larga puede gastar cuota. Conviene cortar por etapa y guardar el informe aunque quede a medias.
-- Coordenadas de Launch Library 2 son de terceros. Sirven para v1; no son un relevamiento oficial de SpaceX.
+- Without dry mass or Cd, pure physics is not viable. That is why the spec calls for the hybrid approach and clear confidence labels.
+- The official table still says “catch” for the booster. Implementing that literally would misrepresent the flight.
+- A 22.5 h flight cannot run at 1× in real time throughout; compress the coast.
+- The orchestrator may try to write code or skip stages. The prompt asks it to delegate and go stage by stage.
+- A long run can consume quota. Stop at stage boundaries and save the report even if the run is incomplete.
+- Launch Library 2 coordinates come from a third party. They are sufficient for v1, but are not an official SpaceX survey.
 
-## 12. Fuentes
+## 12. Sources
 
-| Fuente | Para qué |
+| Source | What it covers |
 | --- | --- |
-| [SpaceX: Starship Flight 15](https://www.spacex.com/launches/starship-flight-15/) | Relato oficial, desenlace, countdown y timeline (tiempos aproximados) |
-| [SpaceX: vehículo Starship](https://www.spacex.com/vehicles/starship) | Alturas, diámetro, propelente, empujes, recuento de motores, Raptor 250 tf |
-| [SpaceX Updates (V3, 12 may 2026)](https://www.spacex.com/updates) | Raptor 3: 250 / 275 tf, masa 1.525 kg; Super Heavy V3 con 3 grid fins; Pad 2 |
-| [Space.com: despegue y órbita](https://www.space.com/space-exploration/launches-spacecraft/spacex-starship-flight-15-chopsticks-double-catch-super-heavy-ship) | ~16:47 CST, ~275 km, inserción ~20 s, 26 Starlink, ~14 órbitas |
-| [Space.com: fotos y ~65 km](https://www.space.com/space-exploration/launches-spacecraft/relive-starships-historic-flight-15-with-our-best-photos-from-launch-and-mechazilla-tower-catch) | Altitud aproximada en la separación |
-| [Space.com: aborto del booster](https://www.space.com/space-exploration/launches-spacecraft/spacex-says-starship-flight-15-booster-aborted-chopsticks-landing-catch-after-launch-due-to-guidance-issue-video) | Alarma de combustible, aclaración del GNC, 13 motores, hover y FTS |
-| [Spaceflight Now, cobertura en vivo](https://spaceflightnow.com/2026/11/13/live-coverage-starship-flight-15-attempts-to-recover-full-vehicle-in-double-launch-pad-catch/) | 16:47 CST, catch ~15:20 CST, B22 / S42, reentrada sobre el Pacífico y el suroeste |
-| [Wikipedia: Starship flight 15](https://en.wikipedia.org/wiki/Starship_flight_test_15) | Recuento con citas; usar siempre la fuente original, no la wiki sola |
-| [Launch Library 2, pad 235](https://ll.thespacedevs.com/2.2.0/pad/235/) | Coordenadas aproximadas de Pad 2 |
-| [WGS 84](https://earth-info.nga.mil/index.php?dir=wgs84&action=wgs84) | μ de la Tierra |
-| [U.S. Standard Atmosphere 1976](https://ntrs.nasa.gov/citations/19770009539) | Densidad vs altitud |
-| [FAA: licencia VOL 23-129](https://www.faa.gov/space/stakeholder_engagement/spacex_starship) | Contexto regulatorio; la Rev. 10 autorizó el Flight 15. La PEA de 2022 describe un diseño más viejo (no usar esas masas como si fueran las de V3) |
+| [SpaceX: Starship Flight 15](https://www.spacex.com/launches/starship-flight-15/) | Official account, outcome, countdown, and timeline (approximate times) |
+| [SpaceX: Starship vehicle](https://www.spacex.com/vehicles/starship) | Heights, diameter, propellant, thrust, engine count, Raptor 250 tf |
+| [SpaceX Updates (V3, 12 May 2026)](https://www.spacex.com/updates) | Raptor 3: 250 / 275 tf, mass 1,525 kg; Super Heavy V3 with 3 grid fins; Pad 2 |
+| [Space.com: liftoff and orbit](https://www.space.com/space-exploration/launches-spacecraft/spacex-starship-flight-15-chopsticks-double-catch-super-heavy-ship) | ~16:47 CST, ~275 km, ~20 s insertion, 26 Starlink, ~14 orbits |
+| [Space.com: photos and ~65 km](https://www.space.com/space-exploration/launches-spacecraft/relive-starships-historic-flight-15-with-our-best-photos-from-launch-and-mechazilla-tower-catch) | Approximate separation altitude |
+| [Space.com: booster abort](https://www.space.com/space-exploration/launches-spacecraft/spacex-says-starship-flight-15-booster-aborted-chopsticks-landing-catch-after-launch-due-to-guidance-issue-video) | Fuel alarm, GNC clarification, 13 engines, hover, and FTS |
+| [Spaceflight Now, live coverage](https://spaceflightnow.com/2026/11/13/live-coverage-starship-flight-15-attempts-to-recover-full-vehicle-in-double-launch-pad-catch/) | 16:47 CST, catch ~15:20 CST, B22 / S42, reentry over the Pacific and the Southwest |
+| [Wikipedia: Starship flight 15](https://en.wikipedia.org/wiki/Starship_flight_test_15) | Summary with citations; always use the original source, not the wiki alone |
+| [Launch Library 2, pad 235](https://ll.thespacedevs.com/2.2.0/pad/235/) | Approximate coordinates for Pad 2 |
+| [WGS 84](https://earth-info.nga.mil/index.php?dir=wgs84&action=wgs84) | Earth's μ |
+| [U.S. Standard Atmosphere 1976](https://ntrs.nasa.gov/citations/19770009539) | Density versus altitude |
+| [FAA: license VOL 23-129](https://www.faa.gov/space/stakeholder_engagement/spacex_starship) | Regulatory context; Rev. 10 authorized Flight 15. The 2022 PEA describes an older design (do not use those masses as V3 values) |
 
-El detalle crudo, las citas y los huecos están en `research.md`.
+See `research.md` for the raw details, citations, and gaps.

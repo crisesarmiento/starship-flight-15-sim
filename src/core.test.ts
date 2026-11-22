@@ -25,7 +25,7 @@ describe('Flight 15: mission seeking', () => {
   })
 
   it('identifies altitude as reconstructed and preserves reported reference values', () => {
-    expect(altitudeNote).toMatch(/reconstruida.*no telemetría/i)
+    expect(altitudeNote).toMatch(/reconstructed.*not telemetry/i)
     expect(sample(0).altitudeM).toBeCloseTo(0)
     expect(sample(141).altitudeM).toBeCloseTo(65000)
     expect(sample(1590).altitudeM).toBeCloseTo(275000)

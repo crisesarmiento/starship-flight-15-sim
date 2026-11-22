@@ -311,7 +311,7 @@ export function createScene(host: HTMLElement): SceneApi {
     }
 
     push('pad', 'Pad 2 · Starbase', 'pad', earth.group.localToWorld(padEcef.clone()))
-    if (camDist < 3000) push('tower', 'Torre de captura: proporción esquemática', 'event', padGroup.localToWorld(new THREE.Vector3(TOWER_POS.x, VISUAL.towerHeight + 26, TOWER_POS.z)))
+    if (camDist < 3000) push('tower', 'Catch tower: schematic proportions', 'event', padGroup.localToWorld(new THREE.Vector3(TOWER_POS.x, VISUAL.towerHeight + 26, TOWER_POS.z)))
     if (dim.visible) {
       const at = (x: number, y: number) => booster.group.localToWorld(new THREE.Vector3(x, y, 0))
       push('l-booster', `${m.boosterHeight} m`, 'dim', at(11.7, m.boosterHeight / 2), { align: 'right' })

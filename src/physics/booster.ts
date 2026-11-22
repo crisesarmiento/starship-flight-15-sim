@@ -20,8 +20,8 @@ const knots = [
 
 export function boosterAt(time: number): VehicleState {
   return { ...curveAt(time, knots), propellantKg: null,
-    method: time >= ftsTime ? 'Marcador cinematográfico del FTS; no es un estado del vehículo después del FTS'
-      : 'Curva cinematográfica; desvío y punto offshore ilustrativos, sin guía ni telemetría',
+    method: time >= ftsTime ? 'Cinematic FTS marker; not a vehicle state after the FTS'
+      : 'Cinematic curve; illustrative divert and offshore point, no guidance or telemetry',
     status: time >= ftsTime ? 'fts' : time >= landingTime ? 'landing-burn'
       : time >= coastTime ? 'divert' : time >= boostbackStart ? 'boostback' : 'separated' }
 }

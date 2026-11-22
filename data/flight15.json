@@ -1,10 +1,10 @@
 {
   "meta": {
-    "disclaimer": "Aproximación con datos públicos. No es información oficial de vuelo ni telemetría interna de SpaceX.",
+    "disclaimer": "Approximation built from public data. This is not official flight information or internal SpaceX telemetry.",
     "researched_at": "2026-11-19",
-    "timezone_note": "t_sec es tiempo de misión desde el liftoff. El despegue local fue en America/Chicago (CST, UTC-6) el 13 de noviembre de 2026.",
+    "timezone_note": "t_sec is mission time since liftoff. Local liftoff was in America/Chicago (CST, UTC-6) on 13 November 2026.",
     "notes_file": "docs/research.md",
-    "timeline_note": "Los tiempos T+ publicados son aproximados. El FTS ocurrió al corte; T+395 s es una alineación impuesta por la sim, no un segundo publicado por separado."
+    "timeline_note": "Published T+ times are approximate. The FTS happened at cutoff; T+395 s is an alignment imposed by the sim, not a separately published second."
   },
   "mission": {
     "name": {
@@ -16,7 +16,7 @@
       "value": "Starlink Group 31-2",
       "confidence": "reported",
       "source": "https://en.wikipedia.org/wiki/Starship_flight_test_15",
-      "note": "SpaceX describe 26 Starlink V3; el nombre de grupo aparece en recuentos, no en el texto consultado de la página de SpaceX."
+      "note": "SpaceX describes 26 Starlink V3; the group name appears in tallies, not in the text consulted on the SpaceX page."
     },
     "launch_site": {
       "value": "Orbital Launch Pad 2, Starbase, Texas",
@@ -32,13 +32,13 @@
       "value": "2026-11-13T22:47:00Z",
       "confidence": "reported",
       "source": "https://www.space.com/space-exploration/launches-spacecraft/spacex-starship-flight-15-chopsticks-double-catch-super-heavy-ship",
-      "note": "Prensa (Space.com, Spaceflight Now): alrededor de las 16:47 CST / 22:47 UTC. SpaceX no publicó el segundo exacto. No usar 22:47:36 UTC como oficial."
+      "note": "Press (Space.com, Spaceflight Now): around 16:47 CST / 22:47 UTC. SpaceX did not publish the exact second. Do not use 22:47:36 UTC as official."
     },
     "ship_catch_utc": {
       "value": "2026-11-14T21:20:00Z",
       "confidence": "reported",
       "source": "https://spaceflightnow.com/2026/11/13/live-coverage-starship-flight-15-attempts-to-recover-full-vehicle-in-double-launch-pad-catch/",
-      "note": "Spaceflight Now: 15:20 CST (21:20 UTC). SpaceX da T+22:32:34 aproximado y '22.5 hours'."
+      "note": "Spaceflight Now: 15:20 CST (21:20 UTC). SpaceX gives approximately T+22:32:34 and '22.5 hours'."
     },
     "booster": {
       "value": "Booster 22 (Super Heavy V3)",
@@ -71,8 +71,8 @@
         "value": null,
         "unit": "kg",
         "confidence": "unknown",
-        "source": "no publicado",
-        "note": "No verificado un filing primario que aplique con certeza a estos V3."
+        "source": "not published",
+        "note": "No primary filing has been verified that applies with certainty to these V3 satellites."
       }
     },
     "orbit": {
@@ -93,28 +93,28 @@
         "unit": "km",
         "confidence": "reported",
         "source": "https://en.wikipedia.org/wiki/Starship_flight_test_15",
-        "note": "Vía cita de Wikipedia al tuit de Jonathan McDowell, 14 nov 2026."
+        "note": "Via Wikipedia's citation of Jonathan McDowell's tweet, 14 Nov 2026."
       },
       "insertion_delta_v_m_s": {
         "value": 92,
         "unit": "m/s",
         "confidence": "reported",
         "source": "https://en.wikipedia.org/wiki/Starship_flight_test_15",
-        "note": "McDowell: about 92 m/s. Cita vía Wikipedia."
+        "note": "McDowell: about 92 m/s. Cited via Wikipedia."
       },
       "apogee_km": {
         "value": null,
         "unit": "km",
         "confidence": "unknown",
-        "source": "no publicado",
-        "note": "Wikipedia lista 278 km sin cita sólida en ese campo."
+        "source": "not published",
+        "note": "Wikipedia lists 278 km without a solid citation in that field."
       },
       "inclination_deg": {
         "value": null,
         "unit": "deg",
         "confidence": "unknown",
-        "source": "no publicado",
-        "note": "Wikipedia lista 30.5° sin cita sólida en ese campo."
+        "source": "not published",
+        "note": "Wikipedia lists 30.5° without a solid citation in that field."
       },
       "orbits_approx": {
         "value": 14,
@@ -132,7 +132,7 @@
         "splashdown_coordinates": {
           "value": null,
           "confidence": "unknown",
-          "source": "no publicado"
+          "source": "not published"
         }
       },
       "ship": {
@@ -154,7 +154,7 @@
       "unit": "deg",
       "confidence": "reported",
       "source": "https://ll.thespacedevs.com/2.2.0/pad/235/",
-      "note": "Launch Library 2, terceros."
+      "note": "Launch Library 2, third party."
     },
     "longitude_deg": {
       "value": -97.15799,
@@ -166,8 +166,8 @@
       "value": null,
       "unit": "m",
       "confidence": "unknown",
-      "source": "no publicado",
-      "note": "SpaceX no publica la altura. En v1 usar una torre reconocible sin afirmar el metro."
+      "source": "not published",
+      "note": "SpaceX does not publish the height. In v1 use a recognizable tower without claiming the meter."
     }
   },
   "vehicle": {
@@ -189,20 +189,20 @@
         "unit": "t",
         "confidence": "official",
         "source": "https://www.spacex.com/vehicles/starship",
-        "note": "La ficha dice '100+ t'."
+        "note": "The spec sheet says '100+ t'."
       },
       "dry_mass_kg": {
         "value": null,
         "unit": "kg",
         "confidence": "unknown",
-        "source": "no publicado"
+        "source": "not published"
       },
       "gross_liftoff_mass_kg": {
         "value": null,
         "unit": "kg",
         "confidence": "unknown",
-        "source": "no publicado",
-        "note": "No usar la PEA 2022 (~5000 t) como masa del Flight 15 / V3."
+        "source": "not published",
+        "note": "Do not use the 2022 PEA (~5000 t) as the Flight 15 / V3 mass."
       }
     },
     "booster": {
@@ -224,7 +224,7 @@
         "unit": "kg",
         "confidence": "official",
         "source": "https://www.spacex.com/vehicles/starship",
-        "note": "Capacidad de diseño, no la carga confirmada del Flight 15."
+        "note": "Design capacity, not the confirmed Flight 15 load."
       },
       "thrust_tf": {
         "value": 8240,
@@ -255,14 +255,14 @@
         "unit": "fins",
         "confidence": "official",
         "source": "https://www.spacex.com/updates",
-        "note": "Actualización V3, 12 may 2026: de 4 a 3 grid fins."
+        "note": "V3 update, 12 May 2026: from 4 to 3 grid fins."
       },
       "dry_mass_kg": {
         "value": null,
         "unit": "kg",
         "confidence": "unknown",
-        "source": "no publicado",
-        "note": "La cifra de 275 t en Wikipedia corresponde al recuadro de Block 1/2, no se adopta para B22."
+        "source": "not published",
+        "note": "The 275 t figure on Wikipedia comes from the Block 1/2 infobox; it is not adopted for B22."
       },
       "boostback_engines_planned": {
         "value": 33,
@@ -302,14 +302,14 @@
         "unit": "kg",
         "confidence": "official",
         "source": "https://www.spacex.com/vehicles/starship",
-        "note": "Capacidad de diseño, no la carga confirmada del Flight 15."
+        "note": "Design capacity, not the confirmed Flight 15 load."
       },
       "thrust_tf": {
         "value": 1614,
         "unit": "tf",
         "confidence": "official",
         "source": "https://www.spacex.com/vehicles/starship",
-        "note": "No coincidir en silencio con 3*250 + 3*275 = 1575 tf de la actualización V3."
+        "note": "Do not silently match 3*250 + 3*275 = 1575 tf from the V3 update."
       },
       "sea_level_engines": {
         "value": 3,
@@ -327,7 +327,7 @@
         "value": null,
         "unit": "kg",
         "confidence": "unknown",
-        "source": "no publicado"
+        "source": "not published"
       },
       "insertion_engines": {
         "value": 1,
@@ -340,7 +340,7 @@
         "unit": "engines",
         "confidence": "official",
         "source": "https://www.spacex.com/launches/starship-flight-15/",
-        "note": "Un Raptor de nivel del mar."
+        "note": "One sea-level Raptor."
       },
       "landing_burn_engine_sequence": {
         "value": [
@@ -359,7 +359,7 @@
         "unit": "tf",
         "confidence": "official",
         "source": "https://www.spacex.com/updates",
-        "note": "Actualización V3, 12 may 2026. La ficha del vehículo también lista 250 tf / 551 klbf."
+        "note": "V3 update, 12 May 2026. The vehicle spec sheet also lists 250 tf / 551 klbf."
       },
       "vacuum_thrust_tf": {
         "value": 275,
@@ -389,15 +389,15 @@
         "value": null,
         "unit": "s",
         "confidence": "unknown",
-        "source": "no publicado",
-        "note": "No está en la ficha 2026. Ver physics_estimates."
+        "source": "not published",
+        "note": "Not in the 2026 spec sheet. See physics_estimates."
       },
       "isp_vacuum_s": {
         "value": null,
         "unit": "s",
         "confidence": "unknown",
-        "source": "no publicado",
-        "note": "Un tuit de SpaceX del 3 ago 2024 citó 350 s para la variante SL; hay recuentos que lo tratan como Isp de vacío. No se adopta como oficial vigente."
+        "source": "not published",
+        "note": "A SpaceX tweet from 3 Aug 2024 cited 350 s for the SL variant; some tallies treat it as vacuum Isp. It is not adopted as current official."
       }
     }
   },
@@ -414,7 +414,7 @@
       "unit": "m/s²",
       "confidence": "official",
       "source": "https://physics.nist.gov/cgi-bin/cuu/Value?gn",
-      "note": "Aceleración estándar para Isp, no un dato de SpaceX."
+      "note": "Standard acceleration for Isp, not a SpaceX figure."
     },
     "atmosphere_model": {
       "value": "U.S. Standard Atmosphere 1976",
@@ -426,14 +426,14 @@
       "unit": "m",
       "confidence": "official",
       "source": "https://earth-info.nga.mil/index.php?dir=wgs84&action=wgs84",
-      "note": "Semieje mayor WGS 84, radio de la esfera simplificada de la sim."
+      "note": "WGS 84 semi-major axis, radius of the sim's simplified sphere."
     },
     "earth_rotation_rad_s": {
       "value": 7.292115e-05,
       "unit": "rad/s",
       "confidence": "official",
       "source": "https://earth-info.nga.mil/index.php?dir=wgs84&action=wgs84",
-      "note": "Velocidad angular nominal WGS 84, sin calcular la época astronómica del lanzamiento."
+      "note": "Nominal WGS 84 angular velocity, without computing the astronomical epoch of the launch."
     }
   },
   "timeline": [
@@ -455,12 +455,12 @@
       "vehicle": "stack",
       "confidence": "official",
       "source": "https://www.spacex.com/launches/starship-flight-15/",
-      "as_flown_note": "Solo el instante; no hay altitud ni velocidad oficiales.",
+      "as_flown_note": "Only the instant; there is no official altitude or speed.",
       "altitude_m": {
         "value": null,
         "unit": "m",
         "confidence": "unknown",
-        "source": "no publicado"
+        "source": "not published"
       }
     },
     {
@@ -481,7 +481,7 @@
       "vehicle": "stack",
       "confidence": "official",
       "source": "https://www.spacex.com/launches/starship-flight-15/",
-      "as_flown_note": "Space.com estima unos 65 km de altitud en la separación.",
+      "as_flown_note": "Space.com estimates about 65 km altitude at separation.",
       "altitude_m": {
         "value": 65000,
         "unit": "m",
@@ -498,7 +498,7 @@
       "vehicle": "booster",
       "confidence": "official",
       "source": "https://www.spacex.com/launches/starship-flight-15/",
-      "as_flown_note": "Encendió 32 de 33 motores previstos."
+      "as_flown_note": "Lit 32 of the 33 planned engines."
     },
     {
       "id": "boostback_shutdown",
@@ -508,7 +508,7 @@
       "vehicle": "booster",
       "confidence": "official",
       "source": "https://www.spacex.com/launches/starship-flight-15/",
-      "as_flown_note": "Corte anticipado por alarma de poca masa de combustible."
+      "as_flown_note": "Cut short by a low fuel mass alarm."
     },
     {
       "id": "booster_landing_burn_start",
@@ -518,7 +518,7 @@
       "vehicle": "booster",
       "confidence": "official",
       "source": "https://www.spacex.com/launches/starship-flight-15/",
-      "as_flown_note": "13 motores, según cobertura del webcast (Space.com)."
+      "as_flown_note": "13 engines, per webcast coverage (Space.com)."
     },
     {
       "id": "booster_landing_burn_shutdown",
@@ -528,7 +528,7 @@
       "vehicle": "booster",
       "confidence": "official",
       "source": "https://www.spacex.com/launches/starship-flight-15/",
-      "as_flown_note": "La tabla de SpaceX dice 'shutdown and catch', pero el vuelo real fue hover sobre el Golfo, corte y FTS. No hubo catch."
+      "as_flown_note": "SpaceX's table says 'shutdown and catch', but the actual flight was a hover over the Gulf, shutdown and FTS. There was no catch."
     },
     {
       "id": "booster_fts",
@@ -538,7 +538,7 @@
       "vehicle": "booster",
       "confidence": "estimate",
       "source": "https://www.spacex.com/launches/starship-flight-15/",
-      "as_flown_note": "El relato oficial confirma FTS al apagar sobre el Golfo. El T+ del FTS se impone al T+ aproximado de corte; no es un segundo oficial independiente."
+      "as_flown_note": "The official account confirms FTS at shutdown over the Gulf. The FTS T+ is imposed on the approximate cutoff T+; it is not an independent official second."
     },
     {
       "id": "ship_ascent_cutoff",
@@ -558,7 +558,7 @@
       "vehicle": "ship",
       "confidence": "official",
       "source": "https://www.spacex.com/launches/starship-flight-15/",
-      "as_flown_note": "Un solo Raptor. McDowell da T+26:06 y ~18 s; la tabla oficial es 00:26:10–00:26:30."
+      "as_flown_note": "A single Raptor. McDowell gives T+26:06 and ~18 s; the official table is 00:26:10–00:26:30."
     },
     {
       "id": "insertion_shutdown",
@@ -588,7 +588,7 @@
       "vehicle": "ship",
       "confidence": "official",
       "source": "https://www.spacex.com/launches/starship-flight-15/",
-      "as_flown_note": "26 Starlink V3, contacto con todos."
+      "as_flown_note": "26 Starlink V3, contact with all of them."
     },
     {
       "id": "hawaii_check_early",
@@ -598,7 +598,7 @@
       "vehicle": "ship",
       "confidence": "official",
       "source": "https://www.spacex.com/launches/starship-flight-15/",
-      "as_flown_note": "La misión siguió."
+      "as_flown_note": "The mission continued."
     },
     {
       "id": "chile_check",
@@ -608,7 +608,7 @@
       "vehicle": "ship",
       "confidence": "official",
       "source": "https://www.spacex.com/launches/starship-flight-15/",
-      "as_flown_note": "La misión siguió."
+      "as_flown_note": "The mission continued."
     },
     {
       "id": "hawaii_check_final",
@@ -618,7 +618,7 @@
       "vehicle": "ship",
       "confidence": "official",
       "source": "https://www.spacex.com/launches/starship-flight-15/",
-      "as_flown_note": "La misión siguió hacia la catch en Starbase."
+      "as_flown_note": "The mission continued toward the catch at Starbase."
     },
     {
       "id": "deorbit_start",
@@ -628,7 +628,7 @@
       "vehicle": "ship",
       "confidence": "official",
       "source": "https://www.spacex.com/launches/starship-flight-15/",
-      "as_flown_note": "Un Raptor de nivel del mar."
+      "as_flown_note": "One sea-level Raptor."
     },
     {
       "id": "deorbit_shutdown",
@@ -678,7 +678,7 @@
       "vehicle": "ship",
       "confidence": "official",
       "source": "https://www.spacex.com/launches/starship-flight-15/",
-      "as_flown_note": "Tres Raptor."
+      "as_flown_note": "Three Raptors."
     },
     {
       "id": "landing_flip",
@@ -718,71 +718,71 @@
       "vehicle": "ship",
       "confidence": "official",
       "source": "https://www.spacex.com/launches/starship-flight-15/",
-      "as_flown_note": "Catch en Pad 2. Primera catch de una etapa superior de Starship."
+      "as_flown_note": "Catch at Pad 2. First catch of a Starship upper stage."
     }
   ],
   "physics_estimates": {
-    "comment": "Solo parámetros no publicados. Se pueden ajustar para cerrar la timeline. Nunca presentarlo en el HUD como oficial.",
+    "comment": "Unpublished parameters only. They can be tuned to close the timeline. Never present them in the HUD as official.",
     "booster_dry_mass_kg": {
       "value": null,
       "unit": "kg",
       "confidence": "unknown",
-      "source": "no publicado",
-      "note": "Ajustable. No hay cifra oficial para V3."
+      "source": "not published",
+      "note": "Adjustable. There is no official figure for V3."
     },
     "ship_dry_mass_kg": {
       "value": null,
       "unit": "kg",
       "confidence": "unknown",
-      "source": "no publicado",
-      "note": "Ajustable. No hay cifra oficial para V3."
+      "source": "not published",
+      "note": "Adjustable. There is no official figure for V3."
     },
     "raptor_sl_isp_s": {
       "value": null,
       "unit": "s",
       "confidence": "unknown",
-      "source": "no publicado",
-      "note": "Hueco. Si se pone un valor de partida, etiquetarlo estimate y citar la fuente (p. ej. discusión del tuit 2024 de 350 s)."
+      "source": "not published",
+      "note": "Gap. If a starting value is set, label it estimate and cite the source (e.g. discussion of the 2024 tweet with 350 s)."
     },
     "raptor_vac_isp_s": {
       "value": null,
       "unit": "s",
       "confidence": "unknown",
-      "source": "no publicado"
+      "source": "not published"
     },
     "drag_cd": {
       "value": null,
       "unit": "1",
       "confidence": "unknown",
-      "source": "no publicado",
-      "note": "Cd constante de partida, ajuste contra la timeline."
+      "source": "not published",
+      "note": "Constant starting Cd, tuned against the timeline."
     },
     "reference_area_m2": {
       "value": null,
       "unit": "m²",
       "confidence": "unknown",
-      "source": "no publicado",
-      "note": "Un punto de partida geométrico sería pi*(4.5^2) para un cilindro de 9 m, pero es una simplificación, no un dato oficial."
+      "source": "not published",
+      "note": "A geometric starting point would be pi*(4.5^2) for a 9 m cylinder, but it is a simplification, not an official figure."
     }
   },
   "model": {
-    "comment": "Reconstrucción didáctica: parámetros propios de la sim, no telemetría ni sistema de guía. No validado para operación.",
+    "comment": "Educational reconstruction: the sim's own parameters, not telemetry or a guidance system. Not validated for operations.",
     "atmosphere": {
       "geometric_altitude_m": {
         "value": [0, 2000, 4000, 6000, 8000, 10000, 11000, 12000, 14000, 16000, 18000, 20000, 24000, 28000, 32000, 36000, 40000, 44000, 48000, 52000, 56000, 60000, 64000, 68000, 70000, 72000, 76000, 80000, 84000, 86000],
         "unit": "m",
         "confidence": "official",
         "source": "https://ntrs.nasa.gov/citations/19770009539",
-        "note": "U.S. Standard Atmosphere, 1976, Tabla II, Geometric Altitude, Metric Units, págs. impresas 53–68. Nudos seleccionados de altitud geométrica Z."
+        "note": "U.S. Standard Atmosphere, 1976, Table II, Geometric Altitude, Metric Units, printed pp. 53–68. Selected knots of geometric altitude Z."
       },
       "density_kg_m3": {
         "value": [1.2250, 1.0066, 0.81935, 0.66011, 0.52579, 0.41351, 0.36480, 0.31194, 0.22786, 0.16647, 0.12165, 0.088910, 0.046938, 0.025076, 0.013555, 0.0072579, 0.0039957, 0.0022589, 0.0013167, 0.00080562, 0.00050445, 0.00030968, 0.00018605, 0.00010917, 0.000082829, 0.000062374, 0.000034311, 0.000018458, 0.0000096940, 0.000006958],
         "unit": "kg/m³",
         "confidence": "official",
         "source": "https://ntrs.nasa.gov/citations/19770009539",
-        "note": "Columna de densidad ρ de los mismos nudos de Tabla II; atmósfera estándar, no medición de Flight 15."
+        "note": "Density column ρ at the same Table II knots; standard atmosphere, not a Flight 15 measurement."
       },
-      "interpolation_note": "Interpolación lineal en ln(ρ) de 0 a 86 km geométricos. Bajo 0 m se usa el valor a nivel del mar. Sobre 86 km se prolonga la pendiente logarítmica del último par hacia el vacío: es una extensión de la sim, no la alta atmósfera USSA76."
+      "interpolation_note": "Linear interpolation in ln(ρ) from 0 to 86 km geometric. Below 0 m the sea-level value is used. Above 86 km the logarithmic slope of the last pair is extended toward vacuum: this is a sim extension, not the USSA76 upper atmosphere."
     },
     "ascent": {
       "step_s": {
@@ -790,72 +790,72 @@
         "unit": "s",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Paso fijo RK4 recomendado por el spec."
+        "note": "Fixed RK4 step recommended by the spec."
       },
       "booster_dry_mass_kg": {
         "value": 250000,
         "unit": "kg",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Orden de magnitud de trabajo para la masa; no sustituye la masa seca unknown de B22."
+        "note": "Working order of magnitude for the mass; it does not replace the unknown dry mass of B22."
       },
       "ship_dry_mass_kg": {
         "value": 170000,
         "unit": "kg",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Orden de magnitud de trabajo para la masa; no sustituye la masa seca unknown de S42."
+        "note": "Working order of magnitude for the mass; it does not replace the unknown dry mass of S42."
       },
       "booster_propellant_kg": {
         "value": 3600000,
         "unit": "kg",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Carga inicial didáctica inferior a capacidad de diseño y suficiente para el consumo del tramo integrado; carga real no publicada."
+        "note": "Educational initial load below design capacity and sufficient for the integrated leg's consumption; actual load not published."
       },
       "ship_propellant_kg": {
         "value": 1550000,
         "unit": "kg",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Carga inicial didáctica inferior a capacidad de diseño; carga real no publicada."
+        "note": "Educational initial load below design capacity; actual load not published."
       },
       "isp_s": {
         "value": 330,
         "unit": "s",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Isp efectivo provisional de la integración, no cifra confirmada de Raptor 3."
+        "note": "Provisional effective Isp for the integration, not a confirmed Raptor 3 figure."
       },
       "drag_cd": {
         "value": 0.4,
         "unit": "1",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Coeficiente de arrastre constante ilustrativo, sin ajuste aerodinámico."
+        "note": "Illustrative constant drag coefficient, without aerodynamic tuning."
       },
       "pitch_start_s": {
         "value": 12,
         "unit": "s",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Inicio de inclinación ilustrativa; no reconstruye el programa de vuelo."
+        "note": "Start of illustrative pitch-over; does not reconstruct the flight program."
       },
       "staging_tilt_deg": {
         "value": 66,
         "unit": "deg",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Inclinación máxima de la receta abierta desde la vertical; proyección local al este sin afirmar azimut real."
+        "note": "Maximum tilt from vertical of the open recipe; local eastward projection without claiming a real azimuth."
       },
       "post_meco_engines": {
         "value": 3,
         "unit": "engines",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Número de trabajo visual entre MECO y boostback; la tabla pública sólo indica corte de la mayoría."
+        "note": "Visual working number between MECO and boostback; the public table only says most engines cut off."
       },
-      "radial_correction_note": "Corrección suave de posición/velocidad hasta el ancla reportada al separar; no modifica la integración bruta ni recupera telemetría."
+      "radial_correction_note": "Smooth position/velocity correction toward the reported anchor at separation; it does not modify the raw integration or recover telemetry."
     },
     "booster": {
       "coast_apex_altitude_m": {
@@ -863,256 +863,256 @@
         "unit": "m",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Nudo cinematográfico al corte del boostback, no apogeo medido."
+        "note": "Cinematic knot at boostback cutoff, not a measured apogee."
       },
       "coast_east_m": {
         "value": 20000,
         "unit": "m",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Desplazamiento dibujado al corte para mostrar desvío, no downrange reportado."
+        "note": "Displacement drawn at cutoff to show the divert, not reported downrange."
       },
       "coast_north_m": {
         "value": -5000,
         "unit": "m",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Componente visual hacia el Golfo al corte, no coordenada reconstruida."
+        "note": "Visual component toward the Gulf at cutoff, not a reconstructed coordinate."
       },
       "offshore_east_m": {
         "value": 42000,
         "unit": "m",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Distancia visual que separa el FTS del pad; no distancia real."
+        "note": "Visual distance separating the FTS from the pad; not a real distance."
       },
       "offshore_north_m": {
         "value": -12000,
         "unit": "m",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Componente sur visual para el cierre offshore; no punto de FTS real."
+        "note": "Visual southward component for the offshore closure; not the real FTS point."
       },
       "burn_start_altitude_m": {
         "value": 900,
         "unit": "m",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Nudo visual al encender; sin medición pública."
+        "note": "Visual knot at ignition; no public measurement."
       },
       "hover_altitude_m": {
         "value": 20,
         "unit": "m",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Separación visual entre vehículo y agua; no altura real."
+        "note": "Visual separation between vehicle and water; not a real height."
       },
       "burn_start_vertical_speed_ms": {
         "value": -65,
         "unit": "m/s",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Tangente descendente visual antes del hover, no velocidad real."
+        "note": "Visual descending tangent before the hover, not a real velocity."
       }
     },
     "ship": {
-      "orbital_anchor_note": "El ancla circular elige una fase hacia el este para que el puente visual de ascenso no retroceda. No se deriva un azimut, inclinación o corredor reales.",
+      "orbital_anchor_note": "The circular anchor picks a phase toward the east so the visual ascent bridge does not move backward. No real azimuth, inclination or corridor is derived.",
       "kepler_join_s": {
         "value": 1180,
         "unit": "s",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Fin ilustrativo del puente entre ascenso y preinserción kepleriana; no evento de vuelo."
+        "note": "Illustrative end of the bridge between ascent and Keplerian pre-insertion; not a flight event."
       },
       "seco_altitude_m": {
         "value": 180000,
         "unit": "m",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Nudo de altura visual al cutoff; sin medición pública."
+        "note": "Visual height knot at cutoff; no public measurement."
       },
       "seco_east_m": {
         "value": 1450000,
         "unit": "m",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Nudo de avance ilustrativo para puente de ascenso, no downrange reportado."
+        "note": "Illustrative advance knot for the ascent bridge, not reported downrange."
       },
       "seco_east_speed_ms": {
         "value": 5600,
         "unit": "m/s",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Tangente ilustrativa en SECO, no telemetría."
+        "note": "Illustrative tangent at SECO, not telemetry."
       },
       "deorbit_delta_v_ms": {
         "value": 58,
         "unit": "m/s",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Pulso fijo retrógrado de la sim para bajar el perigeo; no Δv publicado ni solución de apuntado."
+        "note": "Fixed retrograde pulse from the sim to lower the perigee; not a published Δv or a pointing solution."
       },
       "return_east_m": {
         "value": 23000,
         "unit": "m",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Desplazamiento cinematográfico al subsónico sobre el Golfo; no ruta publicada."
+        "note": "Cinematic displacement at subsonic over the Gulf; not a published route."
       },
       "return_north_m": {
         "value": -7000,
         "unit": "m",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Componente visual al subsónico; no corredor de vuelo."
+        "note": "Visual component at subsonic; not a flight corridor."
       },
       "transonic_altitude_m": {
         "value": 11000,
         "unit": "m",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Nudo de altura visual al transónico; sin medición pública."
+        "note": "Visual height knot at transonic; no public measurement."
       },
       "transonic_east_m": {
         "value": 34000,
         "unit": "m",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Nudo cinematográfico previo al swoosh, no posición reportada."
+        "note": "Cinematic knot before the swoosh, not a reported position."
       },
       "transonic_north_m": {
         "value": -7000,
         "unit": "m",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Componente sur visual al transónico; no recorrido de vuelo."
+        "note": "Visual southward component at transonic; not a flight path."
       },
       "subsonic_altitude_m": {
         "value": 7200,
         "unit": "m",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Nudo de altura visual al subsónico; sin medición pública."
+        "note": "Visual height knot at subsonic; no public measurement."
       },
       "landing_start_east_m": {
         "value": 850,
         "unit": "m",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Nudo ilustrativo al iniciar quema; no posición real."
+        "note": "Illustrative knot at burn start; not a real position."
       },
       "landing_start_altitude_m": {
         "value": 320,
         "unit": "m",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Nudo ilustrativo al iniciar quema; no medición pública."
+        "note": "Illustrative knot at burn start; no public measurement."
       },
       "flip_east_m": {
         "value": 720,
         "unit": "m",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Nudo ilustrativo de desplazamiento en el flip; no posición real."
+        "note": "Illustrative displacement knot at the flip; not a real position."
       },
       "flip_altitude_m": {
         "value": 280,
         "unit": "m",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Nudo ilustrativo de altura en el flip; no medición pública."
+        "note": "Illustrative height knot at the flip; no public measurement."
       },
       "catch_altitude_m": {
         "value": 90,
         "unit": "m",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Altura visual del encuentro con torre; altura real de captura desconocida."
+        "note": "Visual height of the tower encounter; actual catch height unknown."
       },
       "insertion_anchor_east_m": {
         "value": 8500000,
         "unit": "m",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Avance de arco desde Pad 2 para la fase ilustrativa al terminar inserción; no longitud de vuelo medida."
+        "note": "Arc advance from Pad 2 for the illustrative phase at the end of insertion; not a measured flight length."
       },
-      "entry_cut_note": "En T+ de entrada se salta del estado orbital propagado a un tramo local sobre el Golfo. La altura conserva el ancla orbital; la posición horizontal y la velocidad se reemplazan por valores cinematográficos. No es una conexión física ni un corredor calculado.",
+      "entry_cut_note": "At the entry T+ the model jumps from the propagated orbital state to a local leg over the Gulf. The height keeps the orbital anchor; the horizontal position and velocity are replaced by cinematic values. This is not a physical connection or a computed corridor.",
       "entry_east_m": {
         "value": 1150000,
         "unit": "m",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Inicio del tramo local visual sobre el Golfo después del corte, no punto real de entrada."
+        "note": "Start of the visual local leg over the Gulf after the cut, not the real entry point."
       },
       "entry_east_speed_ms": {
         "value": -2400,
         "unit": "m/s",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Tangente ilustrativa hacia el oeste al inicio del tramo local; no velocidad de entrada real."
+        "note": "Illustrative westward tangent at the start of the local leg; not the real entry velocity."
       },
       "entry_vertical_speed_ms": {
         "value": -95,
         "unit": "m/s",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Tangente radial descendente del tramo local después del corte, no velocidad medida."
+        "note": "Descending radial tangent of the local leg after the cut, not a measured velocity."
       },
       "transonic_east_speed_ms": {
         "value": -330,
         "unit": "m/s",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Tangente visual del orden de la velocidad del sonido en este tramo; no Mach calculado."
+        "note": "Visual tangent on the order of the speed of sound in this leg; not a computed Mach number."
       },
       "transonic_vertical_speed_ms": {
         "value": -100,
         "unit": "m/s",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Tangente radial descendente para unir los nudos sin detener la nave."
+        "note": "Descending radial tangent to join the knots without stopping the vehicle."
       },
       "subsonic_east_speed_ms": {
         "value": -240,
         "unit": "m/s",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Tangente horizontal subsonica ilustrativa, no telemetría."
+        "note": "Illustrative subsonic horizontal tangent, not telemetry."
       },
       "subsonic_vertical_speed_ms": {
         "value": -85,
         "unit": "m/s",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Tangente radial descendente subsonica ilustrativa, no telemetría."
+        "note": "Illustrative subsonic descending radial tangent, not telemetry."
       },
       "landing_start_east_speed_ms": {
         "value": -70,
         "unit": "m/s",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Tangente horizontal visual al activar la quema; no telemetría."
+        "note": "Visual horizontal tangent at burn activation; not telemetry."
       },
       "landing_start_vertical_speed_ms": {
         "value": -24,
         "unit": "m/s",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Tangente radial descendente al activar la quema; no telemetría."
+        "note": "Descending radial tangent at burn activation; not telemetry."
       },
       "flip_east_speed_ms": {
         "value": -55,
         "unit": "m/s",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Tangente horizontal visual al flip, no telemetría."
+        "note": "Visual horizontal tangent at the flip, not telemetry."
       },
       "flip_vertical_speed_ms": {
         "value": -17,
         "unit": "m/s",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Tangente radial visual al flip, no telemetría."
+        "note": "Visual radial tangent at the flip, not telemetry."
       }
     },
     "satellites": {
@@ -1121,7 +1121,7 @@
         "unit": "m/s",
         "confidence": "estimate",
         "source": "docs/SPEC.md#5-cómo-simular-recomendación-híbrido",
-        "note": "Dispersión tangencial total visual entre 26 liberaciones uniformes en la ventana pública; no velocidades de expulsión medidas."
+        "note": "Total visual tangential spread across 26 uniform releases in the public window; not measured ejection velocities."
       }
     },
     "maneuvers": {
@@ -1129,36 +1129,36 @@
         "value": null,
         "unit": "m/s",
         "confidence": "unknown",
-        "source": "no publicado",
-        "note": "Sin Δv aislable de despegue: el ascenso expone empuje y consumo, no un impulso instantáneo."
+        "source": "not published",
+        "note": "No isolable liftoff Δv: the ascent exposes thrust and consumption, not an instantaneous impulse."
       },
       "boostback_start": {
         "value": null,
         "unit": "m/s",
         "confidence": "unknown",
-        "source": "no publicado",
-        "note": "Curva cinematográfica sin empuje integrado; no evaluable."
+        "source": "not published",
+        "note": "Cinematic curve without integrated thrust; not evaluable."
       },
       "booster_landing_burn_start": {
         "value": null,
         "unit": "m/s",
         "confidence": "unknown",
-        "source": "no publicado",
-        "note": "Curva cinematográfica sin empuje integrado; no evaluable."
+        "source": "not published",
+        "note": "Cinematic curve without integrated thrust; not evaluable."
       },
       "hot_staging": {
         "value": null,
         "unit": "m/s",
         "confidence": "unknown",
-        "source": "no publicado",
-        "note": "Encendido y separación publicados, ascenso de Ship posterior cinematográfico; no evaluable."
+        "source": "not published",
+        "note": "Ignition and separation published, later Ship ascent is cinematic; not evaluable."
       },
       "ship_landing_burn_start": {
         "value": null,
         "unit": "m/s",
         "confidence": "unknown",
-        "source": "no publicado",
-        "note": "Curva cinematográfica sin empuje integrado; no evaluable."
+        "source": "not published",
+        "note": "Cinematic curve without integrated thrust; not evaluable."
       }
     }
   }
