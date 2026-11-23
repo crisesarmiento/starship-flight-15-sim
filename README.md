@@ -85,6 +85,10 @@ Open the local address Vite prints. `npm ci` installs the versions in the lockfi
 
 Installation requires npm packages. The app does not require external services, remote maps, or API keys.
 
+## Versioning
+
+Versions follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html). `package.json` is the source of truth. Every release is a `vX.Y.Z` git tag. Each version bump goes in its own pull request, which updates `package.json` and [CHANGELOG.md](CHANGELOG.md) before the tag is created.
+
 ## Data and sources
 
 The [timeline and parameters](data/flight15.json) include their sources. The [research report](docs/research.md) documents data gaps and provenance. The [validation report](docs/VALIDACION.md) quantifies corrections and limitations.
@@ -107,4 +111,4 @@ The scene runs in the browser with [three.js](https://threejs.org/), [Vite](http
 
 It was built in a single `/deepwork` run in OpenCode using the repository's `test-astra-sol-2026-11-19` preset: GPT-6.2 Astra as orchestrator and GPT-6.2 Sol as fixer. The [evaluation notes](NOTES-EVAL.md) detail the stages, limitations, and test results.
 
-[Specification](docs/SPEC.md) · [Research and data gaps](docs/research.md) · [Validation](docs/VALIDACION.md) · [MIT License](LICENSE)
+[Specification](docs/SPEC.md) · [Research and data gaps](docs/research.md) · [Validation](docs/VALIDACION.md) · [Changelog](CHANGELOG.md) · [MIT License](LICENSE)
