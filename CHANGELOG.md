@@ -6,15 +6,12 @@ All notable changes to starship-flight-15-sim are documented here. The format fo
 
 ## [Unreleased]
 
-### Added
-
-- A changelog and versioning notes: Semantic Versioning, `package.json` as the
-  source of truth, and a `vX.Y.Z` tag per release.
-
 ## [0.1.0] - 2026-11-23
 
 ### Added
 
+- A changelog and versioning notes: Semantic Versioning, `package.json` as the
+  source of truth, and a `vX.Y.Z` tag per release.
 - An unofficial, browser-based fan simulation of Flight 15, built with
   three.js, Vite, TypeScript and Vitest, including a navigable mission
   walkthrough from liftoff through catch.
