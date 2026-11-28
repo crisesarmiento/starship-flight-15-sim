@@ -8,11 +8,13 @@ import { observeTimeline, observedTime, references, type TimelineRow } from './t
 
 let rows: TimelineRow[]
 let metrics: ReturnType<typeof observeMetrics>
+let report: string
 
 beforeAll(() => {
   rows = observeTimeline()
   metrics = observeMetrics(rows)
-  maybeWriteReport(renderReport(rows, metrics))
+  report = renderReport(rows, metrics)
+  maybeWriteReport(report)
 })
 
 function timeOf(id: string): number {
@@ -32,14 +34,14 @@ function within(label: string, actual: number | null, expected: number, toleranc
   expect(Math.abs(value - expected), label).toBeLessThanOrEqual(tolerance)
 }
 
-describe('Public timeline independent of simulator data', () => {
+describe('Imposed clock and scheduled effects', () => {
   it('lists all 26 public milestones and FTS in the published order and at the published T+ times', () => {
     expect(references).toHaveLength(27)
     expect(data.timeline.map(event => [event.id, event.t_sec]))
       .toEqual(references.map(ref => [ref.id, ref.time]))
   })
 
-  it.each(references)('$id: the milestone and its observable effects fall within ±$tolerance s', ({ id }) => {
+  it.each(references)('$id: imposed marker and scheduled effects match the public window (±$tolerance s)', ({ id }) => {
     const row = rows.find(candidate => candidate.id === id)!
     const allEvidence = [...(row.clock ? [row.clock] : []), ...row.effects]
     for (const { label, transitions } of allEvidence) {
@@ -56,24 +58,44 @@ describe('Public timeline independent of simulator data', () => {
   })
 })
 
-describe('Guided trajectory and orbital elements', () => {
-  it('records the raw residual and measures the adjusted staging altitude', () => {
-    expect(Number.isFinite(metrics.stagingRawM)).toBe(true)
+describe('Trajectory prediction: raw staging only', () => {
+  it('compares the raw staging altitude before radial correction to the reported 65 km', () => {
+    within('Raw staging altitude (m)', metrics.stagingRawM, referenceAltitude.staging, 10_000)
+  })
+})
+
+describe('Model anchors', () => {
+  it('applies the 65 km staging altitude anchor after radial correction', () => {
     const staging = required(metrics.staging, 'staging')
-    within('Ship altitude at staging (m)', staging.ship.altitudeM, referenceAltitude.staging, 10_000)
+    within('Adjusted staging altitude against its anchor (m)', staging.ship.altitudeM, referenceAltitude.staging, 10_000)
+  })
+
+  it('applies the 275 km post-insertion altitude anchor to the circular orbit and its perigee', () => {
+    const after = required(metrics.insertionAfter, 'post-insertion')
+    within('Post-insertion altitude against its anchor (m)', after.ship.altitudeM, referenceAltitude.orbit, 15_000)
+    within('Post-insertion perigee derived from the anchored orbit (m)', after.orbit.perigeeM, referenceAltitude.orbit, 15_000)
+  })
+
+  it('reports the 92 m/s insertion Δv anchor', () => {
+    expect(metrics.burns.find(burn => burn.id === 'insertion_start')?.deltaV).toBe(92)
+  })
+})
+
+describe('Trajectory and orbital consistency', () => {
+  it('derives staging altitude from the staging position vector', () => {
+    const staging = required(metrics.staging, 'staging')
     within('Altitude derived from the staging position vector (m)', norm(staging.ship.r) - earthRadiusM, staging.ship.altitudeM, 1)
   })
 
-  it('raises perigee during insertion and reaches ~275 km afterward', () => {
+  it('raises perigee during insertion and matches orbital elements independently derived from r and v', () => {
     const before = required(metrics.insertionBefore, 'pre-insertion')
     const after = required(metrics.insertionAfter, 'post-insertion')
     const beforeOrbit = osculating(before.ship)
     const afterOrbit = osculating(after.ship)
     expect(beforeOrbit.perigeeM, 'Suborbital perigee before insertion').toBeLessThan(120_000)
     expect(afterOrbit.energy, 'Orbital energy increases').toBeGreaterThan(beforeOrbit.energy)
-    within('Post-insertion altitude (m)', after.ship.altitudeM, referenceAltitude.orbit, 15_000)
+    expect(afterOrbit.perigeeM, 'Perigee rises').toBeGreaterThan(beforeOrbit.perigeeM)
     within('Altitude derived from the post-insertion state (m)', afterOrbit.radius - earthRadiusM, after.ship.altitudeM, 1)
-    within('Post-insertion perigee (m)', after.orbit.perigeeM, referenceAltitude.orbit, 15_000)
     within('Perigee calculated from r and v (m)', after.orbit.perigeeM, afterOrbit.perigeeM, 1)
     within('Apogee calculated from r and v (m)', after.orbit.apogeeM, afterOrbit.apogeeM, 1)
     within('Inclination calculated from r and v (°)', after.orbit.inclinationDeg, afterOrbit.inclinationDeg, 0.001)
@@ -116,6 +138,22 @@ describe('Guided trajectory and orbital elements', () => {
       expect(deltaV, id).toBeGreaterThan(0)
     }
   })
+})
+
+it('reports the imposed clock, raw trajectory residual and anchors separately', () => {
+  const sections = report.split(/^## /m)
+  const section = (title: string) => sections.find(part => part.startsWith(`${title}\n`))
+  expect(section('Timeline: imposed clock (reloj impuesto)')).toContain('Imposed clock: measured marker')
+  const prediction = section('Trajectory prediction: raw staging only')
+  expect(prediction?.match(/^\| Raw staging, before guidance \| .+ \| [+-]\d+\.\d{3} \| ±10 km \| (Within|Outside) \|$/gm))
+    .toHaveLength(1)
+  const anchors = section('Trajectory anchors (anclas)')
+  expect(anchors).toContain('| Adjusted staging altitude at Ship ignition | 65 km |')
+  expect(anchors).toContain('| Altitude immediately after insertion cutoff | 275 km |')
+  expect(anchors).not.toContain('| Residual |')
+  const maneuvers = section('Δv of the maneuvers')
+  expect(maneuvers).toContain('| `insertion_start` | 92.000 | Anchor: ~92 m/s')
+  expect(maneuvers).not.toContain('| Residual')
 })
 
 describe('Deployment and mission outcomes', () => {

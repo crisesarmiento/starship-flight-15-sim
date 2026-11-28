@@ -6,14 +6,14 @@ Educational approximation built from public data. It is not telemetry or an oper
 
 To regenerate: `UPDATE_REPORT=1 npm test -- src/validation`. Without `UPDATE_REPORT=1`, the test does not write the file.
 
-## Timeline
+## Timeline: imposed clock (reloj impuesto)
 
-Independent reference: [SPEC §2 and §8](SPEC.md) and [copy of the public table in research §3](research.md#3-línea-de-tiempo-oficial-copia-de-trabajo).
+Public reference table, kept separate from the simulator schedule: [SPEC §2 and §8](SPEC.md) and [copy of the public table in research §3](research.md#3-línea-de-tiempo-oficial-copia-de-trabajo).
 There are 26 approximate public milestones plus one extra FTS row: the account places the FTS at cutoff, without publishing an independent second.
 The clock is imposed; ignitions, cutoffs, deployment and final states are also driven by the program. Measuring when their output changes checks the implementation, not a physical prediction of those times.
 Max Q, return checks, entry, transonic, subsonic and flip are compared as phase markers: they are not physical detections of dynamic pressure, Mach or attitude.
 Each reference is sampled every 0.25 s (±tolerance plus 2 s) and every detected transition is refined by bisection; at T+0 the initial state is observed.
-Residuals are **observed − reference**. A marker with no transition, or an ambiguous one, does not count as passed.
+Timing offsets are **observed − reference**. A marker with no transition, or an ambiguous one, does not count as passed.
 
 | Milestone | Public T+ (s) | Tolerance | Imposed clock: measured marker (Δs) | Effects observed in `sample` (Δs) |
 | --- | ---: | ---: | --- | --- |
@@ -45,18 +45,29 @@ Residuals are **observed − reference**. A marker with no transition, or an amb
 | `landing_2_to_1` | 22:32:33 (81153) | ±5 s | Event: 81153.000 s (+0.000 s) | Ship engines: 81153.000 s (+0.000 s) 2 → 1 |
 | `ship_catch` | 22:32:34 (81154) | ±5 s | Event: 81154.000 s (+0.000 s) | Status ship: 81154.000 s (+0.000 s) landing-burn → caught; Ship engines: 81154.000 s (+0.000 s) 1 → 0 |
 
-## Trajectory: raw prediction, guidance and orbit
+## Trajectory prediction: raw staging only
 
 Drag uses tabulated densities from the U.S. Standard Atmosphere 1976 (Table II), with logarithmic interpolation up to 86 km. Above that, the last slope is extrapolated: it is not the upper atmosphere of the standard model.
 
-The raw error is evaluated before the radial adjustment. The adjusted altitude is taken at the observed Ship ignition; the orbital altitude and perigee, right after the observed insertion cutoff.
+The raw integrated staging altitude, evaluated at the imposed staging time before the radial correction, is the only trajectory prediction compared against a reported value here. The residual is raw altitude minus the [reported staging altitude of 65 km](https://www.space.com/space-exploration/launches-spacecraft/relive-starships-historic-flight-15-with-our-best-photos-from-launch-and-mechazilla-tower-catch); it is not an error measured against telemetry. The ±10 km tolerance comes from [SPEC §8](SPEC.md#8-validation-criteria).
 
-| Quantity | Reference | Simulated | Residual | Tolerance | Result |
+| Quantity | Reference | Simulated (km) | Residual (km) | Tolerance | Result |
 | --- | ---: | ---: | ---: | ---: | --- |
 | Raw staging, before guidance | 65 km | 70.263 | +5.263 | ±10 km | Within |
-| Adjusted staging (Cinematic Ship ascent bridge and initial coast; not telemetry) | 65 km | 65.000 | +0.000 | ±10 km | Within |
-| Post-insertion altitude (Keplerian coast anchored to the reported orbital altitude) | 275 km | 275.000 | +0.000 | ±15 km | Within |
-| Post-insertion perigee | 275 km | 275.000 | +0.000 | ±15 km | Within |
+
+## Trajectory anchors (anclas)
+
+The [reported staging altitude of 65 km](https://www.space.com/space-exploration/launches-spacecraft/relive-starships-historic-flight-15-with-our-best-photos-from-launch-and-mechazilla-tower-catch) is imposed by the radial correction. The [reported orbital altitude of 275 km](https://www.space.com/space-exploration/launches-spacecraft/spacex-starship-flight-15-chopsticks-double-catch-super-heavy-ship) sets the circular post-insertion orbit, so its perigee also follows from that anchor. Agreement checks that the model applies its inputs; it is not a trajectory prediction.
+
+| Quantity | Anchor input | Simulated output (km) |
+| --- | ---: | ---: |
+| Adjusted staging altitude at Ship ignition | 65 km | 65.000 |
+| Altitude immediately after insertion cutoff | 275 km | 275.000 |
+| Perigee immediately after insertion cutoff (derived from the anchored orbit) | 275 km | 275.000 |
+
+## Orbital consistency checks
+
+Recomputing orbital elements from the simulated ECI state and checking the direction of change through each burn test internal consistency, not agreement with the actual flight.
 
 Osculating perigee during insertion: **-32.151 → 275.000 km**; during deorbit: **275.000 → 79.258 km**. Altitude at the entry marker: 100.345 km.
 Perigee reported by McDowell: ~276 km (via Wikipedia, see [research §2](research.md#ship-como-voló)); it is not an additional official reference.
@@ -79,17 +90,17 @@ It is a deliberate discontinuity of the model, not a residual against telemetry 
 
 ## Δv of the maneuvers
 
-Model estimates and inputs, not telemetry. The reported insertion Δv is used as an input, so the residual is not an independent validation. No numeric tolerance is published; a `null` means the model does not report a Δv for that maneuver.
+Model estimates and inputs, not telemetry. The [92 m/s insertion Δv reported by McDowell (via Wikipedia)](https://en.wikipedia.org/wiki/Starship_flight_test_15) is an anchor (ancla), not a predicted value. A dash means the model does not report a Δv for that maneuver.
 
-| Maneuver | Model Δv (m/s) | Reference (m/s) | Residual (m/s) |
-| --- | ---: | --- | ---: |
-| `liftoff` | Not evaluable: the model reports no Δv | Not evaluable: no published reference | — |
-| `hot_staging` | Not evaluable: the model reports no Δv | Not evaluable: no published reference | — |
-| `boostback_start` | Not evaluable: the model reports no Δv | Not evaluable: no published reference | — |
-| `booster_landing_burn_start` | Not evaluable: the model reports no Δv | Not evaluable: no published reference | — |
-| `insertion_start` | 92.000 | ~92 (McDowell, reported) | +0.000 |
-| `deorbit_start` | 58.000 | Not evaluable: no published reference | — |
-| `ship_landing_burn_start` | Not evaluable: the model reports no Δv | Not evaluable: no published reference | — |
+| Maneuver | Model Δv (m/s) | Model role |
+| --- | ---: | --- |
+| `liftoff` | — | Not evaluable: the model reports no Δv |
+| `hot_staging` | — | Not evaluable: the model reports no Δv |
+| `boostback_start` | — | Not evaluable: the model reports no Δv |
+| `booster_landing_burn_start` | — | Not evaluable: the model reports no Δv |
+| `insertion_start` | 92.000 | Anchor: ~92 m/s (McDowell, reported) |
+| `deorbit_start` | 58.000 | Estimate: no published reference |
+| `ship_landing_burn_start` | — | Not evaluable: the model reports no Δv |
 
 ## Estimates declared in `data/flight15.json`
 

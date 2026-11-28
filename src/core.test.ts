@@ -3,7 +3,7 @@ import { altitudeNote, burnDeltaV, duration, earthRadiusM, eventAt, flight, orbi
 import { norm, sub } from './physics/frame'
 
 describe('Flight 15: mission seeking', () => {
-  it('resolves each milestone at its exact time and gives FTS priority over engine shutdown at the same time', () => {
+  it('uses the imposed clock for milestones and gives FTS priority over simultaneous engine shutdown', () => {
     for (const event of flight.timeline) {
       const expectedId = event.id === 'booster_landing_burn_shutdown' ? 'booster_fts' : event.id
       expect(eventAt(event.t_sec).id).toBe(expectedId)
@@ -24,7 +24,7 @@ describe('Flight 15: mission seeking', () => {
     for (const t of [duration + 1, Infinity]) expect(sample(t)).toEqual(sample(duration))
   })
 
-  it('identifies altitude as reconstructed and preserves reported reference values', () => {
+  it('labels reconstructed altitude as not telemetry and applies the 65 km and 275 km altitude anchors', () => {
     expect(altitudeNote).toMatch(/reconstructed.*not telemetry/i)
     expect(sample(0).altitudeM).toBeCloseTo(0)
     expect(sample(141).altitudeM).toBeCloseTo(65000)
@@ -50,7 +50,7 @@ describe('Flight 15: mission seeking', () => {
     [81146, 0, 2],
     [81153, 0, 1],
     [81154, 0, 0],
-  ])('at T+%is, reports %i booster engines and %i Ship engines', (t, boosterEngines, shipEngines) => {
+  ])('at imposed T+%is, reports %i booster engines and %i Ship engines', (t, boosterEngines, shipEngines) => {
     expect(sample(t)).toMatchObject({ boosterEngines, shipEngines })
   })
 })
@@ -87,7 +87,12 @@ describe('Flight 15: reconstructed telemetry and deployment', () => {
     expect(sample(1580).orbit.perigeeM!).toBeGreaterThan(pre.orbit.perigeeM!)
     expect(sample(77762).orbit.perigeeM!).toBeLessThan(sample(77757).orbit.perigeeM!)
     expect(sample(77767).orbit.perigeeM!).toBeLessThan(sample(77762).orbit.perigeeM!)
-    expect(burnDeltaV('insertion_start')).toBe(flight.mission.orbit.insertion_delta_v_m_s.value)
+  })
+
+  it('reports the 92 m/s insertion Δv anchor and preserves estimated or unknown Δv for other maneuvers', () => {
+    const anchor = flight.mission.orbit.insertion_delta_v_m_s.value
+    expect(anchor).toBe(92)
+    expect(burnDeltaV('insertion_start')).toBe(anchor)
     expect(burnDeltaV('deorbit_start')).toBe(flight.model.ship.deorbit_delta_v_ms.value)
     expect(burnDeltaV('boostback_start')).toBeNull()
     expect(burnDeltaV('unknown')).toBeNull()

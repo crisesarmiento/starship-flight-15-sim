@@ -14,13 +14,18 @@ it('keeps r/v continuous at joins, changes perigee, and preserves Keplerian coas
   const inserted = elements(shipAt(1590))
   const after = elements(shipAt(77767))
   expect(before.perigeeM!).toBeLessThan(0)
-  expect(Math.abs(inserted.perigeeM! - 275_000)).toBeLessThan(15_000)
-  expect(Math.abs(norm(shipAt(1590).r) - earthRadiusM - 275_000)).toBeLessThan(15_000)
+  expect(inserted.perigeeM!).toBeGreaterThan(before.perigeeM!)
   expect(after.perigeeM!).toBeLessThan(100_000)
   expect(elements(shipAt(74_515)).periodS).toBeCloseTo(inserted.periodS!, 6)
   expect(elements(shipAt(79_845)).perigeeM).toBeCloseTo(after.perigeeM!, 4)
   expect(norm(shipAt(79_846).r) - earthRadiusM).toBeGreaterThan(0)
   console.info(`Perigees before insertion, after insertion, and after deorbit: ${[before, inserted, after].map(o => o.perigeeM!.toFixed(0)).join(' / ')} m`)
+})
+
+it('constructs the post-insertion orbit with the 275 km anchor for altitude and circular perigee', () => {
+  const inserted = shipAt(timeAt('insertion_shutdown'))
+  expect(Math.abs(elements(inserted).perigeeM! - 275_000)).toBeLessThan(15_000)
+  expect(Math.abs(norm(inserted.r) - earthRadiusM - 275_000)).toBeLessThan(15_000)
 })
 
 it('moves east during the ascent bridge without passing back over the pad', () => {
@@ -67,7 +72,7 @@ it('declares the entry cut and uses descending local segments without spikes or 
   console.info(`Entry cut: Δr ${entryHandoff.distanceM.toFixed(0)} m; vector Δv ${entryHandoff.velocityGapMs.toFixed(0)} m/s`)
 })
 
-it('preserves public timing windows and ends with a catch on land at Pad 2', () => {
+it('matches public timing windows on the imposed clock', () => {
   for (const [id, reference, tolerance] of [
     ['ship_ascent_cutoff', 489, 2], ['insertion_start', 1570, 5], ['insertion_shutdown', 1590, 5],
     ['payload_deploy_start', 2101, 5], ['payload_deploy_complete', 4660, 5],
@@ -77,6 +82,9 @@ it('preserves public timing windows and ends with a catch on land at Pad 2', () 
     ['landing_flip', 81138, 5], ['landing_3_to_2', 81146, 5], ['landing_2_to_1', 81153, 5],
     ['ship_catch', 81154, 5],
   ] as const) expect(Math.abs(timeAt(id) - reference)).toBeLessThanOrEqual(tolerance)
+})
+
+it('ends with a catch on land at Pad 2', () => {
   expect(shipAt(81153.999).status).toBe('landing-burn')
   const caught = shipAt(81154)
   expect(caught.status).toBe('caught')

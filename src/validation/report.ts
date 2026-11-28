@@ -48,6 +48,9 @@ export function renderReport(rows: TimelineRow[], metrics: Metrics) {
   const dataRows = [...datums(data)]
   const estimates = dataRows.filter(([, datum]) => datum.confidence === 'estimate')
   const unknowns = dataRows.filter(([, datum]) => datum.confidence === 'unknown')
+  const stagingSource = data.timeline.find(event => event.id === 'hot_staging')!.altitude_m!.source
+  const orbitSource = data.mission.orbit.altitude_km.source
+  const insertionDeltaV = data.mission.orbit.insertion_delta_v_m_s
   const perigee = (state: typeof insertionAfter) => format(asKm(state?.orbit.perigeeM))
   const actual = (state: typeof staging) => format(asKm(state?.ship.altitudeM))
   return [
@@ -59,14 +62,14 @@ export function renderReport(rows: TimelineRow[], metrics: Metrics) {
     '',
     'To regenerate: `UPDATE_REPORT=1 npm test -- src/validation`. Without `UPDATE_REPORT=1`, the test does not write the file.',
     '',
-    '## Timeline',
+    '## Timeline: imposed clock (reloj impuesto)',
     '',
-    'Independent reference: [SPEC §2 and §8](SPEC.md) and [copy of the public table in research §3](research.md#3-línea-de-tiempo-oficial-copia-de-trabajo).',
+    'Public reference table, kept separate from the simulator schedule: [SPEC §2 and §8](SPEC.md) and [copy of the public table in research §3](research.md#3-línea-de-tiempo-oficial-copia-de-trabajo).',
     'There are 26 approximate public milestones plus one extra FTS row: the account places the FTS at cutoff, without publishing an independent second.',
     'The clock is imposed; ignitions, cutoffs, deployment and final states are also driven by the program. Measuring when their output changes checks the implementation, not a physical prediction of those times.',
     'Max Q, return checks, entry, transonic, subsonic and flip are compared as phase markers: they are not physical detections of dynamic pressure, Mach or attitude.',
     'Each reference is sampled every 0.25 s (±tolerance plus 2 s) and every detected transition is refined by bisection; at T+0 the initial state is observed.',
-    'Residuals are **observed − reference**. A marker with no transition, or an ambiguous one, does not count as passed.',
+    'Timing offsets are **observed − reference**. A marker with no transition, or an ambiguous one, does not count as passed.',
     '',
     '| Milestone | Public T+ (s) | Tolerance | Imposed clock: measured marker (Δs) | Effects observed in `sample` (Δs) |',
     '| --- | ---: | ---: | --- | --- |',
@@ -74,18 +77,29 @@ export function renderReport(rows: TimelineRow[], metrics: Metrics) {
       `${row.clock ? evidenceText(row.clock, row) : 'Shared with FTS'} | ` +
       `${row.effects.map(effect => evidenceText(effect, row)).join('; ') || 'Marker only'} |`),
     '',
-    '## Trajectory: raw prediction, guidance and orbit',
+    '## Trajectory prediction: raw staging only',
     '',
     'Drag uses tabulated densities from the U.S. Standard Atmosphere 1976 (Table II), with logarithmic interpolation up to 86 km. Above that, the last slope is extrapolated: it is not the upper atmosphere of the standard model.',
     '',
-    'The raw error is evaluated before the radial adjustment. The adjusted altitude is taken at the observed Ship ignition; the orbital altitude and perigee, right after the observed insertion cutoff.',
+    `The raw integrated staging altitude, evaluated at the imposed staging time before the radial correction, is the only trajectory prediction compared against a reported value here. The residual is raw altitude minus the [reported staging altitude of 65 km](${stagingSource}); it is not an error measured against telemetry. The ±10 km tolerance comes from [SPEC §8](SPEC.md#8-validation-criteria).`,
     '',
-    '| Quantity | Reference | Simulated | Residual | Tolerance | Result |',
+    '| Quantity | Reference | Simulated (km) | Residual (km) | Tolerance | Result |',
     '| --- | ---: | ---: | ---: | ---: | --- |',
     comparison('Raw staging, before guidance', asKm(stagingRawM), referenceAltitude.staging / 1000, 10, 'km'),
-    comparison(`Adjusted staging (${staging?.ship.method ?? 'no sample'})`, asKm(staging?.ship.altitudeM), referenceAltitude.staging / 1000, 10, 'km'),
-    comparison(`Post-insertion altitude (${insertionAfter?.ship.method ?? 'no sample'})`, asKm(insertionAfter?.ship.altitudeM), referenceAltitude.orbit / 1000, 15, 'km'),
-    comparison('Post-insertion perigee', asKm(insertionAfter?.orbit.perigeeM), referenceAltitude.orbit / 1000, 15, 'km'),
+    '',
+    '## Trajectory anchors (anclas)',
+    '',
+    `The [reported staging altitude of 65 km](${stagingSource}) is imposed by the radial correction. The [reported orbital altitude of 275 km](${orbitSource}) sets the circular post-insertion orbit, so its perigee also follows from that anchor. Agreement checks that the model applies its inputs; it is not a trajectory prediction.`,
+    '',
+    '| Quantity | Anchor input | Simulated output (km) |',
+    '| --- | ---: | ---: |',
+    `| Adjusted staging altitude at Ship ignition | ${referenceAltitude.staging / 1000} km | ${actual(staging)} |`,
+    `| Altitude immediately after insertion cutoff | ${referenceAltitude.orbit / 1000} km | ${actual(insertionAfter)} |`,
+    `| Perigee immediately after insertion cutoff (derived from the anchored orbit) | ${referenceAltitude.orbit / 1000} km | ${perigee(insertionAfter)} |`,
+    '',
+    '## Orbital consistency checks',
+    '',
+    'Recomputing orbital elements from the simulated ECI state and checking the direction of change through each burn test internal consistency, not agreement with the actual flight.',
     '',
     `Osculating perigee during insertion: **${perigee(insertionBefore)} → ${perigee(insertionAfter)} km**; during deorbit: **${perigee(deorbitBefore)} → ${perigee(deorbitAfter)} km**. Altitude at the entry marker: ${actual(entry)} km.`,
     `Perigee reported by McDowell: ~${data.mission.orbit.mcdowell_perigee_km.value} km (via Wikipedia, see [research §2](research.md#ship-como-voló)); it is not an additional official reference.`,
@@ -111,15 +125,14 @@ export function renderReport(rows: TimelineRow[], metrics: Metrics) {
     '',
     '## Δv of the maneuvers',
     '',
-    'Model estimates and inputs, not telemetry. The reported insertion Δv is used as an input, so the residual is not an independent validation. No numeric tolerance is published; a `null` means the model does not report a Δv for that maneuver.',
+    `Model estimates and inputs, not telemetry. The [92 m/s insertion Δv reported by McDowell (via Wikipedia)](${insertionDeltaV.source}) is an anchor (ancla), not a predicted value. A dash means the model does not report a Δv for that maneuver.`,
     '',
-    '| Maneuver | Model Δv (m/s) | Reference (m/s) | Residual (m/s) |',
-    '| --- | ---: | --- | ---: |',
+    '| Maneuver | Model Δv (m/s) | Model role |',
+    '| --- | ---: | --- |',
     ...metrics.burns.map(({ id, deltaV }) => {
-      const target = data.mission.orbit.insertion_delta_v_m_s.value
-      const reported = id === 'insertion_start'
-      return `| \`${id}\` | ${deltaV === null ? 'Not evaluable: the model reports no Δv' : format(deltaV)} | ${reported ? `~${target} (McDowell, reported)` : 'Not evaluable: no published reference'} | ` +
-        `${reported && deltaV != null ? signed(deltaV - target) : '—'} |`
+      const role = id === 'insertion_start' ? `Anchor: ~${insertionDeltaV.value} m/s (McDowell, reported)`
+        : deltaV === null ? 'Not evaluable: the model reports no Δv' : 'Estimate: no published reference'
+      return `| \`${id}\` | ${format(deltaV)} | ${role} |`
     }),
     '',
     '## Estimates declared in `data/flight15.json`',
